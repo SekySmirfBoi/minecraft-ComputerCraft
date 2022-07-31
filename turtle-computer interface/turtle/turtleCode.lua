@@ -6,7 +6,7 @@ end
 
 rednet.open("right")
 
-print()
+print("   ")
 print("Turtle ready to receive instructions")
 print("------------------------------------")
 print()
