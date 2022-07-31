@@ -8,7 +8,6 @@ rednet.open("right")
 
 print("   ")
 print("Turtle ready to receive instructions")
-print("    ")
 print("Listeneing for messages")
 print(" ")
 
@@ -24,11 +23,9 @@ while true do
     if message == "off" then
         active = "off"
         print("Turtle off")
-        print()
     end
     if message == "on" then
         active = "on"
         print("Turtle on")
-        print()
     end
 end
