@@ -8,6 +8,7 @@ rednet.open("right")
 
 print("   ")
 print("Turtle ready to receive instructions")
+print()
 
 local active = "off"
 
