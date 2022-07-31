@@ -9,6 +9,8 @@ rednet.open("right")
 print("   ")
 print("Turtle ready to receive instructions")
 print("    ")
+print("Listeneing for messages")
+print(" ")
 
 local active = "off"
 
@@ -17,12 +19,7 @@ while true do
         work()
     end
 
-    print("------------------------------------")
-    print()
-    print("Listeneing for message")
-    print()
     local sender, message = rednet.receive("instruction")
-    print("------------------------------------")
 
     if message == "off" then
         active = "off"
