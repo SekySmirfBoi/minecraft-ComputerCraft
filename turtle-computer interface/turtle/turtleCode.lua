@@ -17,9 +17,10 @@ while true do
         work()
     end
 
+    print("------------------------------------")
     print("Listeneing for message")
     local sender, message = rednet.receive("instruction")
-    print()
+    print("------------------------------------")
 
     if message == "off" then
         active = "off"
