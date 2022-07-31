@@ -5,7 +5,7 @@ print("Computer has started.")
 print("Press 1 to enable turtle(s)")
 print("Press 0 to disable turtle(s)")
 
-print("------------------------------------")
+print()
 
 local active = "off"
 
