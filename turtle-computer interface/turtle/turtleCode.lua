@@ -1,4 +1,4 @@
-function me() then
+function me()
     print("you")
 end
 
