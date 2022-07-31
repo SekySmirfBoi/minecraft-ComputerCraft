@@ -1,9 +1,15 @@
-function me()
-    print("you")
+function work() 
+    turtle.forward()
 end
 
 rednet.open("right")
 
-me()
-
 print("Turtle ready to receive instructions")
+
+local active = "off"
+
+while true do
+    if active == "on" then
+        work()
+    end
+end
