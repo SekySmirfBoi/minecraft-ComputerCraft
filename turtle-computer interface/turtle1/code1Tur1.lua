@@ -14,7 +14,7 @@ end
 
 function getCoords(axis)
     
-    local f, err = io.open("coordsTurtle.txt", "r")
+    local f, err = io.open("miningTurtleCode/coordsTurtle.txt", "r")
     
     if axis == "x" then
 
