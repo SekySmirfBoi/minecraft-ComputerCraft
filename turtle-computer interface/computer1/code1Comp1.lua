@@ -5,7 +5,9 @@ rednet.send(18, "echo")
 local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
 local working = false
 
+print()
 print("----------------------------------------")
+print()
 print("Computer has started.")
 
 if eSender == 18 and eMessage == "received" then
