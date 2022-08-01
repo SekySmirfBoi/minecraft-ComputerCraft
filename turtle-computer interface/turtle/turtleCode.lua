@@ -22,7 +22,7 @@ while true do
 
     if message == "echo" then
         rednet.send(sender, "received")
-
+    end
     if message == "off" then
         active = "off"
         print("Turtle off")
