@@ -76,6 +76,10 @@ local currentX = getCoords("x")
 local currentY = getCoords("y")
 local currentZ = getCoords("z")
 
+print(currentX)
+print(currentY)
+print(currentZ)
+
 local active = "off"
 local echoed = false
 
