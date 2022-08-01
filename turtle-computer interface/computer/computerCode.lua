@@ -7,6 +7,7 @@ local working = false
 
 print()
 print("Computer has started.")
+print()
 if eSender == 16 and eMessage == "received" then
     print("Press 1 to enable turtle")
     print("Press 0 to disable turtle")
