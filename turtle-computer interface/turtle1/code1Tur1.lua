@@ -204,6 +204,7 @@ while true do
 
         if message == "echo" then
             rednet.send(sender, "received")
+            print()
             print("Echoing")
             echoed = true
         end

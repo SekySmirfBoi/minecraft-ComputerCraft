@@ -24,7 +24,7 @@ if eSender == 18 and eMessage == "received" then
     print()
     print("Press 0 to disable turtle")
     print("Press 1 to enable turtle")
-    print("Press 2 to echo turtle")
+    --print("Press 2 to echo turtle")
     print()
     working = true
 else
@@ -44,6 +44,7 @@ while working do
         local protocol = arg3
     end
     
+    --[[
     if event == "char" and arg1 == "2" then
         rednet.send(18, "echo")
         eSender, eMessage, eProtocol = rednet.receive(nil, 2)
@@ -51,6 +52,7 @@ while working do
             print("Turtle responded")
         end
     end
+    ]]--
 
     if event == "char" and arg1 == "0" then
         print("Turtle off")
