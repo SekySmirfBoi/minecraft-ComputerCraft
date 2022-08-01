@@ -156,6 +156,18 @@ end
 
 rednet.open("right")
 
+print()
+print("----------------------------------------")
+print()
+print("   _____    _____   ____  ")
+print(" / ____|  / ____| |  _ \\ ")
+print("| (___   | (___   | |_) |")
+print(" \\___ \\   \\___ \\  |  _ < ")
+print(" ____) |  ____) | | |_) |")
+print("|_____/  |_____/  |____/ ")
+print()
+print("----------------------------------------")
+
 print("   ")
 print("Turtle ready to receive instructions")
 print("Listeneing for messages")
