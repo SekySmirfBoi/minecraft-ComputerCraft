@@ -1,4 +1,4 @@
-function return()
+function returnHome()
     print("It would return if completed, but it's still in development")
 end
 
