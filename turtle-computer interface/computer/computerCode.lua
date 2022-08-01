@@ -20,6 +20,16 @@ end
 local active = "off"
 
 while working do 
+    rednet.send(16, "echo")
+    local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
+
+    if eSender == 16 and eMessage == "received" then
+        working = true
+    else
+        print("Failed to get a responce from turtle")
+        working = false
+    end
+
     local event, character = os.pullEvent("char")
     
     if character == "0" then
