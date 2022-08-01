@@ -27,7 +27,9 @@ while working do
     local event, arg1, arg2, arg3, arg4, arg5 = os.pullEvent()
 
     if event == "rednet_message" then
-        local message = 
+        local sender = arg1
+        local message = arg2
+        local protocol = arg3
     end
     
     if event == "char" and arg1 == "2" then
