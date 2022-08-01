@@ -24,12 +24,12 @@ while true do
             active = "off"
             print("Turtle off")
         end
-        
+
         if message == "on" then
             active = "on"
             print("Turtle on")
         end
     elseif echoed and active == "on" then
-        print("Forwards")
+        turtle.forward()
     end
 end
