@@ -24,9 +24,9 @@ local active = "off"
 
 while working do 
 
-    local event, character = os.pullEvent("char")
+    local event, arg1, arg2 = os.pullEvent()
 
-    if character == "2" then
+    if event == "char" and arg1 == "2" then
         rednet.send(18, "echo")
         eSender, eMessage, eProtocol = rednet.receive(nil, 2)
         if eSender == 18 and eMessage == "received" then
@@ -34,13 +34,13 @@ while working do
         end
     end
 
-    if character == "0" then
+    if event == "char" and arg1 == "0" then
         print("Turtle off")
         active = "off"
         rednet.send(18, "off", "instruction")
     end
 
-    if character == "1" then
+    if event == "char" and arg1 == "1" then
         print("Turtle on")
         active = "on"
         rednet.send(18, "on", "instruction")
