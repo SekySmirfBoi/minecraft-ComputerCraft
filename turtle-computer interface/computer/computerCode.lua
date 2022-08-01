@@ -31,7 +31,7 @@ while working do
         rednet.send(18, "shutdown", "instruction")
 
         shell.exit()
-
+    end
     if character == "0" then
         print("Turtle off")
         active = "off"
