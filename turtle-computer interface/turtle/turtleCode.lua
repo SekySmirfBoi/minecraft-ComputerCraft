@@ -26,7 +26,7 @@ while true do
             active = "on"
             print("Turtle on")
         end
-    elseif echoed then
+    elseif echoed and active == "on" then
         print("Forwards")
     end
 end
