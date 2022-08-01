@@ -116,6 +116,8 @@ end
 
 rednet.open("right")
 
+moveBackwads()
+
 print("   ")
 print("Turtle ready to receive instructions")
 print("Listeneing for messages")
