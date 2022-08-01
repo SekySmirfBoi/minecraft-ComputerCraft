@@ -6,6 +6,7 @@ print("Listeneing for messages")
 print(" ")
 
 local active = "off"
+local echoed = false
 
 while true do
 
@@ -15,6 +16,7 @@ while true do
         if message == "echo" then
             rednet.send(sender, "received")
             print("Echoing")
+            echoed = true
         end
         if message == "off" then
             active = "off"
@@ -24,7 +26,7 @@ while true do
             active = "on"
             print("Turtle on")
         end
-    else
+    else if echoed then
         print("Forwards")
     end
 end
