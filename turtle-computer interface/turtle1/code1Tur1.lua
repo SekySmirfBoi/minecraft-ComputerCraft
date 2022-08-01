@@ -1,17 +1,57 @@
 function moveUp()
-    turtle.up()
+    local success, err = turtle.up()
+    print()
+    print("Fuel left: ", turtle.getFuelLevel())
+
+    if success then
+        print("Successfully moved back")
+    else
+        print()
+        print("There was an error")
+        print("Reason: ", err)
+    end
 end
 
 function moveDown()
-    turtle.down()
+    local success, err = turtle.down()
+    print()
+    print("Fuel left: ", turtle.getFuelLevel())
+
+    if success then
+        print("Successfully moved back")
+    else
+        print()
+        print("There was an error")
+        print("Reason: ", err)
+    end
 end
 
 function moveForwards()
-    turtle.forward()
+    local success, err = turtle.forward()
+    print()
+    print("Fuel left: ", turtle.getFuelLevel())
+
+    if success then
+        print("Successfully moved forward")
+    else
+        print()
+        print("There was an error")
+        print("Reason: ", err)
+    end
 end
 
 function moveBackwads()
-    print(turtle.getFuelLevel())
+    local success, err = turtle.back()
+    print()
+    print("Fuel left: ", turtle.getFuelLevel())
+
+    if success then
+        print("Successfully moved back")
+    else
+        print()
+        print("There was an error")
+        print("Reason: ", err)
+    end
 end
 
 function turnLeft()
@@ -35,7 +75,7 @@ end
 
 function updateCoords()
     local f = io.open("coordsTurtle.txt", "w")
-    io.write(tostring(currentX) + "\n" + tostring(currentY) + "\n" + tostring(currentZ))
+    io.write(tostring(currentX) + "\n" + tostring(currentY) + "\n" + tostring(currentZ) + "\n" + tostring(facing))
     io.close(f)
 end
 
@@ -115,8 +155,6 @@ function getCoords(axis)
 end
 
 rednet.open("right")
-
-moveBackwads()
 
 print("   ")
 print("Turtle ready to receive instructions")
