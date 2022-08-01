@@ -9,8 +9,9 @@ print()
 print("Computer has started.")
 print()
 if eSender == 18 and eMessage == "received" then
-    print("Press 1 to enable turtle")
     print("Press 0 to disable turtle")
+    print("Press 1 to enable turtle")
+    print("Press 2 to echo turtle")
     print()
     working = true
 else
@@ -20,8 +21,14 @@ end
 local active = "off"
 
 while working do 
-    
+
     local event, character = os.pullEvent("char")
+
+    if character == "2" then
+        rednet.send(18, "echo")
+        eSender, eMessage, eProtocol = rednet.receive(nil, 2)
+        if eSender == 18 and eMessage == "received" then
+            print("Turtle responded")
 
     if character == "0" then
         print("Turtle off")
