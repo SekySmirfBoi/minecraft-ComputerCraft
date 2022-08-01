@@ -17,7 +17,7 @@ while true do
         if message == "shutdown" then
             print("Turtle shutting down")
 
-            shell.exit()
+            os.shutdown()
         end
         if message == "echo" then
             rednet.send(sender, "received")
