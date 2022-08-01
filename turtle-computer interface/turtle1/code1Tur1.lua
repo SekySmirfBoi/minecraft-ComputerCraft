@@ -23,9 +23,9 @@ function turnRight()
 end
 
 function returnHome()
-    local disFromHomeX = 
-    local disFromHomeY = 
-    local disFromHomeZ = 
+    --local disFromHomeX = 
+    --local disFromHomeY = 
+    --local disFromHomeZ = 
     print("It would return if completed, but it's still in development")
 end
 
