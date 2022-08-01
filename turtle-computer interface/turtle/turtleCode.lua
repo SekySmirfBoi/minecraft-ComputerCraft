@@ -30,6 +30,6 @@ while true do
             print("Turtle on")
         end
     elseif echoed and active == "on" then
-        turtle.forward()
+        turtle.back()
     end
 end
