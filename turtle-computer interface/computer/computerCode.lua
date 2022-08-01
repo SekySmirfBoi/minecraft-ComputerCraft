@@ -29,6 +29,8 @@ while working do
         eSender, eMessage, eProtocol = rednet.receive(nil, 2)
         if eSender == 18 and eMessage == "received" then
             print("Turtle responded")
+        end
+    end
 
     if character == "0" then
         print("Turtle off")
