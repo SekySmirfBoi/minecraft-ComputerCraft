@@ -10,8 +10,6 @@ m.setCursorPos(1,1)
 --local working = false
 
 --m.write
-m.write("--------------------------------------------------------------------")
-m.setCursorPos(1,2)
 m.write()
 m.setCursorPos(1,3)
 m.write("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
