@@ -89,9 +89,9 @@ local currentX = getCoords("x")
 local currentY = getCoords("y")
 local currentZ = getCoords("z")
 
-print("X: " + tostring(currentX))
-print("Y: " + tostring(currentY))
-print("Z: " + tostring(currentZ))
+print("X:", currentX)
+print("Y:", currentY)
+print("Z:", currentZ)
 
 local active = "off"
 local echoed = false
