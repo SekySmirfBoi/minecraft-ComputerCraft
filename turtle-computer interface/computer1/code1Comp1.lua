@@ -24,8 +24,12 @@ local active = "off"
 
 while working do 
 
-    local event, arg1, arg2 = os.pullEvent()
+    local event, arg1, arg2, arg3, arg4, arg5 = os.pullEvent()
 
+    if event == "rednet_message" then
+        local message = 
+    end
+    
     if event == "char" and arg1 == "2" then
         rednet.send(18, "echo")
         eSender, eMessage, eProtocol = rednet.receive(nil, 2)
