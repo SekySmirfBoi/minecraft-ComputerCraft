@@ -9,7 +9,7 @@ end
 function updateCoords()
     local f = io.open("coordsTurtle.txt", "w")
     io.write(tostring(currentX) + "\n" + tostring(currentY) + "\n" + tostring(currentZ))
-    f.close
+    io.close(f)
 end
 
 function getCoords(axis)
