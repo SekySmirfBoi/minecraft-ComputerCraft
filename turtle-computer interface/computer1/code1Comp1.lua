@@ -6,7 +6,7 @@ local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
 local working = false
 
 print()
-print("----------------------------------------")
+print("----------------------------------------------")
 print()
 print("   _____    _____   ____  ")
 print(" / ____|  / ____| |  _ \\ ")
@@ -15,7 +15,7 @@ print(" \\___ \\   \\___ \\  |  _ < ")
 print(" ____) |  ____) | | |_) |")
 print("|_____/  |_____/  |____/ ")
 print()
-print("----------------------------------------")
+print("----------------------------------------------")
 print()
 print("Computer has started.")
 

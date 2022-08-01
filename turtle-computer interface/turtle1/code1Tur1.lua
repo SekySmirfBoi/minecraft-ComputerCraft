@@ -157,7 +157,7 @@ end
 rednet.open("right")
 
 print()
-print("----------------------------------------")
+print("---------------------------------------")
 print()
 print("   _____    _____   ____  ")
 print(" / ____|  / ____| |  _ \\ ")
@@ -166,7 +166,7 @@ print(" \\___ \\   \\___ \\  |  _ < ")
 print(" ____) |  ____) | | |_) |")
 print("|_____/  |_____/  |____/ ")
 print()
-print("----------------------------------------")
+print("---------------------------------------")
 
 print("   ")
 print("Turtle ready to receive instructions")
@@ -186,10 +186,12 @@ local currentY = getCoords("y")
 local currentZ = getCoords("z")
 local facing = getCoords("face")
 
+--[[
 print("X:", currentX)
 print("Y:", currentY)
 print("Z:", currentZ)
 print("Facing:", facing)
+]]--
 
 local active = "off"
 local echoed = false
