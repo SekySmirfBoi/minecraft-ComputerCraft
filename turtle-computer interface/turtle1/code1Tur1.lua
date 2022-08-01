@@ -1,4 +1,31 @@
+function moveUp()
+    turtle.up()
+end
+
+function moveDown()
+    turtle.down()
+end
+
+function moveForwards()
+    turtle.forward()
+end
+
+function moveBackwads()
+    print(turtle.getFuelLevel())
+end
+
+function turnLeft()
+    turtle.turnLeft()
+end
+
+function turnRight()
+    turtle.turnRight()
+end
+
 function returnHome()
+    local disFromHomeX = 
+    local disFromHomeY = 
+    local disFromHomeZ = 
     print("It would return if completed, but it's still in development")
 end
 
