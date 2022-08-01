@@ -1,6 +1,6 @@
 rednet.open("back")
 
-rednet.send(16, "echo")
+rednet.send(18, "echo")
 
 local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
 local working = false
@@ -8,7 +8,7 @@ local working = false
 print()
 print("Computer has started.")
 print()
-if eSender == 16 and eMessage == "received" then
+if eSender == 18 and eMessage == "received" then
     print("Press 1 to enable turtle")
     print("Press 0 to disable turtle")
     print()
@@ -25,12 +25,12 @@ while working do
     if character == "0" then
         print("Turtle off")
         active = "off"
-        rednet.send(16, "off", "instruction")
+        rednet.send(18, "off", "instruction")
     end
 
     if character == "1" then
         print("Turtle on")
         active = "on"
-        rednet.send(16, "on", "instruction")
+        rednet.send(18, "on", "instruction")
     end
 end
