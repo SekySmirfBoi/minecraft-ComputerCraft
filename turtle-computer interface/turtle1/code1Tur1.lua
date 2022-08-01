@@ -67,6 +67,23 @@ function getCoords(axis)
         end
     end
 
+    if axis == "face" then
+
+        local count = 1
+
+        if f == nil then
+            print(err)
+        else
+            for line in f:lines() do
+                if count == 4 then
+                    f:close()
+                    return tonumber(line)
+                end
+                count = count + 1
+            end
+        end
+    end
+
     f:close()
 end
 
@@ -88,10 +105,12 @@ local homeZ = 257
 local currentX = getCoords("x")
 local currentY = getCoords("y")
 local currentZ = getCoords("z")
+local facing = getCoords("face")
 
 print("X:", currentX)
 print("Y:", currentY)
 print("Z:", currentZ)
+print("Facing:", facing)
 
 local active = "off"
 local echoed = false
