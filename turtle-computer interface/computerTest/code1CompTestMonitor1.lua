@@ -1,12 +1,15 @@
 rednet.open("back")
+local m = peripheral.wrap("left")
+
+m.clear()
+m.setCursorPos(1,1)
+
+--rednet.send(18, "echo")
+
+--local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
+--local working = false
 
 
-rednet.send(18, "echo")
-
-local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
-local working = false
-
-print()
 print("----------------------------------------------")
 print()
 print("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
@@ -29,7 +32,7 @@ print()
 print("----------------------------------------------")
 print()
 print("Computer has started.")
-
+--[[
 if eSender == 18 and eMessage == "received" then
     print("Turtle 1 active")
     print()
@@ -55,7 +58,7 @@ while working do
         local protocol = arg3
     end
     
-    --[[
+    
     if event == "char" and arg1 == "2" then
         rednet.send(18, "echo")
         eSender, eMessage, eProtocol = rednet.receive(nil, 2)
@@ -63,7 +66,7 @@ while working do
             print("Turtle responded")
         end
     end
-    ]]--
+    
 
     if event == "char" and arg1 == "0" then
         print("Turtle off")
@@ -77,3 +80,4 @@ while working do
         rednet.send(18, "on", "instruction")
     end
 end
+]]--
