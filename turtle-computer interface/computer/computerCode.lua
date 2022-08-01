@@ -20,18 +20,9 @@ end
 local active = "off"
 
 while working do 
-    local event, character = os.pullEvent("char")
     
-    if character == "9" then
-        print()
-        print("Computer shuting down")
-        print("Turtle shutting down")
-        print()
+    local event, character = os.pullEvent("char")
 
-        rednet.send(18, "shutdown", "instruction")
-
-        os.shutdown()
-    end
     if character == "0" then
         print("Turtle off")
         active = "off"
