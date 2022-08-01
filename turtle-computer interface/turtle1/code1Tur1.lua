@@ -13,18 +13,23 @@ function updateCoords()
 end
 
 function getCoords(axis)
-    local f = io.open("coordsTurtle.txt", "r")
+    
+    local f, err = io.open("coordsTurtle.txt", "r")
     
     if axis == "x" then
 
         local count = 1
 
-        for line in f:lines() do
-            if count == 1 then
-                f:close()
-                return tonumber(line)
+        if f == nil then
+            print(err)
+        else
+            for line in f:lines() do
+                if count == 1 then
+                    f:close()
+                    return tonumber(line)
+                end
+                count = count + 1
             end
-            count = count + 1
         end
     end
 
@@ -32,12 +37,16 @@ function getCoords(axis)
 
         local count = 1
 
-        for line in f:lines() do
-            if count == 2 then
-                f:close()
-                return tonumber(line)
+        if f == nil then
+            print(err)
+        else
+            for line in f:lines() do
+                if count == 2 then
+                    f:close()
+                    return tonumber(line)
+                end
+                count = count + 1
             end
-            count = count + 1
         end
     end
 
@@ -45,12 +54,16 @@ function getCoords(axis)
 
         local count = 1
 
-        for line in f:lines() do
-            if count == 3 then
-                f:close()
-                return tonumber(line)
+        if f == nil then
+            print(err)
+        else
+            for line in f:lines() do
+                if count == 3 then
+                    f:close()
+                    return tonumber(line)
+                end
+                count = count + 1
             end
-            count = count + 1
         end
     end
 
