@@ -18,7 +18,10 @@ while true do
         work()
     end
 
-    local sender, message = rednet.receive("instruction")
+    local sender, message, protocol = rednet.receive()
+
+    if message == "echo" then
+        rednet.send(sender, "received")
 
     if message == "off" then
         active = "off"
