@@ -8,13 +8,13 @@ local working = false
 print()
 print("Computer has started.")
 if eSender == 16 and eMessage == "received" then
-    print("Press 1 to enable turtle(s)")
-    print("Press 0 to disable turtle(s)")
+    print("Press 1 to enable turtle")
+    print("Press 0 to disable turtle")
+    print()
     working = true
 else
     print("Failed to get a responce from turtle")
 end
-print()
 
 local active = "off"
 
