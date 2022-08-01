@@ -22,6 +22,7 @@ while true do
 
     if message == "echo" then
         rednet.send(sender, "received")
+        print("Echoing")
     end
     if message == "off" then
         active = "off"
