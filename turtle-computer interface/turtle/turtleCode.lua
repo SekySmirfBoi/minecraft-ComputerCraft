@@ -13,6 +13,12 @@ while true do
     local sender, message, protocol = rednet.receive(nil, 1)
 
     if sender == 12 then
+
+        if message == "shutdown" then
+            print("Turtle shutting down")
+
+            shell.exit()
+        end
         if message == "echo" then
             rednet.send(sender, "received")
             print("Echoing")
