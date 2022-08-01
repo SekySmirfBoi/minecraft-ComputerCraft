@@ -30,6 +30,7 @@ while true do
     end
     if message == "on" then
         active = "on"
+        work()
         print("Turtle on")
     end
 end
