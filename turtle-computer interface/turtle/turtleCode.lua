@@ -14,20 +14,17 @@ while true do
 
     if sender == 12 then
 
-        if message == "shutdown" then
-            print("Turtle shutting down")
-
-            os.shutdown()
-        end
         if message == "echo" then
             rednet.send(sender, "received")
             print("Echoing")
             echoed = true
         end
+
         if message == "off" then
             active = "off"
             print("Turtle off")
         end
+        
         if message == "on" then
             active = "on"
             print("Turtle on")
