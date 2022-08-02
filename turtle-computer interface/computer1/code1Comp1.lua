@@ -92,9 +92,12 @@ while working do
             local respSender, respMessage, respProtocol = rednet.receive(nil, 1)
 
             if respMessage == "returningHome" and respSender == turtleID1 and respProtocol == "notSleep"
-            print("Attempt:", attempt)
-
-            rednet.send(turtleID1, "return", "instruction")
+                print("Turtle returing home")
+                responded = true
+            else
+                print("Attempt:", attempt)
+                rednet.send(turtleID1, "return", "instruction")
+            end
         end
     end
 end
