@@ -59,13 +59,13 @@ function moveUp(addReturn)
             table.insert( wayHome, 1, "moveDown" )
         end
         
-        currentY = tonumber(currentY) + 1
-        updateCoords()
+        --currentY = tonumber(currentY) + 1
+        --updateCoords()
         
         print("Successfully moved up, new coordinates:"); rednet.send(masterComputerID, "Successfully moved up, new coordinates:", compDisplay)
-        print("X: "..currentX)
-        print("Y: "..currentY)
-        print("Z: "..currentZ)
+        print("X:",currentX)
+        print("Y:",currentY)
+        print("Z:",currentZ)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -85,13 +85,13 @@ function moveDown(addReturn)
             table.insert( wayHome, 1, "moveUp" )
         end
         
-        currentY = tonumber(currentY) - 1
-        updateCoords()
+        --currentY = tonumber(currentY) - 1
+        --updateCoords()
 
         print("Successfully moved down, new coordinates:"); rednet.send(masterComputerID, "Successfully moved down, new coordinates:", compDisplay)
-        print("X: "..currentX)
-        print("Y: "..currentY)
-        print("Z: "..currentZ)
+        print("X:",currentX)
+        print("Y:",currentY)
+        print("Z:",currentZ)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -123,9 +123,9 @@ function moveForwards(addReturn)
         updateCoords()
 
         print("Successfully moved forward, new coordinates:"); rednet.send(masterComputerID, "Successfully moved forward, new coordinates:", compDisplay)
-        print("X: "..currentX)
-        print("Y: "..currentY)
-        print("Z: "..currentZ)
+        print("X:",currentX)
+        print("Y:",currentY)
+        print("Z:",currentZ)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -157,9 +157,9 @@ function moveBackwards(addReturn)
         updateCoords()
 
         print("Successfully moved back, new coordinates:"); rednet.send(masterComputerID, "Successfully moved back, new coordinates:", compDisplay)
-        print("X: "..currentX)
-        print("Y: "..currentY)
-        print("Z: "..currentZ)
+        print("X:",currentX)
+        print("Y:",currentY)
+        print("Z:",currentZ)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -210,7 +210,7 @@ function turnLeft(addReturn)
 end
 
 function turnRight(addReturn)
-    turtle.turnRight()
+    local success, err = turtle.turnRight()
     print(); rednet.send(masterComputerID, "", compDisplay)
     print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
