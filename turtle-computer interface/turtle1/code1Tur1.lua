@@ -4,9 +4,7 @@ function updateWayHomeFile(move, adding)
         local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "a")
         local f2, err2 = io.open("miningTurtleCode/wayHomeFile.txt", "r")
 
-        local f2Lines = f2:lines
-
-        for line in f2Lines do
+        for line in f2:lines() do
             if line ~= "" then
                 f:write("\n")
             end
@@ -23,7 +21,7 @@ function updateWayHomeFile(move, adding)
         local f2, err2 = io.open("miningTurtleCode/wayHomeFile.txt", "w")
         local lineLength = 0
 
-        for line in f:lines do
+        for line in f:lines() do
             lineCount = lineCount + 1
         end
 
@@ -61,7 +59,7 @@ function moveUp(addReturn)
             table.insert( wayHome, 1, "moveDown" )
         end
         
-        currentY == currentY + 1
+        currentY = currentY + 1
         updateCoords()
         
         print("Successfully moved up, new coordinates:"); rednet.send(masterComputerID, "Successfully moved up, new coordinates:", compDisplay)
@@ -87,7 +85,7 @@ function moveDown(addReturn)
             table.insert( wayHome, 1, "moveUp" )
         end
         
-        currentY == currentY - 1
+        currentY = currentY - 1
         updateCoords()
 
         print("Successfully moved down, new coordinates:"); rednet.send(masterComputerID, "Successfully moved down, new coordinates:", compDisplay)
