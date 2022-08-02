@@ -216,10 +216,7 @@ print("|_____/  |_____/  |____/ ")
 print()
 print("---------------------------------------")
 
-print("   ")
-print("Turtle ready to receive instructions")
-print("Listeneing for messages")
-print(" ")
+
 
 thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
 masterComputerID = 12   -- masterComputerID -- The computer in control of everything
@@ -244,6 +241,11 @@ elseif facing == 2 then
 elseif facing == 3 then
     dirFacing = "east"
 end
+
+print()
+print("Turtle ready to receive instructions")
+print("Listeneing for messages")
+print()
 
 --[[
 print("X:", currentX)
