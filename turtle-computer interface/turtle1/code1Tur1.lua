@@ -235,13 +235,13 @@ local currentZ = getCoords("z")
 local facing = getCoords("face")
 local dirFacing;
 
-if facing = 0 then
+if facing == 0 then
     dirFacing = "north"
-elseif facing = 1 then
+elseif facing == 1 then
     dirFacing = "west"
-elseif facing = 2 then
+elseif facing == 2 then
     dirFacing = "south"
-elseif facing = 3 then
+elseif facing == 3 then
     dirFacing = "east"
 end
 
