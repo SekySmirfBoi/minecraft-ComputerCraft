@@ -1,6 +1,6 @@
 rednet.open("back")
 
-local turtleID1 = 18
+local turtleID1 = 39
 
 rednet.send(turtleID1, "echo", "instruction")
 
@@ -100,5 +100,33 @@ while working do
                 rednet.send(turtleID1, "return", "instruction")
             end
         end
+    end
+
+
+
+
+
+    if event == "char" and arg1 == "3" then
+        rednet.send(turtleID1, "up")
+    end
+    
+    if event == "char" and arg1 == "4" then
+        rednet.send(turtleID1, "down")
+    end
+    
+    if event == "char" and arg1 == "5" then
+        rednet.send(turtleID1, "forward")
+    end
+    
+    if event == "char" and arg1 == "6" then
+        rednet.send(turtleID1, "back")
+    end
+    
+    if event == "char" and arg1 == "7" then
+        rednet.send(turtleID1, "left")
+    end
+    
+    if event == "char" and arg1 == "8" then
+        rednet.send(turtleID1, "right")
     end
 end
