@@ -5,7 +5,7 @@ local function getFilename(sUrl)
     return sUrl:match("/([^/]+)$")
 end
 
-local res = http.get("https://github.com/SekySmirfBoi/minecraft-ComputerCraft/blob/main/turtle-computer%20interface/turtle1/code1Tur1.lua" , nil , true).readAll()
+local res = http.get("https://raw.githubusercontent.com/SekySmirfBoi/minecraft-ComputerCraft/main/turtle-computer%20interface/turtle1/code1Tur1.lua" , nil , true).readAll()
 print(res)
 
 local tArgs = { ... }
