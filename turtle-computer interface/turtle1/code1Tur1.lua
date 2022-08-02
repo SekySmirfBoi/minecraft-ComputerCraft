@@ -260,7 +260,7 @@ local active = "off"
 local echoed = false
 
 while true do
-
+    print("yes")
     local sender, message, protocol = rednet.receive(nil, 1)
 
     if sender == masterComputerID then
