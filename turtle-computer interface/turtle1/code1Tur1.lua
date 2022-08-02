@@ -259,7 +259,7 @@ local compDisplay = "compDisplay"
 local active = "off"
 local echoed = false
 
-while true down do
+while true do
 
     local sender, message, protocol = rednet.receive(nil, 1)
 
