@@ -85,7 +85,7 @@ function moveDown(addReturn)
             table.insert( wayHome, 1, "moveUp" )
         end
         
-        currentY = currentY - 1
+        currentY = tonumber(currentY) - 1
         updateCoords()
 
         print("Successfully moved down, new coordinates:"); rednet.send(masterComputerID, "Successfully moved down, new coordinates:", compDisplay)
