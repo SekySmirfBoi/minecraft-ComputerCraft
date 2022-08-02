@@ -298,9 +298,9 @@ function work()
 end
 
 function updateCoords()
-    f = io.open("miningTurtleCode/coordsTurtle.txt", "w")
-    f:write(currentX.."\n"..currentY.."\n"..currentZ.."\n"..facing.."\n"..arseFacing)
-    f:close()
+    --f = io.open("miningTurtleCode/coordsTurtle.txt", "w")
+    --f:write(currentX.."\n"..currentY.."\n"..currentZ.."\n"..facing.."\n"..arseFacing)
+    --f:close()
 end
 
 function getCoords(axis)
