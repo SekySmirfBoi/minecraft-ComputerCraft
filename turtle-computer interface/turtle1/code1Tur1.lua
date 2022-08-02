@@ -4,7 +4,9 @@ function updateWayHomeFile(move, adding)
         local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "a")
         local f2, err2 = io.open("miningTurtleCode/wayHomeFile.txt", "r")
 
-        for line in f2:lines do
+        local f2Lines = f2:lines
+
+        for line in f2Lines do
             if line ~= "" then
                 f:write("\n")
             end
