@@ -1,55 +1,55 @@
 function moveUp()
     local success, err = turtle.up()
-    print()
-    print("Fuel left: ", turtle.getFuelLevel())
+    print(); rednet.send(masterComputerID, "", compDisplay)
+    print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
     if success then
-        print("Successfully moved back")
+        print("Successfully moved up"); rednet.send(masterComputerID, "Successfully moved up", compDisplay)
     else
         print()
-        print("There was an error")
+        print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
         print("Reason: ", err)
     end
 end
 
 function moveDown()
     local success, err = turtle.down()
-    print()
-    print("Fuel left: ", turtle.getFuelLevel())
+    print(); rednet.send(masterComputerID, "", compDisplay)
+    print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
     if success then
-        print("Successfully moved back")
+        print("Successfully moved down"); rednet.send(masterComputerID, "Successfully moved down", compDisplay)
     else
         print()
-        print("There was an error")
+        print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
         print("Reason: ", err)
     end
 end
 
 function moveForwards()
     local success, err = turtle.forward()
-    print()
-    print("Fuel left: ", turtle.getFuelLevel())
+    print(); rednet.send(masterComputerID, "", compDisplay)
+    print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
     if success then
-        print("Successfully moved forward")
+        print("Successfully moved forward"); rednet.send(masterComputerID, "Successfully moved forward", compDisplay)
     else
         print()
-        print("There was an error")
+        print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
         print("Reason: ", err)
     end
 end
 
 function moveBackwads()
     local success, err = turtle.back()
-    print()
-    print("Fuel left: ", turtle.getFuelLevel())
+    print(); rednet.send(masterComputerID, "", compDisplay)
+    print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
     if success then
-        print("Successfully moved back")
+        print("Successfully moved back"); rednet.send(masterComputerID, "Successfully moved back", compDisplay)
     else
         print()
-        print("There was an error")
+        print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
         print("Reason: ", err)
     end
 end
@@ -192,6 +192,8 @@ print("Y:", currentY)
 print("Z:", currentZ)
 print("Facing:", facing)
 ]]--
+
+local compDisplay = "compDisplay"
 
 local active = "off"
 local echoed = false

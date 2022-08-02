@@ -18,18 +18,22 @@ print("|_____/  |_____/  |____/ ")
 print()
 print("----------------------------------------------")
 print()
-print("Computer has started.")
+print("Computer output: Computer has started.")
 
 if eSender == 18 and eMessage == "received" then
+    print("Computer output: ")
+    print()
     print("Turtle 1 active")
     print()
     print("Press 0 to disable turtle")
     print("Press 1 to enable turtle")
     --print("Press 2 to echo turtle")
     print()
+    print("End of Computer output")
+    print()
     working = true
 else
-    print("Failed to get a responce from turtle")
+    print("Computer output: Failed to get a responce from turtle")
     print()
 end
 
@@ -45,6 +49,9 @@ while working do
         local protocol = arg3
 
         if sender == 18 then
+            if protocol == "compDisplay" then
+                print(message)
+            end
         end
     end
     
@@ -59,13 +66,13 @@ while working do
     ]]--
 
     if event == "char" and arg1 == "0" then
-        print("Turtle off")
+        print("Computer output: Turtle off")
         active = "off"
         rednet.send(18, "off", "instruction")
     end
 
     if event == "char" and arg1 == "1" then
-        print("Turtle on")
+        print("Computer output: Turtle on")
         active = "on"
         rednet.send(18, "on", "instruction")
     end
