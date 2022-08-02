@@ -259,8 +259,8 @@ local compDisplay = "compDisplay"
 local active = "off"
 local echoed = false
 
-while true do
-    print("yes")
+while true down
+
     local sender, message, protocol = rednet.receive(nil, 1)
 
     if sender == masterComputerID then

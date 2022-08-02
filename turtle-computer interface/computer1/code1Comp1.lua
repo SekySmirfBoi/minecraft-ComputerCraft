@@ -2,7 +2,7 @@ rednet.open("back")
 
 local turtleID1 = 18
 
-rednet.send(turtleID1, "echo")
+rednet.send(turtleID1, "echo", "instruction")
 
 local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
 local working = false
