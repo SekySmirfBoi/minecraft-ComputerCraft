@@ -43,6 +43,9 @@ while working do
         local sender = arg1
         local message = arg2
         local protocol = arg3
+
+        if sender == 18 then
+        end
     end
     
     --[[
