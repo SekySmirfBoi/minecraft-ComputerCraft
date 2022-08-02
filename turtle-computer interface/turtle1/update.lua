@@ -19,7 +19,7 @@ print(tArgs)
 local url = table.remove(tArgs, 1)
 print(url)
 
-local sFile = tArgs[1] or getFilename(url) or url
+local sFile = tArgs[1] or url
 print(sFile)
 --local sPath = shell.resolve(sFile)
 local file, err = fs.open(shell.resolve(sFile), "wb")
