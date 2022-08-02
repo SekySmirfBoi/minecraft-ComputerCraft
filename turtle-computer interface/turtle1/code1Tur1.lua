@@ -4,7 +4,12 @@ function moveUp()
     print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
     if success then
+        currentY == currentY + 1
+        updateCoords()
+        
         print("Successfully moved up"); rednet.send(masterComputerID, "Successfully moved up", compDisplay)
+
+        table.insert( wayHome, 1, "moveDown" )
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -18,7 +23,12 @@ function moveDown()
     print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
     if success then
+        currentY == currentY - 1
+        updateCoords()
+
         print("Successfully moved down"); rednet.send(masterComputerID, "Successfully moved down", compDisplay)
+
+        table.insert( wayHome, 1, "moveUp" )
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -33,6 +43,8 @@ function moveForwards()
 
     if success then
         print("Successfully moved forward"); rednet.send(masterComputerID, "Successfully moved forward", compDisplay)
+
+        table.insert( wayHome, 1, "moveBackwards" )
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -47,6 +59,8 @@ function moveBackwads()
 
     if success then
         print("Successfully moved back"); rednet.send(masterComputerID, "Successfully moved back", compDisplay)
+
+        table.insert( wayHome, 1, "moveForwards" )
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -59,22 +73,32 @@ function turnLeft()
     print(); rednet.send(masterComputerID, "", compDisplay)
     print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
-    if facing == 0 then
-        facing = 1
-        dirFacing = "west"
-    elseif facing == 1 then
-        facing = 2
-        dirFacing = "south"
-    elseif facing == 2 then
-        facing = 3
-        dirFacing = "east"
-    elseif facing == 3 then
-        facing = 0
-        dirFacing = "north"
-    end
-
     if success then
-        print("Successfully turned left, now facing", dirFacing)
+        print("Successfully turned left, now facing", dirFacing); local turnMes = "Successfully turned left, now facing", dirFacing; rednet.send(masterComputerID, turnMes, "compDisplay")
+
+        if facing == 0 then
+            facing = 1
+            arseFacing = 3
+            dirFacing = "west"
+            dirArseFacing = "east"
+        elseif facing == 1 then
+            facing = 2
+            arseFacing = 0
+            dirFacing = "south"
+            dirArseFacing = "north"
+        elseif facing == 2 then
+            facing = 3
+            arseFacing = 1
+            dirFacing = "east"
+            dirArseFacing = "west"
+        elseif facing == 3 then
+            facing = 0
+            arseFacing = 2
+            dirFacing = "north"
+            dirArseFacing = "south"
+        end
+
+        table.insert( wayHome, 1, "turnRight" )
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -87,22 +111,32 @@ function turnRight()
     print(); rednet.send(masterComputerID, "", compDisplay)
     print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
-    if facing == 0 then
-        facing = 3
-        dirFacing = "east"
-    elseif facing == 1 then
-        facing = 0
-        dirFacing = "north"
-    elseif facing == 2 then
-        facing = 1
-        dirFacing = "west"
-    elseif facing == 3 then
-        facing = 2
-        dirFacing = "south"
-    end
-
     if success then
-        print("Successfully turned right, now facing", dirFacing)
+        print("Successfully turned right, now facing", dirFacing); local turnMes = "Successfully turned right, now facing", dirFacing; rednet.send(masterComputerID, turnMes, "compDisplay")
+        
+        if facing == 0 then
+            facing = 3
+            dirFacing = 1
+            arseFacing = "west"
+            dirArseFacing = "east"
+        elseif facing == 1 then
+            facing = 0
+            dirFacing = 2
+            arseFacing = "south"
+            dirArseFacing = "north"
+        elseif facing == 2 then
+            facing = 1
+            dirFacing = 3
+            arseFacing = "east"
+            dirArseFacing = "west"
+        elseif facing == 3 then
+            facing = 2
+            dirFacing = 0
+            arseFacing = "north"
+            dirArseFacing = "south"
+        end
+
+        table.insert( wayHome, 1, "turnLeft" )
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
@@ -111,10 +145,7 @@ function turnRight()
 end
 
 function returnHome()
-    --local disFromHomeX = 
-    --local disFromHomeY = 
-    --local disFromHomeZ = 
-    print("It would return if completed, but it's still in development")
+    if wayHome[1] == 
 end
 
 function work()
@@ -122,9 +153,9 @@ function work()
 end
 
 function updateCoords()
-    local f = io.open("coordsTurtle.txt", "w")
-    io.write(tostring(currentX) + "\n" + tostring(currentY) + "\n" + tostring(currentZ) + "\n" + tostring(facing))
-    io.close(f)
+    f = io.open("coordsTurtle.txt", "w")
+    f:write(currentX.."\n"..currentY.."\n"..currentZ.."\n"..facing.."\n"..arseFacing)
+    f:close()
 end
 
 function getCoords(axis)
@@ -199,6 +230,23 @@ function getCoords(axis)
         end
     end
 
+    if axis == "arse" then
+
+        local count = 1
+
+        if f == nil then
+            print(err)
+        else
+            for line in f:lines() do
+                if count == 5 then
+                    f:close()
+                    return tonumber(line)
+                end
+                count = count + 1
+            end
+        end
+    end
+
     f:close()
 end
 
@@ -216,7 +264,7 @@ print("|_____/  |_____/  |____/ ")
 print()
 print("---------------------------------------")
 
-
+wayHome = {}
 
 thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
 masterComputerID = 12   -- masterComputerID -- The computer in control of everything
@@ -230,16 +278,22 @@ local currentX = getCoords("x")
 local currentY = getCoords("y")
 local currentZ = getCoords("z")
 local facing = getCoords("face")
+local arseFacing = getCoords("arse")
 local dirFacing;
+local dirArseFacing;
 
 if facing == 0 then
     dirFacing = "north"
+    dirArseFacing = "south"
 elseif facing == 1 then
     dirFacing = "west"
+    dirArseFacing = "east"
 elseif facing == 2 then
     dirFacing = "south"
+    dirArseFacing = "north"
 elseif facing == 3 then
     dirFacing = "east"
+    dirArseFacing = "west"
 end
 
 print()
