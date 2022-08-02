@@ -91,7 +91,7 @@ while working do
             
             local respSender, respMessage, respProtocol = rednet.receive(nil, 1)
 
-            if respMessage == "returningHome" and respSender == turtleID1 and respProtocol == "notSleep"
+            if respMessage == "returningHome" and respSender == turtleID1 and respProtocol == "notSleep" then
                 print("Turtle returing home")
                 responded = true
             else
