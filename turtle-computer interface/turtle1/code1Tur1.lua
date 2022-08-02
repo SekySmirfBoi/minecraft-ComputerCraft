@@ -8,7 +8,7 @@ function moveUp()
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason: ", err)
+        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
     end
 end
 
@@ -22,7 +22,7 @@ function moveDown()
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason: ", err)
+        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
     end
 end
 
@@ -36,7 +36,7 @@ function moveForwards()
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason: ", err)
+        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
     end
 end
 
@@ -50,16 +50,64 @@ function moveBackwads()
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason: ", err)
+        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
     end
 end
 
 function turnLeft()
-    turtle.turnLeft()
+    local success, err = turtle.turnLeft()
+    print(); rednet.send(masterComputerID, "", compDisplay)
+    print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
+
+    if facing == 0 then
+        facing = 1
+        dirFacing = "west"
+    elseif facing == 1 then
+        facing = 2
+        dirFacing = "south"
+    elseif facing == 2 then
+        facing = 3
+        dirFacing = "east"
+    elseif facing == 3 then
+        facing = 0
+        dirFacing = "north"
+    end
+
+    if success then
+        print("Successfully turned left, now facing", dirFacing)
+    else
+        print()
+        print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
+        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
+    end
 end
 
 function turnRight()
     turtle.turnRight()
+    print(); rednet.send(masterComputerID, "", compDisplay)
+    print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
+
+    if facing == 0 then
+        facing = 3
+        dirFacing = "east"
+    elseif facing == 1 then
+        facing = 0
+        dirFacing = "north"
+    elseif facing == 2 then
+        facing = 1
+        dirFacing = "west"
+    elseif facing == 3 then
+        facing = 2
+        dirFacing = "south"
+    end
+
+    if success then
+        print("Successfully turned right, now facing", dirFacing)
+    else
+        print()
+        print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
+        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
+    end
 end
 
 function returnHome()
@@ -185,6 +233,17 @@ local currentX = getCoords("x")
 local currentY = getCoords("y")
 local currentZ = getCoords("z")
 local facing = getCoords("face")
+local dirFacing;
+
+if facing = 0 then
+    dirFacing = "north"
+elseif facing = 1 then
+    dirFacing = "west"
+elseif facing = 2 then
+    dirFacing = "south"
+elseif facing = 3 then
+    dirFacing = "east"
+end
 
 --[[
 print("X:", currentX)
@@ -204,22 +263,29 @@ while true do
 
     if sender == masterComputerID then
 
-        if message == "echo" then
+        if message == "echo" and protocol == "instruction" then
             rednet.send(sender, "received")
             print()
             print("Echoing")
             echoed = true
         end
 
-        if message == "off" then
+        if message == "off" and protocol == "instruction" then
             active = "off"
             print("Turtle off")
         end
 
-        if message == "on" then
+        if message == "on" and protocol == "instruction" then
             active = "on"
             print("Turtle on")
         end
+
+        if message == "return" and protocol == "instruction" then
+            rednet.send(masterComputerID, "returningHome", "notSleep")
+            print("Returning home")
+            returnHome()
+        end
+
     elseif echoed and active == "on" then
         work()
     end
