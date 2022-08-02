@@ -22,7 +22,7 @@ print(url)
 local sFile = tArgs[1] or url
 print(sFile)
 --local sPath = shell.resolve(sFile)
-local file, err = fs.open(shell.resolve(sFile), "wb")
+local file, err = fs.open(shell.resolve("https://raw.githubusercontent.com/SekySmirfBoi/minecraft-ComputerCraft/main/turtle-computer%20interface/turtle1/code1Tur1.lua"), "wb")
 print(file)
 print(err)
 
