@@ -9,9 +9,13 @@ local eResponded = false
 while not eResponded do
     rednet.send(turtleID1, "echo", "instruction")
     local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
+    peint("Echoing turtle")
 
     if eSender == turtleID1 and eMessage == "received" then
         eResponded = true
+        print()
+        print("Echoed")
+        print()
     end
 end
 
