@@ -106,27 +106,27 @@ while working do
 
 
 
-    if event == "char" and arg1 == "3" then
+    if event == "char" and arg1 == "7" then
         rednet.send(turtleID1, "up")
     end
     
-    if event == "char" and arg1 == "4" then
+    if event == "char" and arg1 == "9" then
         rednet.send(turtleID1, "down")
     end
     
-    if event == "char" and arg1 == "5" then
+    if event == "char" and arg1 == "8" then
         rednet.send(turtleID1, "forward")
     end
     
-    if event == "char" and arg1 == "6" then
+    if event == "char" and arg1 == "5" then
         rednet.send(turtleID1, "back")
     end
     
-    if event == "char" and arg1 == "7" then
+    if event == "char" and arg1 == "4" then
         rednet.send(turtleID1, "left")
     end
     
-    if event == "char" and arg1 == "8" then
+    if event == "char" and arg1 == "6" then
         rednet.send(turtleID1, "right")
     end
 end
