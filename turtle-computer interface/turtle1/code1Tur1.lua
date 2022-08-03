@@ -666,6 +666,7 @@ while loopRunning do
 
         if sender == masterComputerID then
 
+            -- Responds back to thr master computer saying that it is online
             if message == "echo" and protocol == "instruction" then
                 rednet.send(sender, "received")
                 print()
@@ -673,28 +674,32 @@ while loopRunning do
                 echoed = true
             end
 
+            -- disables the turtle after the master computer tells it to
             if message == "off" and protocol == "instruction" then
                 active = "off"
                 print("Turtle off")
             end
 
+            -- enables the turtle after the master computer tells it to
             if message == "on" and protocol == "instruction" then
                 active = "on"
                 print("Turtle on")
             end
 
+            -- sends the turtle back home
             if message == "return" and protocol == "instruction" then
                 rednet.send(masterComputerID, "returningHome", "notSleep")
                 print("Returning home")
                 returnHome()
             end
 
+            --updates the turtles home
             if message == "newHome" and protocol == "instruction" then
                 print("Setting new home coords as:")
                 updateHomeCoords()
             end
 
-            -- 
+            -- termination after getting the instruction from the master computer
             if message == "termination" and protocol == "instruction" then
                 term.setTextColor(colors.red)
                 print("Why kill me?")
@@ -710,31 +715,37 @@ while loopRunning do
 
 
 
-
+            --moves turtle up
             if message == "up" then
                 moveUp(true)
             end
-
+            
+            --moves turtle down
             if message == "down" then
                 moveDown(true)
             end
 
+            --moves turtle forward
             if message == "forward" then
                 moveForwards(true)
             end
 
+            --moves turtle backwards
             if message == "back" then
                 moveBackwards(true)
             end
 
+            --turns turtle left
             if message == "left" then
                 turnLeft(true)
             end
 
+            --turns turtle 
             if message == "right" then
                 turnRight(true)
             end
 
+            -- sends the master computer its coords
             if message == "coords" then
                 local x, y, z = gps.locate()
                 print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
@@ -742,12 +753,14 @@ while loopRunning do
                 print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
             end
 
+            --empties way home file and table
             if message == "emptyWayHome" then
                 updateWayHomeFile(nil, false, true)
                 wayHome = {}
             end
         end
 
+    -- custom terminate
     elseif osEvent == "terminate" then
         
         rednet.send(masterComputerID, "termination", "userCommand")
@@ -761,6 +774,8 @@ while loopRunning do
         term.setTextColor(colors.white)
         loopRunning = false
 
+
+    --turtle goes and works
     elseif echoed and active == "on" then
         work()
     end
