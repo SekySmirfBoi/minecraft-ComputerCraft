@@ -1,4 +1,4 @@
-function updateWayHomeFile(move, adding)
+function updateWayHomeFile(move, adding, reset)
 
     if adding == true then
         
@@ -23,22 +23,24 @@ function updateWayHomeFile(move, adding)
         local f2, err2 = io.open("miningTurtleCode/wayHomeFile.txt", "w")
         local lineLength = 0
 
-        for line in f:lines() do
-            lineCount = lineCount + 1
-        end
-
-        for line in f:lines() do
-            if count == lineCount then
-                lineLength = string.len(line)
+        if reset == false then
+            for line in f:lines() do
+                lineCount = lineCount + 1
             end
-            count = count + 1
-        end
 
-        f2:seek("end", -1 * lineLength)
+            for line in f:lines() do
+                if count == lineCount then
+                    lineLength = string.len(line)
+                end
+                count = count + 1
+            end
 
-        while lineLength ~= 0 do
-            f2:write("")
-            lineLength = lineLength - 1
+            f2:seek("end", -1 * lineLength)
+
+            while lineLength ~= 0 do
+                f2:write("")
+                lineLength = lineLength - 1
+            end
         end
 
         f:close()
@@ -120,22 +122,22 @@ function returnHome()
         if x ~= homeX or y ~= homeY or z ~= homeZ then
             if item == "moveDown" then
                 moveDown(false)
-                updateWayHomeFile(nil, false)
+                updateWayHomeFile(nil, false, false)
             elseif item == "moveUp" then
                 moveUp(false)
-                updateWayHomeFile(nil, false)
+                updateWayHomeFile(nil, false, false)
             elseif item == "moveBackwards" then
                 moveBackwards(false)
-                updateWayHomeFile(nil, false)
+                updateWayHomeFile(nil, false, false)
             elseif item == "moveForwards" then
                 moveForwards(false)
-                updateWayHomeFile(nil, false)
+                updateWayHomeFile(nil, false, false)
             elseif item == "turnRight" then
                 turnRight(false)
-                updateWayHomeFile(nil, false)
+                updateWayHomeFile(nil, false, false)
             elseif item == "turnLeft" then
                 turnLeft(false)
-                updateWayHomeFile(nil, false)
+                updateWayHomeFile(nil, false, false)
             end
         else
             local success, data = turtle.inspect()
@@ -241,7 +243,7 @@ function moveUp(addReturnHome, addReturnToPath)
     if success then
         
         if addReturnHome then
-            updateWayHomeFile("moveDown", true)
+            updateWayHomeFile("moveDown", true, false)
             table.insert( wayHome, 1, "moveDown" )
         end
         if addReturnToPath then
@@ -279,7 +281,7 @@ function moveDown(addReturnHome, addReturnToPath)
     if success then
         
         if addReturnHome then
-            updateWayHomeFile("moveUp", true)
+            updateWayHomeFile("moveUp", true, false)
             table.insert( wayHome, 1, "moveUp" )
         end
         if addReturnToPath then
@@ -310,7 +312,7 @@ function moveForwards(addReturnHome, addReturnToPath)
     if success then
         
         if addReturnHome then
-            updateWayHomeFile("moveBackwards", true)
+            updateWayHomeFile("moveBackwards", true, false)
             table.insert( wayHome, 1, "moveBackwards" )
         end
         if addReturnToPath then
@@ -341,7 +343,7 @@ function moveBackwards(addReturnHome, addReturnToPath)
     if success then
         
         if addReturnHome then
-            updateWayHomeFile("moveForwards", true)
+            updateWayHomeFile("moveForwards", true, false)
             table.insert( wayHome, 1, "moveForwards" )
         end
         if addReturnToPath then
@@ -394,7 +396,7 @@ function turnLeft(addReturnHome, addReturnToPath)
         end
         
         if addReturnHome then
-            updateWayHomeFile("turnRight", true)
+            updateWayHomeFile("turnRight", true, false)
             table.insert( wayHome, 1, "turnRight" )
         end
         if addReturnToPath then
@@ -447,7 +449,7 @@ function turnRight(addReturnHome, addReturnToPath)
         end
         
         if addReturnHome then
-            updateWayHomeFile("turnLeft", true)
+            updateWayHomeFile("turnLeft", true, false)
             table.insert( wayHome, 1, "turnLeft" )
         end
         if addReturnToPath then
@@ -478,11 +480,30 @@ function work()
     returnToPath()
 end
 
+function updateHomeCoords()
+
+    local x, y, z = gps.locate()
+
+    print("X: "..x)
+    print("Y: "..y)
+    print("Z: "..z)
+
+    rednet.send(masterComputerID, "New home coordinates:", "compDisplay")
+    rednet.send(masterComputerID, "X: "..x, "compDisplay")
+    rednet.send(masterComputerID, "Y: "..y, "compDisplay")
+    rednet.send(masterComputerID, "Z: "..z, "compDisplay")
+
+    f = io.open("miningTurtleCode/homeCoords.txt", "w")
+    f:write(x.."\n"..y.."\n"..z)
+    f:close()
+end
+
 function getCoords(axis)
     
-    local f, err = io.open("miningTurtleCode/coordsTurtle.txt", "r")
+    local f, err = io.open("miningTurtleCode/homeCoords.txt", "r")
+    local f2, err2 = io.open("miningTurtleCode/turtleCoords.txt", "r")
 
-    if axis == "face" then
+    if axis == "x" then
 
         local count = 1
 
@@ -490,9 +511,60 @@ function getCoords(axis)
             print(err)
         else
             for line in f:lines() do
-                if count == 4 then
+                if count == 1 then
                     f:close()
-                    return 1
+                    return tonumber(line)
+                end
+                count = count + 1
+            end
+        end
+    end
+
+    if axis == "y" then
+
+        local count = 1
+
+        if f == nil then
+            print(err)
+        else
+            for line in f:lines() do
+                if count == 2 then
+                    f:close()
+                    return tonumber(line)
+                end
+                count = count + 1
+            end
+        end
+    end
+
+    if axis == "z" then
+
+        local count = 1
+
+        if f == nil then
+            print(err)
+        else
+            for line in f:lines() do
+                if count == 3 then
+                    f:close()
+                    return tonumber(line)
+                end
+                count = count + 1
+            end
+        end
+    end
+
+    if axis == "face" then
+
+        local count = 1
+
+        if f2 == nil then
+            print(err2)
+        else
+            for line in f2:lines() do
+                if count == 4 then
+                    f2:close()
+                    return tonumber(line)
                 end
                 count = count + 1
             end
@@ -503,13 +575,13 @@ function getCoords(axis)
 
         local count = 1
 
-        if f == nil then
-            print(err)
+        if f2 == nil then
+            print(err2)
         else
-            for line in f:lines() do
+            for line in f2:lines() do
                 if count == 5 then
-                    f:close()
-                    return 3
+                    f2:close()
+                    return tonumber(line)
                 end
                 count = count + 1
             end
@@ -517,6 +589,7 @@ function getCoords(axis)
     end
 
     f:close()
+    f2:close()
 end
 
 rednet.open("left")
@@ -540,9 +613,9 @@ thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
 masterComputerID = 12   -- masterComputerID -- The computer in control of everything
 comp2ID = 19    -- relayComputerID -- The computer used to relay messages
 
-local homeX = 572
-local homeY = 64
-local homeZ = 257
+local homeX = getCoords("x")
+local homeY = getCoords("y")
+local homeZ = getCoords("z")
 
 local facing = getCoords("face")
 local arseFacing = getCoords("arse")
@@ -582,7 +655,11 @@ local echoed = false
 
 while true do
 
-    local sender, message, protocol = rednet.receive(nil, 1)
+    local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
+
+    local sender = osArg1
+    local message = osArg2
+    local protocol = osArg3
 
     if sender == masterComputerID then
 
@@ -607,6 +684,11 @@ while true do
             rednet.send(masterComputerID, "returningHome", "notSleep")
             print("Returning home")
             returnHome()
+        end
+
+        if message == "newHome" and protocol == "instruction" then
+            print("Setting new home coords as:")
+            updateHomeCoords()
         end
 
 
@@ -645,7 +727,10 @@ while true do
             print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
         end
 
-
+        if message == "emptyWayHome" then
+            updateWayHomeFile(nil, false, true)
+            wayHome = {}
+        end
 
 
 

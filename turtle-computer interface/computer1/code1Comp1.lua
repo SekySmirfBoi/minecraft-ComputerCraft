@@ -128,7 +128,16 @@ while working do
     end
 
 
-    if event == "char" and arg1 == "7" then
+    --[[
+    keyUp = 265
+    keyDown = 264
+    keyLeft = 263
+    keyRight = 262
+    pgUp = 266
+    pgDown = 267
+    ]]--
+
+    if event == "key" and arg1 == 266 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "up")
         else
@@ -136,7 +145,7 @@ while working do
         end
     end
     
-    if event == "char" and arg1 == "9" then
+    if event == "key" and arg1 == 267 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "down")
         else
@@ -144,7 +153,7 @@ while working do
         end
     end
     
-    if event == "char" and arg1 == "8" then
+    if event == "key" and arg1 == 265 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "forward")
         else
@@ -153,7 +162,7 @@ while working do
     end
 
     
-    if event == "char" and arg1 == "5" then
+    if event == "key" and arg1 == 264 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "back")
         else
@@ -161,7 +170,7 @@ while working do
         end
     end
     
-    if event == "char" and arg1 == "4" then
+    if event == "key" and arg1 == 263 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "left")
         else
@@ -169,7 +178,7 @@ while working do
         end
     end
     
-    if event == "char" and arg1 == "6" then
+    if event == "key" and arg1 == 262 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "right")
         else 
@@ -184,6 +193,22 @@ while working do
             rednet.send(turtleID1, "coords")
         else
             print("remoteControl off")
+        end
+    end
+
+    if event == "char" and arg1 == "[" then
+        print("Are you sure? Yes: T, No: [")
+        print("This is an irriversable change")
+
+        local specialEvent, specialArg1, specialArg2, specialArg3, specialArg4, specialArg5 = os.pullEvent("char")
+
+        if specialEvent == "char" then
+            if specialArg1 == "T" then
+                print("Set new home")
+                rednet.send(turtleID1, "emptyWayHome", "instruction")
+            else
+                print("Nothing happened")
+            end
         end
     end
 end
