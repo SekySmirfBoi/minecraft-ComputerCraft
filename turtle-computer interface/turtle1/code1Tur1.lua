@@ -694,6 +694,7 @@ while loopRunning do
                 updateHomeCoords()
             end
 
+            -- 
             if message == "termination" and protocol == "instruction" then
                 term.setTextColor(colors.red)
                 print("Why kill me?")

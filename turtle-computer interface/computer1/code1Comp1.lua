@@ -40,7 +40,7 @@ local remoteControl = "off"
 
 while working do 
 
-    local event, arg1, arg2, arg3, arg4, arg5 = os.pullEvent()
+    local event, arg1, arg2, arg3, arg4, arg5 = os.pullEventRaw()
 
     if event == "rednet_message" then
         local sender = arg1
@@ -233,5 +233,16 @@ while working do
                 print("Nothing happened")
             end
         end
+    end
+
+    -- kills program the computer and turtle is running
+    if event == "terminate" then
+        
+        rednet.send(turtleID1, "termination", "instruction")
+        term.setTextColor(colors.red)
+        print("Terminated code")
+        term.setTextColor(colors.white)
+        working = false
+        
     end
 end
