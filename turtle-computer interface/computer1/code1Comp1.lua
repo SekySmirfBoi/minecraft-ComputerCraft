@@ -7,19 +7,6 @@ local working = false
 local eResponded = false
 local eSender, eMessage, eProtocol
 
-while not eResponded do
-    rednet.send(turtleID1, "echo", "instruction")
-    eSender, eMessage, eProtocol = rednet.receive(nil, 2)
-    print("Echoing turtle")
-
-    if eSender == turtleID1 and eMessage == "received" then
-        eResponded = true
-        print()
-        print("Echoed")
-        print()
-    end
-end
-
 
 print()
 print("----------------------------------------------")
@@ -35,15 +22,22 @@ print("----------------------------------------------")
 print()
 print("Computer has started.")
 
-if eSender == turtleID1 and eMessage == "received" then
-    print()
-    print("Turtle 1 active")
-    print()
-    print("Press 0 to disable turtle")
-    print("Press 1 to enable turtle")
-    print("Press 2 to return turtle")
-    print()
-    working = true
+while not eResponded do
+    rednet.send(turtleID1, "echo", "instruction")
+    eSender, eMessage, eProtocol = rednet.receive(nil, 2)
+    print("Echoing turtle")
+
+    if eSender == turtleID1 and eMessage == "received" then
+        eResponded = true
+        print()
+        print("Turtle has started")
+        print()
+        print("Press 0 to stop the turtle from working")
+        print("Press 1 to start the turtle working")
+        print("Press 2 to return turtle to its pre set home")
+        print()
+        working = true
+    end
 end
 
 local active = "off"
