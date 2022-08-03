@@ -1,5 +1,5 @@
 
-2) change the way home method so it doesnt just follow the path it took to
+2) change the return home method so it doesnt just follow the path it took to
     get to its current position, bc it seems unreliable
 3) remove all traces of return to path
 4) finish the work function

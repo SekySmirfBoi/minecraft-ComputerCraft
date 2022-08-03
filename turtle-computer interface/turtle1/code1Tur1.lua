@@ -1,95 +1,25 @@
 function returnHome()
-    local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "r")
+    
 
-    for line in f:lines() do
-        table.insert(wayHome, 1, line)
-    end
-    f:close()
 
-    --[[
-    "moveDown"
-    "moveUp"
-    "moveBackwards"
-    "moveForwards"
-    "turnRight"
-    "turnLeft"
-    ]]--
+    -------------------------------------------------
+    -------------------------------------------------
+    -------------------------------------------------
+    -------------------------------------------------
 
-    for key, item in pairs(wayHome) do
+    local success, data = turtle.inspect()
 
-        local x, y, z = gps.locate()
-
-        if x ~= homeX or y ~= homeY or z ~= homeZ then
-            if item == "moveDown" then
-                moveDown(false)
-                updateWayHomeFile(nil, false, false)
-            elseif item == "moveUp" then
-                moveUp(false)
-                updateWayHomeFile(nil, false, false)
-            elseif item == "moveBackwards" then
-                moveBackwards(false)
-                updateWayHomeFile(nil, false, false)
-            elseif item == "moveForwards" then
-                moveForwards(false)
-                updateWayHomeFile(nil, false, false)
-            elseif item == "turnRight" then
-                turnRight(false)
-                updateWayHomeFile(nil, false, false)
-            elseif item == "turnLeft" then
-                turnLeft(false)
-                updateWayHomeFile(nil, false, false)
-            end
-        else
-            local success, data = turtle.inspect()
-
-            if data.name == nil then
-                data.name = "notTheRightOne"
-            end
-
-            if data.name == "minecraft:crafting_table" then
-                turtle.left()
-                turtle.left()
-            else
-
-                turtle.left()
-                local success, data = turtle.inspect()
-                
-                if data.name == nil then
-                    data.name = "notTheRightOne"
-                end
-                if data.name == "minecraft:crafting_table" then
-                    turtle.left()
-                    turtle.left()
-                else
-
-                    turtle.left()
-                    local success, data = turtle.inspect()
-                    
-                    if data.name == nil then
-                        data.name = "notTheRightOne"
-                    end
-                    if data.name == "minecraft:crafting_table" then
-                        turtle.left()
-                        turtle.left()
-                    else
-
-                        turtle.left()
-                        local success, data = turtle.inspect()
-                        
-                        if data.name == nil then
-                            data.name = "notTheRightOne"
-                        end
-                        if data.name == "minecraft:crafting_table" then
-                            turtle.left()
-                            turtle.left()
-                        end
-                    end
-                end
-            end
-        end
+    if data.name == nil then
+        data.name = "notTheRightOne"
     end
 
-    wayHome = {}
+    while data.name ~= "minecraft:crafting_table" then
+        turtle.left()
+        success, data = turtle.inspect() 
+    end
+    
+    turtle.left()
+    turtle.left()
 end
 
 function moveUp()
@@ -120,7 +50,9 @@ function moveDown()
     if y == 5 then
         print("Will not go below y-level 5."); rednet.send(masterComputerID, "Will not go below y-level 5.", "compDisplay")
         print("This is to prevent the turtle getting stuck under bedrock"); rednet.send(masterComputerID, "This is to prevent the turtle getting stuck under bedrock", "compDisplay")
+        return
     end
+
     local success, err = turtle.down()
     print(); rednet.send(masterComputerID, "", compDisplay)
     print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
@@ -246,9 +178,6 @@ print("|_____/  |_____/  |____/ ")
 print()
 print("---------------------------------------")
 
-wayHome = {}
-wayToPath = {}
-
 thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
 masterComputerID = 12   -- masterComputerID -- The computer in control of everything
 comp2ID = 19    -- secondComputerID -- Just a second unused computer
@@ -261,8 +190,6 @@ print()
 print("Turtle ready to receive instructions")
 print("Listeneing for messages")
 print()
-
-local compDisplay = "compDisplay"
 
 local active = "off"
 local echoed = false
