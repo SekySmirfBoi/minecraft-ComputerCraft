@@ -109,6 +109,7 @@ while working do
             else
                 print("Attempt:", attempt)
                 rednet.send(turtleID1, "return", "instruction")
+                attempt = attempt + 1
             end
         end
     end
