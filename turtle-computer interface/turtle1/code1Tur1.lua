@@ -9,9 +9,7 @@ function returnHome()
 
     local success, data = turtle.inspect()
 
-    if data.name == nil then
-        data.name = "notTheRightOne"
-    end
+    
 
     while data.name ~= "minecraft:crafting_table" do
         turtle.left()
