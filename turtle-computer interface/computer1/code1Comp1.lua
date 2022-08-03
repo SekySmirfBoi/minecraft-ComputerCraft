@@ -2,10 +2,19 @@ rednet.open("back")
 
 local turtleID1 = 39
 
-rednet.send(turtleID1, "echo", "instruction")
-
-local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
 local working = false
+
+local eResponded = false
+
+while not eResponded do
+    rednet.send(turtleID1, "echo", "instruction")
+    local eSender, eMessage, eProtocol = rednet.receive(nil, 2)
+
+    if eSender == turtleID1 and eMessage == "received" then
+        eResponded = true
+    end
+end
+
 
 print()
 print("----------------------------------------------")
@@ -30,9 +39,6 @@ if eSender == turtleID1 and eMessage == "received" then
     print("Press 2 to return turtle")
     print()
     working = true
-else
-    print("Failed to get a responce from turtle")
-    print()
 end
 
 local active = "off"
