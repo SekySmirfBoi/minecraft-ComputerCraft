@@ -1,15 +1,324 @@
 function returnHome()
+
+    local x, y, z = gps.locate()
+
+    while y > 5 do
+        if turtle.detectDown() then
+            digBlock("down")
+        end
+        moveDown()
+        x, y, z = gps.locate()
+        if turtle.getFuelLevel == 0 then
+            print(); rednet.send(masterComputerID, "", "compDisplay")
+            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            return
+        end
+    end
+
+    correctYIfAtHome()
+
+    local oldDifX = 0
+    local newDifX = 0
+
+    local oldZ = 0
+    local newZealand = 0
+
+    x, y, z = gps.locate()
+    oldZ = z
+
+    if x < homeX then
+        
+        oldDifX = homeX - x
+
+        if turtle.detect() then
+            digBlock("front")
+        end
+        moveForwards()
+        if oldZ ~= newZealand then
+            moveBackwards()
+            turnRight()
+            if turtle.detect() then
+                digBlock("front")
+            end
+            moveForwards()
+        end
+
+        x, y, z = gps.locate()
+
+        newDifX = homeX - X
+
+    elseif x > homeX then
+
+        oldDifX = x - homeX
+
+        if turtle.detect() then
+            digBlock("front")
+        end
+        moveForwards()
+
+        x, y, z = gps.locate()
+
+        newDifX = x - homeX
+    end
+
+
+    if oldDifX < newDifX then
+        turtle.left()
+        turtle.left()
+    end
+
+    x, y, z = gps.locate()
+
+    while x ~= homeX do
+        if turtle.detect() then
+            digBlock("front")
+        end
+        moveForwards()
+        x, y, z = gps.locate()
+        if turtle.getFuelLevel == 0 then
+            print(); rednet.send(masterComputerID, "", "compDisplay")
+            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            return
+        end
+    end
     
+    correctYIfAtHome()
+
+    local oldDifX = 0
+    local newDifX = 0
+
+    local oldZ = 0
+    local newZealand = 0
+
+    x, y, z = gps.locate()
+    oldZ = z
+
+    if x < homeX then
+        
+        oldDifX = homeX - x
+
+        if turtle.detect() then
+            digBlock("front")
+        end
+
+        moveForwards()
+        if oldZ ~= newZealand then
+            moveBackwards()
+            turnRight()
+            if turtle.detect() then
+                digBlock("front")
+            end
+            moveForwards()
+        end
+
+        x, y, z = gps.locate()
+
+        newDifX = homeX - X
+
+    elseif x > homeX then
+
+        oldDifX = x - homeX
+
+        if turtle.detect() then
+            digBlock("front")
+        end
+
+        moveForwards()
+        if oldZ ~= newZealand then
+            moveBackwards()
+            turnRight()
+            if turtle.detect() then
+                digBlock("front")
+            end
+            moveForwards()
+        end
+
+        x, y, z = gps.locate()
+
+        newDifX = x - homeX
+    end
 
 
-    -------------------------------------------------
-    -------------------------------------------------
-    -------------------------------------------------
-    -------------------------------------------------
+    if oldDifX < newDifX then
+        turtle.left()
+        turtle.left()
+    end
 
+    x, y, z = gps.locate()
+
+    while x ~= homeX do
+        if turtle.detect() then
+            digBlock("front")
+        end
+        moveForwards()
+        x, y, z = gps.locate()
+        if turtle.getFuelLevel == 0 then
+            print(); rednet.send(masterComputerID, "", "compDisplay")
+            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            return
+        end
+    end
+
+
+    ------------------------------------------------------------
+
+    correctYIfAtHome()
+
+    local oldDifZ = 0
+    local newDifZ = 0
+
+    local oldX = 0
+    local newX = 0
+
+    x, y, z = gps.locate()
+    oldX = x
+
+    if z < homeZ then
+        
+        oldDifZ = homeZ - z
+
+        if turtle.detect() then
+            digBlock("front")
+        end
+        moveForwards()
+        if oldX ~= newX then
+            moveBackwards()
+            turnRight()
+            if turtle.detect() then
+                digBlock("front")
+            end
+            moveForwards()
+        end
+
+        x, y, z = gps.locate()
+
+        newDifZ = homeZ - z
+
+    elseif z > homeZ then
+
+        oldDifZ = z - homeZ
+
+        if turtle.detect() then
+            digBlock("front")
+        end
+        moveForwards()
+        if oldX ~= newX then
+            moveBackwards()
+            turnRight()
+            if turtle.detect() then
+                digBlock("front")
+            end
+            moveForwards()
+        end
+
+        x, y, z = gps.locate()
+
+        newDifZ = z - homeZ
+    end
+
+
+    if oldDifZ < newDifZ then
+        turtle.left()
+        turtle.left()
+    end
+
+    x, y, z = gps.locate()
+
+    while z ~= homeZ do
+        if turtle.detect() then
+            digBlock("front")
+        end
+        moveForwards()
+        x, y, z = gps.locate()
+        if turtle.getFuelLevel == 0 then
+            print(); rednet.send(masterComputerID, "", "compDisplay")
+            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            return
+        end
+    end
+
+    local oldDifZ = 0
+    local newDifZ = 0
+
+    local oldX = 0
+    local newX = 0
+
+    x, y, z = gps.locate()
+    oldX = x
+
+    if z < homeZ then
+        
+        oldDifZ = homeZ - z
+
+        if turtle.detect() then
+            digBlock("front")
+        end
+
+        moveForwards()
+        if oldX ~= newX then
+            moveBackwards()
+            turnRight()
+            if turtle.detect() then
+                digBlock("front")
+            end
+            moveForwards()
+        end
+
+        x, y, z = gps.locate()
+
+        newDifZ = homeZ - z
+
+    elseif z > homeZ then
+
+        oldDifZ = z - homeZ
+
+        if turtle.detect() then
+            digBlock("front")
+        end
+
+        moveForwards()
+        if oldX ~= newX then
+            moveBackwards()
+            turnRight()
+            if turtle.detect() then
+                digBlock("front")
+            end
+            moveForwards()
+        end
+
+        x, y, z = gps.locate()
+
+        newDifZ = z - homeZ
+    end
+
+
+    if oldDifZ < newDifZ then
+        turtle.left()
+        turtle.left()
+    end
+
+    x, y, z = gps.locate()
+
+    while z ~= homeZ do
+        if turtle.detect() then
+            digBlock("front")
+        end
+        moveForwards()
+        x, y, z = gps.locate()
+        if turtle.getFuelLevel == 0 then
+            print(); rednet.send(masterComputerID, "", "compDisplay")
+            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            return
+        end
+    end
+
+    -----------------------------------------------------------------------------------------------
+
+    correctYIfAtHome()
+end
+
+function correctTurtleFacing() 
     local success, data = turtle.inspect()
-
-    
 
     while data.name ~= "minecraft:crafting_table" do
         turnLeft()
@@ -19,6 +328,68 @@ function returnHome()
     turnLeft()
     turnLeft()
 end
+
+function correctYIfAtHome()
+
+    local x, y, z = gps.locate()
+
+    if x == homeX and z == homeZ then
+
+        while y < 64 do
+            if turtle.detectUp() then
+                digBlock("up")
+            end
+            moveUp()
+            x, y, z = gps.locate()
+            if turtle.getFuelLevel == 0 then
+                print(); rednet.send(masterComputerID, "", "compDisplay")
+                print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+                return
+            end
+        end
+
+        while y > 64 do
+            if turtle.detectDown() then
+                digBlock("down")
+            end
+            moveDown()
+            x, y, z = gps.locate()
+            if turtle.getFuelLevel == 0 then
+                print(); rednet.send(masterComputerID, "", "compDisplay")
+                print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+                return
+            end
+        end
+
+        correctTurtleFacing()
+        return
+    end
+end
+
+
+function digBlock(dir) 
+    local success, data
+
+    if dir == "front" or dir == nil then
+        success, data = turtle.dig()
+    elseif dir == "down" then
+        success, data = turtle.digDown()
+    elseif dir == "up" then
+        success, data = turtle.digUp()
+    else
+        return
+    end
+
+    if success then
+        print()
+        print("Mined block: "..data.name); rednet.send(masterComputerID, "Mined block: "..data.name, "compDisplay")
+    else
+        print()
+        print("Failed to mine block"); rednet.send(masterComputerID, "Failed to mine block", "compDisplay")
+        print("Reason: "..data); rednet.send(masterComputerID, "Reason: "..data, "compDisplay")
+    end
+end
+
 
 function moveUp()
     local success, err = turtle.up()
