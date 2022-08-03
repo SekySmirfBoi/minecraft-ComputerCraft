@@ -140,7 +140,7 @@ while working do
         rednet.send(turtleID1, "right")
     end
 
-    if event == "char" and arg1 == "." then
+    if event == "char" and arg1 == "+" then
         rednet.send(turtleID1, "coords")
     end
 end
