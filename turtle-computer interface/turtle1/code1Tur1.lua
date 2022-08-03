@@ -657,83 +657,94 @@ while true do
 
     local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
 
-    local sender = osArg1
-    local message = osArg2
-    local protocol = osArg3
+    if osEvent == "rednet_message" then
+        local sender = osArg1
+        local message = osArg2
+        local protocol = osArg3
 
-    if sender == masterComputerID then
+        if sender == masterComputerID then
 
-        if message == "echo" and protocol == "instruction" then
-            rednet.send(sender, "received")
-            print()
-            print("Echoing")
-            echoed = true
+            if message == "echo" and protocol == "instruction" then
+                rednet.send(sender, "received")
+                print()
+                print("Echoing")
+                echoed = true
+            end
+
+            if message == "off" and protocol == "instruction" then
+                active = "off"
+                print("Turtle off")
+            end
+
+            if message == "on" and protocol == "instruction" then
+                active = "on"
+                print("Turtle on")
+            end
+
+            if message == "return" and protocol == "instruction" then
+                rednet.send(masterComputerID, "returningHome", "notSleep")
+                print("Returning home")
+                returnHome()
+            end
+
+            if message == "newHome" and protocol == "instruction" then
+                print("Setting new home coords as:")
+                updateHomeCoords()
+            end
+
+
+
+
+
+
+            if message == "up" then
+                moveUp(true)
+            end
+
+            if message == "down" then
+                moveDown(true)
+            end
+
+            if message == "forward" then
+                moveForwards(true)
+            end
+
+            if message == "back" then
+                moveBackwards(true)
+            end
+
+            if message == "left" then
+                turnLeft(true)
+            end
+
+            if message == "right" then
+                turnRight(true)
+            end
+
+            if message == "coords" then
+                local x, y, z = gps.locate()
+                print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
+                print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
+                print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
+            end
+
+            if message == "emptyWayHome" then
+                updateWayHomeFile(nil, false, true)
+                wayHome = {}
+            end
         end
 
-        if message == "off" and protocol == "instruction" then
-            active = "off"
-            print("Turtle off")
-        end
-
-        if message == "on" and protocol == "instruction" then
-            active = "on"
-            print("Turtle on")
-        end
-
-        if message == "return" and protocol == "instruction" then
-            rednet.send(masterComputerID, "returningHome", "notSleep")
-            print("Returning home")
-            returnHome()
-        end
-
-        if message == "newHome" and protocol == "instruction" then
-            print("Setting new home coords as:")
-            updateHomeCoords()
-        end
-
-
-
-
-
-
-        if message == "up" then
-            moveUp(true)
-        end
-
-        if message == "down" then
-            moveDown(true)
-        end
-
-        if message == "forward" then
-            moveForwards(true)
-        end
-
-        if message == "back" then
-            moveBackwards(true)
-        end
-
-        if message == "left" then
-            turnLeft(true)
-        end
-
-        if message == "right" then
-            turnRight(true)
-        end
-
-        if message == "coords" then
-            local x, y, z = gps.locate()
-            print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
-            print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
-            print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
-        end
-
-        if message == "emptyWayHome" then
-            updateWayHomeFile(nil, false, true)
-            wayHome = {}
-        end
-
-
-
+    elseif osEvent == "terminate" then
+        
+        rednet.send(masterComputerID, "termination", "userCommand")
+        term.setTextColor(colors.red)
+        print("Why kill me?")
+        print()
+        term.setTextColor(colors.lightBlue)
+        print("It's because I'm a turtle isn't it :(")
+        print("Tell my family that I love them")
+        print("Why would you ever do that, you're the one who killed me")
+        term.setTextColor(colors.white)
 
     elseif echoed and active == "on" then
         work()
