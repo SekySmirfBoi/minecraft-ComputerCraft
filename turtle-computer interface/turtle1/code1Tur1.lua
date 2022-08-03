@@ -12,12 +12,12 @@ function returnHome()
     
 
     while data.name ~= "minecraft:crafting_table" do
-        turtle.left()
+        turnLeft()
         success, data = turtle.inspect() 
     end
 
-    turtle.left()
-    turtle.left()
+    turnLeft()
+    turnLeft()
 end
 
 function moveUp()
