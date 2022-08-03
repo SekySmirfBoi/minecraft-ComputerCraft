@@ -208,7 +208,6 @@ while loopRunning do
             -- Responds back to thr master computer saying that it is online
             if message == "echo" and protocol == "instruction" then
                 rednet.send(sender, "received")
-                print()
                 print("Echoing")
                 echoed = true
             end

@@ -21,6 +21,8 @@ print()
 print("----------------------------------------------")
 print()
 print("Computer has started.")
+print()
+print("Echoing turtle")
 
 while not eResponded do
     rednet.send(turtleID1, "echo", "instruction")
@@ -29,6 +31,8 @@ while not eResponded do
 
     if eSender == turtleID1 and eMessage == "received" then
         eResponded = true
+        print()
+        print("----------------------------------------------")
         print()
         print("Turtle has started")
         print()
