@@ -241,8 +241,9 @@ while working do
         rednet.send(turtleID1, "termination", "instruction")
         term.setTextColor(colors.red)
         print("Terminated code")
+        print("This is a custom termination")
         term.setTextColor(colors.white)
         working = false
-        
+
     end
 end
