@@ -68,7 +68,7 @@ while working do
 
             if message == "termination" and protocol == "userCommand" then
                 print("terminating")
-                working == false
+                working = false
             end
         end
     end
