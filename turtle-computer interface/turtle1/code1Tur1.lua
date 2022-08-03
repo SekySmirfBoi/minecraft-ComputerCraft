@@ -66,7 +66,7 @@ function moveUp(addReturn)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
+        print(err); rednet.send(masterComputerID, tostring(err), "compDisplay")
     end
 end
 
@@ -85,14 +85,11 @@ function moveDown(addReturn)
         --currentY = tonumber(currentY) - 1
         --updateCoords()
 
-        print("Successfully moved down, new coordinates:"); rednet.send(masterComputerID, "Successfully moved down, new coordinates:", compDisplay)
-        print("X:",currentX)
-        print("Y:",currentY)
-        print("Z:",currentZ)
+        print("Successfully moved down"); rednet.send(masterComputerID, "Successfully moved down", compDisplay)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
+        print(err); rednet.send(masterComputerID, tostring(err), "compDisplay")
     end
 end
 
@@ -119,14 +116,11 @@ function moveForwards(addReturn)
 
         updateCoords()
 
-        print("Successfully moved forward, new coordinates:"); rednet.send(masterComputerID, "Successfully moved forward, new coordinates:", compDisplay)
-        print("X:",currentX)
-        print("Y:",currentY)
-        print("Z:",currentZ)
+        print("Successfully moved forward"); rednet.send(masterComputerID, "Successfully moved forward", compDisplay)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
+        print(err); rednet.send(masterComputerID, tostring(err), "compDisplay")
     end
 end
 
@@ -153,14 +147,11 @@ function moveBackwards(addReturn)
         
         updateCoords()
 
-        print("Successfully moved back, new coordinates:"); rednet.send(masterComputerID, "Successfully moved back, new coordinates:", compDisplay)
-        print("X:",currentX)
-        print("Y:",currentY)
-        print("Z:",currentZ)
+        print("Successfully moved back"); rednet.send(masterComputerID, "Successfully moved back", compDisplay)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
+        print(err); rednet.send(masterComputerID, tostring(err), "compDisplay")
     end
 end
 
@@ -198,11 +189,11 @@ function turnLeft(addReturn)
             table.insert( wayHome, 1, "turnRight" )
         end
 
-        print("Successfully turned left, now facing", dirFacing); local turnMes = "Successfully turned left, now facing", dirFacing; rednet.send(masterComputerID, turnMes, "compDisplay")
+        print("Successfully turned left"); rednet.send(masterComputerID, "Successfully turned left", "compDisplay")
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
+        print(err); rednet.send(masterComputerID, tostring(err), "compDisplay")
     end
 end
 
@@ -240,11 +231,11 @@ function turnRight(addReturn)
             table.insert( wayHome, 1, "turnLeft" )
         end
 
-        print("Successfully turned right, now facing", dirFacing); local turnMes = "Successfully turned right, now facing", dirFacing; rednet.send(masterComputerID, turnMes, "compDisplay")
+        print("Successfully turned right", dirFacing); rednet.send(masterComputerID, "Successfully turned right", "compDisplay")
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
-        print("Reason:", err); local errorMessage = "Reason:", err; rednet.send(masterComputerID, errorMessage, "compDisplay")
+        print(err); rednet.send(masterComputerID, tostring(err), "compDisplay")
     end
 end
 
