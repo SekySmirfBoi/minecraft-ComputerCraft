@@ -507,8 +507,8 @@ while true do
         if message == "coords" then
             local x, y, z = gps.locate()
             print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
-            print("Y: "..x); rednet.send(masterComputerID, y, "getCoordsY")
-            print("Z: "..x); rednet.send(masterComputerID, z, "getCoordsZ")
+            print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
+            print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
         end
 
 

@@ -40,6 +40,7 @@ else
 end
 
 local active = "off"
+local remoteControl = "off"
 
 while working do 
 
@@ -115,32 +116,73 @@ while working do
 
 
 
+    if event == "char" and arg1 == "/" then
+        if remoteControl == "off" then
+            remoteControl = "on"
+            print("Enabled turtle remote control")
+        elseif remoteControl == "on" then
+            remoteControl = "off"
+            print("Disabled turtle remote control")
+        end
+    end
+
 
     if event == "char" and arg1 == "7" then
-        rednet.send(turtleID1, "up")
+        if remoteControl == "on" then
+            rednet.send(turtleID1, "up")
+        else
+            print("remoteControl off")
+        end
     end
     
     if event == "char" and arg1 == "9" then
-        rednet.send(turtleID1, "down")
+        if remoteControl == "on" then
+            rednet.send(turtleID1, "down")
+        else
+            print("remoteControl off")
+        end
     end
     
     if event == "char" and arg1 == "8" then
-        rednet.send(turtleID1, "forward")
+        if remoteControl == "on" then
+            rednet.send(turtleID1, "forward")
+        else
+            print("remoteControl off")
+        end
     end
+
     
     if event == "char" and arg1 == "5" then
-        rednet.send(turtleID1, "back")
+        if remoteControl == "on" then
+            rednet.send(turtleID1, "back")
+        else
+            print("remoteControl off")
+        end
     end
     
     if event == "char" and arg1 == "4" then
-        rednet.send(turtleID1, "left")
+        if remoteControl == "on" then
+            rednet.send(turtleID1, "left")
+        else
+            print("remoteControl off")
+        end
     end
     
     if event == "char" and arg1 == "6" then
-        rednet.send(turtleID1, "right")
+        if remoteControl == "on" then
+            rednet.send(turtleID1, "right")
+        else 
+            print("remoteControl off")
+        end
     end
 
+
+
     if event == "char" and arg1 == "+" then
-        rednet.send(turtleID1, "coords")
+        if remoteControl == "on" then
+            rednet.send(turtleID1, "coords")
+        else
+            print("remoteControl off")
+        end
     end
 end
