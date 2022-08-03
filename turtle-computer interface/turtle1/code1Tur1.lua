@@ -694,6 +694,17 @@ while loopRunning do
                 updateHomeCoords()
             end
 
+            if message == "termination" and protocol == "instruction" then
+                term.setTextColor(colors.red)
+                print("Why kill me?")
+                print()
+                term.setTextColor(colors.lightBlue)
+                print("It's because I'm a turtle isn't it :(")
+                print("Tell my family that I love them")
+                print("Why would you ever do that, you're the one who killed me")
+                term.setTextColor(colors.white)
+                loopRunning = false
+            end
 
 
 

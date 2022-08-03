@@ -19,23 +19,19 @@ print("|_____/  |_____/  |____/ ")
 print()
 print("----------------------------------------------")
 print()
-print("Computer output: Computer has started.")
+print("Computer has started.")
 
 if eSender == turtleID1 and eMessage == "received" then
-    print("Computer output: ")
     print()
     print("Turtle 1 active")
     print()
     print("Press 0 to disable turtle")
     print("Press 1 to enable turtle")
     print("Press 2 to return turtle")
-    --print("Press 2 to echo turtle")
-    print()
-    print("End of Computer output")
     print()
     working = true
 else
-    print("Computer output: Failed to get a responce from turtle")
+    print("Failed to get a responce from turtle")
     print()
 end
 
@@ -52,20 +48,25 @@ while working do
         local protocol = arg3
 
         if sender == turtleID1 then
+            -- prints whatever the turtle said to the screen
             if protocol == "compDisplay" then
                 print(message)
             end
 
+            -- prints turtle's x coordinate
             if protocol == "getCoordsX" then
                 print("X: "..message)
             end
+            -- prints turtle's y coordinate
             if protocol == "getCoordsY" then
                 print("Y: "..message)
             end
+            -- prints turtle's z coordinate
             if protocol == "getCoordsZ" then
                 print("Z: "..message)
             end
 
+            -- Terminates the computer when turtle is terminated
             if message == "termination" and protocol == "userCommand" then
                 print("terminating")
                 working = false
@@ -83,25 +84,33 @@ while working do
     end
     ]]--
 
+    -- Stop the turtle from moving and mining
     if event == "char" and arg1 == "0" then
         print("Computer output: Turtle off.")
         active = "off"
         rednet.send(turtleID1, "off", "instruction")
     end
 
+    -- Start the turtle moving and mining
     if event == "char" and arg1 == "1" then
         print("Computer output: Turtle on.")
         active = "on"
         rednet.send(turtleID1, "on", "instruction")
     end
 
+    -- Bring turtle to its current set home
     if event == "char" and arg1 == "2" then
         print("Attempting to return turtle.")
         print("Attempt: 1")
         rednet.send(turtleID1, "return", "instruction")
 
         local responded = false
-        local attempt = 2
+        local attempt = 1
+
+        if active == "on" then
+            print("You must deactive the turtle first")
+            responded = true
+        end
 
         while not responded do
             
@@ -121,9 +130,11 @@ while working do
 
 
 
-
+    -- Toggle remote control
     if event == "char" and arg1 == "/" then
-        if remoteControl == "off" then
+        if active == "on" then
+            print("You must deactivate the turtle first")
+        elseif remoteControl == "off" then
             remoteControl = "on"
             print("Enabled turtle remote control")
         elseif remoteControl == "on" then
@@ -142,6 +153,7 @@ while working do
     pgDown = 267
     ]]--
 
+    -- Turtle move up
     if event == "key" and arg1 == 266 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "up")
@@ -150,6 +162,7 @@ while working do
         end
     end
     
+    -- Turtle move down
     if event == "key" and arg1 == 267 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "down")
@@ -158,6 +171,7 @@ while working do
         end
     end
     
+    -- Turtle move forward
     if event == "key" and arg1 == 265 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "forward")
@@ -166,7 +180,7 @@ while working do
         end
     end
 
-    
+    -- Turtle move back
     if event == "key" and arg1 == 264 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "back")
@@ -175,6 +189,7 @@ while working do
         end
     end
     
+    -- Turtle turn left
     if event == "key" and arg1 == 263 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "left")
@@ -183,6 +198,7 @@ while working do
         end
     end
     
+    -- Turtle turn right
     if event == "key" and arg1 == 262 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "right")
@@ -192,7 +208,7 @@ while working do
     end
 
 
-
+    -- Get the coords of the turtle to be able to track easier
     if event == "char" and arg1 == "+" then
         if remoteControl == "on" then
             rednet.send(turtleID1, "coords")
@@ -201,6 +217,8 @@ while working do
         end
     end
 
+
+    -- Empty wayHomeFile.txt to set a new home location
     if event == "char" and arg1 == "[" then
         print("Are you sure? Yes: T, No: [")
         print("This is an irriversable change")
