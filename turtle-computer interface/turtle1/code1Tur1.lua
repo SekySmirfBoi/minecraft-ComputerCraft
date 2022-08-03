@@ -653,7 +653,9 @@ local compDisplay = "compDisplay"
 local active = "off"
 local echoed = false
 
-while true do
+local loopRunning = true
+
+while loopRunning do
 
     local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
 
@@ -745,6 +747,7 @@ while true do
         print("Tell my family that I love them")
         print("Why would you ever do that, you're the one who killed me")
         term.setTextColor(colors.white)
+        loopRunning = false
 
     elseif echoed and active == "on" then
         work()

@@ -68,7 +68,7 @@ while working do
 
             if message == "termination" and protocol == "userCommand" then
                 print("terminating")
-                os.reboot()
+                working == false
             end
         end
     end
