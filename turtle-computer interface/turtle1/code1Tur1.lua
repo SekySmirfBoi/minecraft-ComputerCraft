@@ -2,8 +2,8 @@ function updateWayHomeFile(move, adding, reset)
 
     if adding == true then
         
-        local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "a")
-        local f2, err2 = io.open("miningTurtleCode/wayHomeFile.txt", "r")
+        local f, err = io.open("wayHomeFile.txt", "a")
+        local f2, err2 = io.open("wayHomeFile.txt", "r")
 
         for line in f2:lines() do
             if line ~= "" then
@@ -19,8 +19,8 @@ function updateWayHomeFile(move, adding, reset)
 
         local lineCount = 0
         local count = 1
-        local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "r")
-        local f2, err2 = io.open("miningTurtleCode/wayHomeFile.txt", "w")
+        local f, err = io.open("wayHomeFile.txt", "r")
+        local f2, err2 = io.open("wayHomeFile.txt", "w")
         local lineLength = 0
 
         if reset == false then
@@ -52,8 +52,8 @@ function updateReturnToPathFile(move, adding)
 
     if adding == true then
         
-        local f, err = io.open("miningTurtleCode/returnToPath.txt", "a")
-        local f2, err2 = io.open("miningTurtleCode/returnToPath.txt", "r")
+        local f, err = io.open("returnToPath.txt", "a")
+        local f2, err2 = io.open("returnToPath.txt", "r")
 
         for line in f2:lines() do
             if line ~= "" then
@@ -69,8 +69,8 @@ function updateReturnToPathFile(move, adding)
         
         local lineCount = 0
         local count = 1
-        local f, err = io.open("miningTurtleCode/returnToPath.txt", "r")
-        local f2, err2 = io.open("miningTurtleCode/returnToPath.txt", "w")
+        local f, err = io.open("returnToPath.txt", "r")
+        local f2, err2 = io.open("returnToPath.txt", "w")
         local lineLength = 0
 
         for line in f:lines() do
@@ -99,7 +99,7 @@ end
 
 
 function returnHome()
-    local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "r")
+    local f, err = io.open("wayHomeFile.txt", "r")
 
     for line in f:lines() do
         table.insert(wayHome, 1, line)
@@ -193,7 +193,7 @@ function returnHome()
 end
 
 function returnToPath()
-    local f, err = io.open("miningTurtleCode/returnToPathFile.txt", "r")
+    local f, err = io.open("returnToPathFile.txt", "r")
 
     for line in f:lines() do
         table.insert(wayToPath, 1, line)
@@ -493,15 +493,15 @@ function updateHomeCoords()
     rednet.send(masterComputerID, "Y: "..y, "compDisplay")
     rednet.send(masterComputerID, "Z: "..z, "compDisplay")
 
-    f = io.open("miningTurtleCode/homeCoords.txt", "w")
+    f = io.open("homeCoords.txt", "w")
     f:write(x.."\n"..y.."\n"..z)
     f:close()
 end
 
 function getCoords(axis)
     
-    local f, err = io.open("miningTurtleCode/homeCoords.txt", "r")
-    local f2, err2 = io.open("miningTurtleCode/turtleCoords.txt", "r")
+    local f, err = io.open("homeCoords.txt", "r")
+    local f2, err2 = io.open("turtleCoords.txt", "r")
 
     if axis == "x" then
 
