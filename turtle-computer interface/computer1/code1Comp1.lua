@@ -217,24 +217,6 @@ while working do
         end
     end
 
-
-    -- Empty wayHomeFile.txt to set a new home location
-    if event == "char" and arg1 == "[" then
-        print("Are you sure? Yes: T, No: [")
-        print("This is an irriversable change")
-
-        local specialEvent, specialArg1, specialArg2, specialArg3, specialArg4, specialArg5 = os.pullEvent("char")
-
-        if specialEvent == "char" then
-            if specialArg1 == "t" then
-                print("Set new home")
-                rednet.send(turtleID1, "emptyWayHome", "instruction")
-            else
-                print("Nothing happened")
-            end
-        end
-    end
-
     -- kills program the computer and turtle is running
     if event == "terminate" then
         

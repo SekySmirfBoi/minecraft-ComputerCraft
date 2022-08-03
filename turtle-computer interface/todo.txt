@@ -1,0 +1,10 @@
+
+2) change the way home method so it doesnt just follow the path it took to
+    get to its current position, bc it seems unreliable
+3) remove all traces of return to path
+4) finish the work function
+5) add a control list to the computer
+
+
+
+absolute final) make monitors be compatible with the turtle and computer

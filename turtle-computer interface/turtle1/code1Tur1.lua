@@ -1,103 +1,3 @@
-function updateWayHomeFile(move, adding, reset)
-
-    if adding == true then
-        
-        local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "a")
-        local f2, err2 = io.open("miningTurtleCode/wayHomeFile.txt", "r")
-
-        for line in f2:lines() do
-            if line ~= "" then
-                f:write("\n")
-            end
-        end
-
-        f:write(move)
-        f:close()
-        f2:close()
-
-    elseif adding == false then
-
-        local lineCount = 0
-        local count = 1
-        local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "r")
-        local f2, err2 = io.open("miningTurtleCode/wayHomeFile.txt", "w")
-        local lineLength = 0
-
-        if reset == false then
-            for line in f:lines() do
-                lineCount = lineCount + 1
-            end
-
-            for line in f:lines() do
-                if count == lineCount then
-                    lineLength = string.len(line)
-                end
-                count = count + 1
-            end
-
-            f2:seek("end", -1 * lineLength)
-
-            while lineLength ~= 0 do
-                f2:write("")
-                lineLength = lineLength - 1
-            end
-        end
-
-        f:close()
-        f2:close()
-    end
-end
-
-function updateReturnToPathFile(move, adding)
-
-    if adding == true then
-        
-        local f, err = io.open("miningTurtleCode/returnToPath.txt", "a")
-        local f2, err2 = io.open("miningTurtleCode/returnToPath.txt", "r")
-
-        for line in f2:lines() do
-            if line ~= "" then
-                f:write("\n")
-            end
-        end
-
-        f:write(move)
-        f:close()
-        f2:close()
-
-    elseif adding == false then
-        
-        local lineCount = 0
-        local count = 1
-        local f, err = io.open("miningTurtleCode/returnToPath.txt", "r")
-        local f2, err2 = io.open("miningTurtleCode/returnToPath.txt", "w")
-        local lineLength = 0
-
-        for line in f:lines() do
-            lineCount = lineCount + 1
-        end
-
-        for line in f:lines() do
-            if count == lineCount then
-                lineLength = string.len(line)
-            end
-            count = count + 1
-        end
-
-        f2:seek("end", -1 * lineLength)
-
-        while lineLength ~= 0 do
-            f2:write("")
-            lineLength = lineLength - 1
-        end
-
-        f:close()
-        f2:close()
-    end
-end
-
-
-
 function returnHome()
     local f, err = io.open("miningTurtleCode/wayHomeFile.txt", "r")
 
@@ -192,65 +92,12 @@ function returnHome()
     wayHome = {}
 end
 
-function returnToPath()
-    local f, err = io.open("miningTurtleCode/returnToPathFile.txt", "r")
-
-    for line in f:lines() do
-        table.insert(wayToPath, 1, line)
-    end
-    f:close()
-
-    --[[
-    "moveDown"
-    "moveUp"
-    "moveBackwards"
-    "moveForwards"
-    "turnRight"
-    "turnLeft"
-    ]]--
-
-    for key, item in pairs(wayToPath) do
-        if item == "moveDown" then
-            moveDown(false)
-            updateReturnToPathFile(nil, false)
-        elseif item == "moveUp" then
-            moveUp(false)
-            updateReturnToPathFile(nil, false)
-        elseif item == "moveBackwards" then
-            moveBackwards(false)
-            updateReturnToPathFile(nil, false)
-        elseif item == "moveForwards" then
-            moveForwards(false)
-            updateReturnToPathFile(nil, false)
-        elseif item == "turnRight" then
-            turnRight(false)
-            updateReturnToPathFile(nil, false)
-        elseif item == "turnLeft" then
-            turnLeft(false)
-            updateReturnToPathFile(nil, false)
-        end
-    end
-
-    wayToPath = {}
-end
-
-
-function moveUp(addReturnHome, addReturnToPath)
+function moveUp()
     local success, err = turtle.up()
     print(); rednet.send(masterComputerID, "", "compDisplay")
     print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
-    if success then
-        
-        if addReturnHome then
-            updateWayHomeFile("moveDown", true, false)
-            table.insert( wayHome, 1, "moveDown" )
-        end
-        if addReturnToPath then
-            updateReturnToPathFile("moveDown", true)
-            table.insert( wayToPath, 1, "moveDown" )
-        end
-        
+    if success then        
         print("Successfully moved up"); rednet.send(masterComputerID, "Successfully moved up", "compDisplay")
     else
         print()
@@ -261,12 +108,12 @@ function moveUp(addReturnHome, addReturnToPath)
         elseif err == "Movement obstructed" then
             print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error"); rednet.send(masterComputerID, "Unknown error", "compDisplay")
+            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
-function moveDown(addReturnHome, addReturnToPath)
+function moveDown()
     
     local x, y, z = gps.locate()
 
@@ -279,16 +126,6 @@ function moveDown(addReturnHome, addReturnToPath)
     print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        
-        if addReturnHome then
-            updateWayHomeFile("moveUp", true, false)
-            table.insert( wayHome, 1, "moveUp" )
-        end
-        if addReturnToPath then
-            updateReturnToPathFile("moveUp", true)
-            table.insert( wayToPath, 1, "moveUp" )
-        end
-
         print("Successfully moved down"); rednet.send(masterComputerID, "Successfully moved down", "compDisplay")
     else
         print()
@@ -299,27 +136,17 @@ function moveDown(addReturnHome, addReturnToPath)
         elseif err == "Movement obstructed" then
             print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error"); rednet.send(masterComputerID, "Unknown error", "compDisplay")
+            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
-function moveForwards(addReturnHome, addReturnToPath)
+function moveForwards()
     local success, err = turtle.forward()
     print(); rednet.send(masterComputerID, "", "compDisplay")
     print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        
-        if addReturnHome then
-            updateWayHomeFile("moveBackwards", true, false)
-            table.insert( wayHome, 1, "moveBackwards" )
-        end
-        if addReturnToPath then
-            updateReturnToPathFile("moveBackwards", true)
-            table.insert( wayToPath, 1, "moveBackwards" )
-        end
-
         print("Successfully moved forward"); rednet.send(masterComputerID, "Successfully moved forward", "compDisplay")
     else
         print()
@@ -330,27 +157,17 @@ function moveForwards(addReturnHome, addReturnToPath)
         elseif err == "Movement obstructed" then
             print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error"); rednet.send(masterComputerID, "Unknown error", "compDisplay")
+            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
-function moveBackwards(addReturnHome, addReturnToPath)
+function moveBackwards()
     local success, err = turtle.back()
     print(); rednet.send(masterComputerID, "", "compDisplay")
     print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        
-        if addReturnHome then
-            updateWayHomeFile("moveForwards", true, false)
-            table.insert( wayHome, 1, "moveForwards" )
-        end
-        if addReturnToPath then
-            updateReturnToPathFile("moveForwards", true)
-            table.insert( wayToPath, 1, "moveForwards" )
-        end
-
         print("Successfully moved back"); rednet.send(masterComputerID, "Successfully moved back", "compDisplay")
     else
         print()
@@ -361,49 +178,17 @@ function moveBackwards(addReturnHome, addReturnToPath)
         elseif err == "Movement obstructed" then
             print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error"); rednet.send(masterComputerID, "Unknown error", "compDisplay")
+            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
-function turnLeft(addReturnHome, addReturnToPath)
+function turnLeft()
     local success, err = turtle.turnLeft()
     print(); rednet.send(masterComputerID, "", "compDisplay")
     print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-
-        if facing == 0 then
-            facing = 1
-            arseFacing = 3
-            dirFacing = "west"
-            dirArseFacing = "east"
-        elseif facing == 1 then
-            facing = 2
-            arseFacing = 0
-            dirFacing = "south"
-            dirArseFacing = "north"
-        elseif facing == 2 then
-            facing = 3
-            arseFacing = 1
-            dirFacing = "east"
-            dirArseFacing = "west"
-        elseif facing == 3 then
-            facing = 0
-            arseFacing = 2
-            dirFacing = "north"
-            dirArseFacing = "south"
-        end
-        
-        if addReturnHome then
-            updateWayHomeFile("turnRight", true, false)
-            table.insert( wayHome, 1, "turnRight" )
-        end
-        if addReturnToPath then
-            updateReturnToPathFile("turnRight", true)
-            table.insert( wayToPath, 1, "turnRight" )
-        end
-
         print("Successfully turned left"); rednet.send(masterComputerID, "Successfully turned left", "compDisplay")
     else
         print()
@@ -414,49 +199,17 @@ function turnLeft(addReturnHome, addReturnToPath)
         elseif err == "Movement obstructed" then
             print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error"); rednet.send(masterComputerID, "Unknown error", "compDisplay")
+            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
-function turnRight(addReturnHome, addReturnToPath)
+function turnRight()
     local success, err = turtle.turnRight()
     print(); rednet.send(masterComputerID, "", "compDisplay")
     print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        
-        if facing == 0 then
-            facing = 3
-            dirFacing = 1
-            arseFacing = "west"
-            dirArseFacing = "east"
-        elseif facing == 1 then
-            facing = 0
-            dirFacing = 2
-            arseFacing = "south"
-            dirArseFacing = "north"
-        elseif facing == 2 then
-            facing = 1
-            dirFacing = 3
-            arseFacing = "east"
-            dirArseFacing = "west"
-        elseif facing == 3 then
-            facing = 2
-            dirFacing = 0
-            arseFacing = "north"
-            dirArseFacing = "south"
-        end
-        
-        if addReturnHome then
-            updateWayHomeFile("turnLeft", true, false)
-            table.insert( wayHome, 1, "turnLeft" )
-        end
-        if addReturnToPath then
-            updateReturnToPathFile("turnLeft", true)
-            table.insert( wayToPath, 1, "turnLeft" )
-        end
-
         print("Successfully turned right"); rednet.send(masterComputerID, "Successfully turned right", "compDisplay")
     else
         print()
@@ -467,7 +220,7 @@ function turnRight(addReturnHome, addReturnToPath)
         elseif err == "Movement obstructed" then
             print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error"); rednet.send(masterComputerID, "Unknown error", "compDisplay")
+            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
@@ -477,119 +230,6 @@ function work()
 
     if y == 5 then
     end
-    returnToPath()
-end
-
-function updateHomeCoords()
-
-    local x, y, z = gps.locate()
-
-    print("X: "..x)
-    print("Y: "..y)
-    print("Z: "..z)
-
-    rednet.send(masterComputerID, "New home coordinates:", "compDisplay")
-    rednet.send(masterComputerID, "X: "..x, "compDisplay")
-    rednet.send(masterComputerID, "Y: "..y, "compDisplay")
-    rednet.send(masterComputerID, "Z: "..z, "compDisplay")
-
-    f = io.open("miningTurtleCode/homeCoords.txt", "w")
-    f:write(x.."\n"..y.."\n"..z)
-    f:close()
-end
-
-function getCoords(axis)
-    
-    local f, err = io.open("miningTurtleCode/homeCoords.txt", "r")
-    local f2, err2 = io.open("miningTurtleCode/turtleCoords.txt", "r")
-
-    if axis == "x" then
-
-        local count = 1
-
-        if f == nil then
-            print(err)
-        else
-            for line in f:lines() do
-                if count == 1 then
-                    f:close()
-                    return tonumber(line)
-                end
-                count = count + 1
-            end
-        end
-    end
-
-    if axis == "y" then
-
-        local count = 1
-
-        if f == nil then
-            print(err)
-        else
-            for line in f:lines() do
-                if count == 2 then
-                    f:close()
-                    return tonumber(line)
-                end
-                count = count + 1
-            end
-        end
-    end
-
-    if axis == "z" then
-
-        local count = 1
-
-        if f == nil then
-            print(err)
-        else
-            for line in f:lines() do
-                if count == 3 then
-                    f:close()
-                    return tonumber(line)
-                end
-                count = count + 1
-            end
-        end
-    end
-
-    if axis == "face" then
-
-        local count = 1
-
-        if f2 == nil then
-            print(err2)
-        else
-            for line in f2:lines() do
-                if count == 4 then
-                    f2:close()
-                    return tonumber(line)
-                end
-                count = count + 1
-            end
-        end
-    end
-
-    if axis == "arse" then
-
-        local count = 1
-
-        if f2 == nil then
-            print(err2)
-        else
-            for line in f2:lines() do
-                if count == 5 then
-                    f2:close()
-                    return tonumber(line)
-                end
-                count = count + 1
-            end
-        end
-    end
-
-    f:close()
-    f2:close()
 end
 
 rednet.open("left")
@@ -611,42 +251,16 @@ wayToPath = {}
 
 thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
 masterComputerID = 12   -- masterComputerID -- The computer in control of everything
-comp2ID = 19    -- relayComputerID -- The computer used to relay messages
+comp2ID = 19    -- secondComputerID -- Just a second unused computer
 
-local homeX = getCoords("x")
-local homeY = getCoords("y")
-local homeZ = getCoords("z")
-
-local facing = getCoords("face")
-local arseFacing = getCoords("arse")
-local dirFacing;
-local dirArseFacing;
-
-if facing == 0 then
-    dirFacing = "north"
-    dirArseFacing = "south"
-elseif facing == 1 then
-    dirFacing = "west"
-    dirArseFacing = "east"
-elseif facing == 2 then
-    dirFacing = "south"
-    dirArseFacing = "north"
-elseif facing == 3 then
-    dirFacing = "east"
-    dirArseFacing = "west"
-end
+local homeX = 572
+local homeY = 64
+local homeZ = 257
 
 print()
 print("Turtle ready to receive instructions")
 print("Listeneing for messages")
 print()
-
---[[
-print("X:", currentX)
-print("Y:", currentY)
-print("Z:", currentZ)
-print("Facing:", facing)
-]]--
 
 local compDisplay = "compDisplay"
 
@@ -717,32 +331,32 @@ while loopRunning do
 
             --moves turtle up
             if message == "up" then
-                moveUp(true)
+                moveUp()
             end
             
             --moves turtle down
             if message == "down" then
-                moveDown(true)
+                moveDown()
             end
 
             --moves turtle forward
             if message == "forward" then
-                moveForwards(true)
+                moveForwards()
             end
 
             --moves turtle backwards
             if message == "back" then
-                moveBackwards(true)
+                moveBackwards()
             end
 
             --turns turtle left
             if message == "left" then
-                turnLeft(true)
+                turnLeft()
             end
 
             --turns turtle 
             if message == "right" then
-                turnRight(true)
+                turnRight()
             end
 
             -- sends the master computer its coords
@@ -751,12 +365,6 @@ while loopRunning do
                 print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
                 print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
                 print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
-            end
-
-            --empties way home file and table
-            if message == "emptyWayHome" then
-                updateWayHomeFile(nil, false, true)
-                wayHome = {}
             end
         end
 
