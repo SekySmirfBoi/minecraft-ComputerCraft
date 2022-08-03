@@ -81,7 +81,7 @@ function returnHome()
             return
         end
     end
-    
+
     correctYIfAtHome()
 
     local oldDifX = 0
@@ -320,13 +320,10 @@ end
 function correctTurtleFacing() 
     local success, data = turtle.inspect()
 
-    while data.name ~= "minecraft:crafting_table" do
+    while data.name ~= "minecraft:chest" do
         turnLeft()
         success, data = turtle.inspect() 
     end
-
-    turnLeft()
-    turnLeft()
 end
 
 function correctYIfAtHome()
@@ -660,6 +657,11 @@ while loopRunning do
                 print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
                 print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
                 print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
+            end
+
+            -- orients the turtle
+            if message == "orient" then
+                correctTurtleFacing()
             end
         end
 

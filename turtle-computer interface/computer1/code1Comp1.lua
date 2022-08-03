@@ -157,6 +157,13 @@ while working do
         end
     end
 
+    -- Orient the trutle
+    if event == "char" and arg1 == "#" then
+        print()
+        print("Orientating turtle")
+        rednet.send(turtleID1, "orient", "instruction")
+    end
+
 
     --[[
     keyUp = 265
