@@ -226,7 +226,7 @@ while working do
         local specialEvent, specialArg1, specialArg2, specialArg3, specialArg4, specialArg5 = os.pullEvent("char")
 
         if specialEvent == "char" then
-            if specialArg1 == "T" then
+            if specialArg1 == "t" then
                 print("Set new home")
                 rednet.send(turtleID1, "emptyWayHome", "instruction")
             else
