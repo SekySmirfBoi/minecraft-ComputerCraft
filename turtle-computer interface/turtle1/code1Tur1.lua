@@ -13,11 +13,11 @@ function returnHome()
         data.name = "notTheRightOne"
     end
 
-    while data.name ~= "minecraft:crafting_table" then
+    while data.name ~= "minecraft:crafting_table" do
         turtle.left()
         success, data = turtle.inspect() 
     end
-    
+
     turtle.left()
     turtle.left()
 end
