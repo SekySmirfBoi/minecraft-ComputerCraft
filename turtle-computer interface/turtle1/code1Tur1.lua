@@ -50,7 +50,7 @@ end
 function moveUp(addReturn)
     local success, err = turtle.up()
     print(); rednet.send(masterComputerID, "", compDisplay)
-    print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left", turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
+    print("Fuel left: ", turtle.getFuelLevel()); local fuelMessage = "Fuel left "..turtle.getFuelLevel(); rednet.send(masterComputerID, fuelMessage, compDisplay)
 
     if success then
         
@@ -62,10 +62,7 @@ function moveUp(addReturn)
         --currentY = tonumber(currentY) + 1
         --updateCoords()
         
-        print("Successfully moved up, new coordinates:"); rednet.send(masterComputerID, "Successfully moved up, new coordinates:", compDisplay)
-        print("X:",currentX)
-        print("Y:",currentY)
-        print("Z:",currentZ)
+        print("Successfully moved up"); rednet.send(masterComputerID, "Successfully moved up", compDisplay)
     else
         print()
         print("There was an error"); rednet.send(masterComputerID, "There was an error", compDisplay)
