@@ -54,6 +54,16 @@ while working do
             if protocol == "compDisplay" then
                 print(message)
             end
+
+            if protocol == "getCoordsX" then
+                print("X: "..message)
+            end
+            if protocol == "getCoordsY" then
+                print("Y: "..message)
+            end
+            if protocol == "getCoordsZ" then
+                print("Z: "..message)
+            end
         end
     end
     
@@ -128,5 +138,9 @@ while working do
     
     if event == "char" and arg1 == "6" then
         rednet.send(turtleID1, "right")
+    end
+
+    if event == "char" and arg1 == "." then
+        rednet.send(turtleID1, "coords")
     end
 end

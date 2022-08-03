@@ -504,6 +504,13 @@ while true do
             turnRight(true)
         end
 
+        if message == "coords" then
+            local x, y, z = gps.locate()
+            print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
+            print("Y: "..x); rednet.send(masterComputerID, y, "getCoordsY")
+            print("Z: "..x); rednet.send(masterComputerID, z, "getCoordsZ")
+        end
+
 
 
 
