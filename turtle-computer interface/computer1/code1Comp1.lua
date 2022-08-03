@@ -65,6 +65,11 @@ while working do
             if protocol == "getCoordsZ" then
                 print("Z: "..message)
             end
+
+            if message == "termination" and protocol == "userCommand" then
+                print("terminating")
+                os.reboot()
+            end
         end
     end
     
