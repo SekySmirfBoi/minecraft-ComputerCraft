@@ -365,14 +365,18 @@ end
 
 
 function digBlock(dir) 
-    local success, data
+    local success, err
+    local succ, data
 
     if dir == "front" or dir == nil then
-        success, data = turtle.dig()
+        succ, data = turtle.inspect()
+        success = turtle.dig()
     elseif dir == "down" then
-        success, data = turtle.digDown()
+        succ, data = turtle.inspectDown()
+        success = turtle.digDown()
     elseif dir == "up" then
-        success, data = turtle.digUp()
+        succ, data = turtle.inspectUp()
+        success = turtle.digUp()
     else
         return
     end
@@ -383,7 +387,7 @@ function digBlock(dir)
     else
         print()
         print("Failed to mine block"); rednet.send(masterComputerID, "Failed to mine block", "compDisplay")
-        print("Reason: "..data); rednet.send(masterComputerID, "Reason: "..data, "compDisplay")
+        print("Reason: "..err); rednet.send(masterComputerID, "Reason: "..err, "compDisplay")
     end
 end
 
