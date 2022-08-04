@@ -198,19 +198,19 @@ while working do
 
     if event == "key" and arg1 == 340 then
         print()
-        print("Destroying up block")
+        print("Attempting to destroy up block")
         rednet.send(turtleID1, "destroyUp", "instruction")
     end
 
     if event == "key" and arg1 == 341 then
         print()
-        print("Destroying front block")
+        print("Attempting to destroy front block")
         rednet.send(turtleID1, "destroyFront", "instruction")
     end
 
     if event == "key" and arg1 == 342 then
         print()
-        print("Destroying down block")
+        print("Attempting to destroy down block")
         rednet.send(turtleID1, "destroyDown", "instruction")
     end
 

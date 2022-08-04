@@ -438,6 +438,8 @@ function digBlock(dir)
         succ, data = turtle.inspect()
         if x == homeX and y == homeY and z == homeZ then
             print("Will not break blocks while at home")
+            success = false
+            err = "Turtle at home"
         else
             success, err = turtle.dig()
         end
@@ -445,6 +447,8 @@ function digBlock(dir)
         succ, data = turtle.inspectDown()
         if x == homeX and y == homeY and z == homeZ then
             print("Will not break blocks while at home")
+            success = false
+            err = "Turtle at home"
         else
             success, err = turtle.digDown()
         end
@@ -452,6 +456,8 @@ function digBlock(dir)
         succ, data = turtle.inspectUp()
         if x == homeX and y == homeY and z == homeZ then
             print("Will not break blocks while at home")
+            success = false
+            err = "Turtle at home"
         else
             success, err = turtle.digUp()
         end
