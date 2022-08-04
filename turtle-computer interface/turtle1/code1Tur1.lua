@@ -688,6 +688,18 @@ while loopRunning do
 
 
 
+            -- destroy up block
+            if message == "destroyUp" and protocol == "instruction" then
+                digBlock("up")
+            end
+
+            if message == "destroyFront" and protocol == "instruction" then
+                digBlock("front")
+            end
+
+            if message == "destroyDown" and protocol == "instruction" then
+                digBlock("down")
+            end
 
             --moves turtle up
             if message == "up" then

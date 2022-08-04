@@ -184,7 +184,29 @@ while working do
     keyRight = 262
     pgUp = 266
     pgDown = 267
+
+    leftShift = 340
+    leftCtrl = 341
+    leftAlt = 342
     ]]--
+
+    if event == "key" and arg1 == 340 then
+        print()
+        print("Destroying up block")
+        rednet.send(turtleID1, "destroyUp", "instruction")
+    end
+
+    if event == "key" and arg1 == 341 then
+        print()
+        print("Destroying front block")
+        rednet.send(turtleID1, "destroyFront", "instruction")
+    end
+
+    if event == "key" and arg1 == 342 then
+        print()
+        print("Destroying down block")
+        rednet.send(turtleID1, "destroyDown", "instruction")
+    end
 
     -- Turtle move up
     if event == "key" and arg1 == 266 then
