@@ -508,7 +508,7 @@ function moveDown()
     end
 
     local success, err = turtle.down()
-    print(); rednet.send(masterComputerID, "", compDisplay)
+    print(); rednet.send(masterComputerID, "", "compDisplay")
     print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
