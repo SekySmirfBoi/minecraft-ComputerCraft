@@ -406,7 +406,7 @@ function dropInventory(dir)
         
         for i = 1, 16, 1 do
             turtle.select(i)
-            turtle.()
+            turtle.dropDown()
         end
 
         turtle.select(prevSlot)
