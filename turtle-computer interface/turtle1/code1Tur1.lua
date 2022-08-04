@@ -34,6 +34,8 @@ function returnHome()
             digBlock("front")
         end
         moveForwards()
+        x, y, z = gps.locate()
+        newZealand = z
         if oldZ ~= newZealand then
             moveBackwards()
             turnRight()
@@ -55,6 +57,18 @@ function returnHome()
             digBlock("front")
         end
         moveForwards()
+        x, y, z = gps.locate()
+        newZealand = z
+        if oldZ ~= newZealand then
+            moveBackwards()
+            turnRight()
+            if turtle.detect() then
+                digBlock("front")
+            end
+            moveForwards()
+        end
+
+        x, y, z = gps.locate()
 
         x, y, z = gps.locate()
 
@@ -83,66 +97,6 @@ function returnHome()
     end
 
     correctYIfAtHome()
-
-    local oldDifX = 0
-    local newDifX = 0
-
-    local oldZ = 0
-    local newZealand = 0
-
-    x, y, z = gps.locate()
-    oldZ = z
-
-    if x < homeX then
-        
-        oldDifX = homeX - x
-
-        if turtle.detect() then
-            digBlock("front")
-        end
-
-        moveForwards()
-        if oldZ ~= newZealand then
-            moveBackwards()
-            turnRight()
-            if turtle.detect() then
-                digBlock("front")
-            end
-            moveForwards()
-        end
-
-        x, y, z = gps.locate()
-
-        newDifX = homeX - x
-
-    elseif x > homeX then
-
-        oldDifX = x - homeX
-
-        if turtle.detect() then
-            digBlock("front")
-        end
-
-        moveForwards()
-        if oldZ ~= newZealand then
-            moveBackwards()
-            turnRight()
-            if turtle.detect() then
-                digBlock("front")
-            end
-            moveForwards()
-        end
-
-        x, y, z = gps.locate()
-
-        newDifX = x - homeX
-    end
-
-
-    if oldDifX < newDifX then
-        turnLeft()
-        turnLeft()
-    end
 
     x, y, z = gps.locate()
 
@@ -181,6 +135,8 @@ function returnHome()
             digBlock("front")
         end
         moveForwards()
+        x, y, z = gps.locate()
+        newX = x
         if oldX ~= newX then
             moveBackwards()
             turnRight()
@@ -202,81 +158,8 @@ function returnHome()
             digBlock("front")
         end
         moveForwards()
-        if oldX ~= newX then
-            moveBackwards()
-            turnRight()
-            if turtle.detect() then
-                digBlock("front")
-            end
-            moveForwards()
-        end
-
         x, y, z = gps.locate()
-
-        newDifZ = z - homeZ
-    end
-
-
-    if oldDifZ < newDifZ then
-        turnLeft()
-        turnLeft()
-    end
-
-    x, y, z = gps.locate()
-
-    while z ~= homeZ do
-        if turtle.detect() then
-            digBlock("front")
-        end
-        moveForwards()
-        x, y, z = gps.locate()
-        if turtle.getFuelLevel == 0 then
-            print(); rednet.send(masterComputerID, "", "compDisplay")
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
-            return
-        end
-    end
-
-    local oldDifZ = 0
-    local newDifZ = 0
-
-    local oldX = 0
-    local newX = 0
-
-    x, y, z = gps.locate()
-    oldX = x
-
-    if z < homeZ then
-        
-        oldDifZ = homeZ - z
-
-        if turtle.detect() then
-            digBlock("front")
-        end
-
-        moveForwards()
-        if oldX ~= newX then
-            moveBackwards()
-            turnRight()
-            if turtle.detect() then
-                digBlock("front")
-            end
-            moveForwards()
-        end
-
-        x, y, z = gps.locate()
-
-        newDifZ = homeZ - z
-
-    elseif z > homeZ then
-
-        oldDifZ = z - homeZ
-
-        if turtle.detect() then
-            digBlock("front")
-        end
-
-        moveForwards()
+        newX = x
         if oldX ~= newX then
             moveBackwards()
             turnRight()
