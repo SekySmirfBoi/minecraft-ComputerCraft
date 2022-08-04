@@ -432,15 +432,29 @@ function digBlock(dir)
     local success, err
     local succ, data
 
+    local x, y, z = gps.locate()
+
     if dir == "front" or dir == nil then
         succ, data = turtle.inspect()
-        success = turtle.dig()
+        if x == homeX and y == homeY and z == homeZ then
+            print("Will not break blocks while at home")
+        else
+            success, err = turtle.dig()
+        end
     elseif dir == "down" then
         succ, data = turtle.inspectDown()
-        success = turtle.digDown()
+        if x == homeX and y == homeY and z == homeZ then
+            print("Will not break blocks while at home")
+        else
+            success, err = turtle.digDown()
+        end
     elseif dir == "up" then
         succ, data = turtle.inspectUp()
-        success = turtle.digUp()
+        if x == homeX and y == homeY and z == homeZ then
+            print("Will not break blocks while at home")
+        else
+            success, err = turtle.digUp()
+        end
     else
         return
     end
