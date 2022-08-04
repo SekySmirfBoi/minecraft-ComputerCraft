@@ -192,7 +192,7 @@ while working do
     pgDown = 267
 
     leftShift = 340
-    leftCtrl = 341
+    tab = 258
     leftAlt = 342
     ]]--
 
@@ -202,7 +202,7 @@ while working do
         rednet.send(turtleID1, "destroyUp", "instruction")
     end
 
-    if event == "key" and arg1 == 341 then
+    if event == "key" and arg1 == 258 then
         print()
         print("Attempting to destroy front block")
         rednet.send(turtleID1, "destroyFront", "instruction")
