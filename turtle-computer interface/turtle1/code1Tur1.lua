@@ -616,19 +616,19 @@ thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
 masterComputerID = 12   -- masterComputerID -- The computer in control of everything
 comp2ID = 19    -- secondComputerID -- Just a second unused computer
 
-global homeX = 572
-global homeY = 64
-global homeZ = 257
+homeX = 572
+homeY = 64
+homeZ = 257
 
 print()
 print("Turtle ready to receive instructions")
 print("Listeneing for messages")
 print()
 
-global active = "off"
-global echoed = false
+active = "off"
+echoed = false
 
-global loopRunning = true
+loopRunning = true
 
 while loopRunning do
 
