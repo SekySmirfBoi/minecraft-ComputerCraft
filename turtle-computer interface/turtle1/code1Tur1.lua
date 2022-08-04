@@ -15,7 +15,7 @@ function returnHome(homeX, homeY, homeZ)
         end
     end
 
-    correctYIfAtHome()
+    correctYIfAtHome(homeX, homeY, homeZ)
 
     local oldDifX = 0
     local newDifX = 0
@@ -82,7 +82,7 @@ function returnHome(homeX, homeY, homeZ)
         end
     end
 
-    correctYIfAtHome()
+    correctYIfAtHome(homeX, homeY, homeZ)
 
     local oldDifX = 0
     local newDifX = 0
@@ -162,7 +162,7 @@ function returnHome(homeX, homeY, homeZ)
 
     ------------------------------------------------------------
 
-    correctYIfAtHome()
+    correctYIfAtHome(homeX, homeY, homeZ)
 
     local oldDifZ = 0
     local newDifZ = 0
@@ -314,7 +314,7 @@ function returnHome(homeX, homeY, homeZ)
 
     -----------------------------------------------------------------------------------------------
 
-    correctYIfAtHome()
+    correctYIfAtHome(homeX, homeY, homeZ)
 end
 
 function correctTurtleFacing() 
@@ -326,7 +326,7 @@ function correctTurtleFacing()
     end
 end
 
-function correctYIfAtHome()
+function correctYIfAtHome(homeX, homeY, homeZ)
 
     local x, y, z = gps.locate()
 
