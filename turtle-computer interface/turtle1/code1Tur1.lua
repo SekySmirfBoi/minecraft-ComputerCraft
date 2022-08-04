@@ -518,7 +518,7 @@ print()
 print("---------------------------------------")
 
 thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
-masterComputerID = 45   -- masterComputerID -- The computer in control of everything
+masterComputerID = 12   -- masterComputerID -- The computer in control of everything
 comp2ID = 19    -- secondComputerID -- Just a second unused computer
 
 homeX = 572
