@@ -176,6 +176,12 @@ while working do
         rednet.send(turtleID1, "orient", "instruction")
     end
 
+    -- Empty inventory do
+    if event == "char" and arg1 == "e" then
+        print()
+        rednet.send(turtleID1, "inventoryEmtpyHome", "instruction")
+    end
+
 
     --[[
     keyUp = 265

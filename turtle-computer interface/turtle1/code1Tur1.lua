@@ -421,9 +421,9 @@ function emptyInventoryAtHome()
 
     if x == homeX and y == homeY and x == homeX then
         correctTurtleFacing()
-        dropInventory("front")
+        dropInventory("front"); rednet.send(masterComputerID, "Emptying inventory", "compyDisplay")
     else
-        print("Turtle not at home")
+        print("Turtle not at home"); rednet.send(masterComputerID, "Turtle not at home", "compyDisplay")
     end
 end
 
@@ -671,6 +671,11 @@ while loopRunning do
             if message == "newHome" and protocol == "instruction" then
                 print("Setting new home coords as:")
                 updateHomeCoords()
+            end
+            
+            -- empties inventory into the home chest
+            if message == "inventoryEmtpyHome" and protocol == "instruction" then
+                emptyInventoryAtHome()
             end
 
             -- termination after getting the instruction from the master computer
