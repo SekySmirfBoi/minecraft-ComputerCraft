@@ -525,6 +525,9 @@ homeX = 572
 homeY = 64
 homeZ = 257
 
+nextMove = ""
+miningVein = false
+
 print()
 print("Turtle ready to receive instructions")
 print("Listeneing for messages")
@@ -672,6 +675,6 @@ while loopRunning do
 
     --turtle goes and works
     elseif echoed and active == "on" then
-        work()
+        nextMove = work(nextMove)
     end
 end
