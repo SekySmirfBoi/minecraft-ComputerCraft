@@ -63,8 +63,8 @@ function returnHome()
 
 
     if oldDifX < newDifX then
-        turtle.left()
-        turtle.left()
+        turnLeft()
+        turnLeft()
     end
 
     x, y, z = gps.locate()
@@ -140,8 +140,8 @@ function returnHome()
 
 
     if oldDifX < newDifX then
-        turtle.left()
-        turtle.left()
+        turnLeft()
+        turnLeft()
     end
 
     x, y, z = gps.locate()
@@ -218,8 +218,8 @@ function returnHome()
 
 
     if oldDifZ < newDifZ then
-        turtle.left()
-        turtle.left()
+        turnLeft()
+        turnLeft()
     end
 
     x, y, z = gps.locate()
@@ -293,8 +293,8 @@ function returnHome()
 
 
     if oldDifZ < newDifZ then
-        turtle.left()
-        turtle.left()
+        turnLeft()
+        turnLeft()
     end
 
     x, y, z = gps.locate()
