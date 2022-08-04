@@ -1,4 +1,4 @@
-function returnHome()
+function returnHome(homeX, homeY, homeZ)
 
     local x, y, z = gps.locate()
 
@@ -600,7 +600,7 @@ while loopRunning do
             if message == "return" and protocol == "instruction" then
                 rednet.send(masterComputerID, "returningHome", "notSleep")
                 print("Returning home")
-                returnHome()
+                returnHome(homeX, homeY, homeZ)
             end
 
             --updates the turtles home
