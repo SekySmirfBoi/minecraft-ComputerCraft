@@ -45,7 +45,7 @@ function returnHome(homeX, homeY, homeZ)
 
         x, y, z = gps.locate()
 
-        newDifX = homeX - X
+        newDifX = homeX - x
 
     elseif x > homeX then
 
@@ -113,7 +113,7 @@ function returnHome(homeX, homeY, homeZ)
 
         x, y, z = gps.locate()
 
-        newDifX = homeX - X
+        newDifX = homeX - x
 
     elseif x > homeX then
 
