@@ -317,6 +317,7 @@ function returnHome()
     correctYIfAtHome()
 end
 
+
 function correctTurtleFacing() 
     local success, data = turtle.inspect()
 
@@ -421,7 +422,8 @@ function emptyInventoryAtHome()
 
     if x == homeX and y == homeY and x == homeX then
         correctTurtleFacing()
-        dropInventory("front"); rednet.send(masterComputerID, "Emptying inventory", "compyDisplay")
+        rednet.send(masterComputerID, "Emptying inventory", "compyDisplay")
+        dropInventory("front");
     else
         print("Turtle not at home"); rednet.send(masterComputerID, "Turtle not at home", "compyDisplay")
     end
