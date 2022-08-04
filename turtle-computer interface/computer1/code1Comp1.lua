@@ -38,7 +38,19 @@ while not eResponded do
         print()
         print("Press 0 to stop the turtle from working")
         print("Press 1 to start the turtle working")
-        print("Press 2 to return turtle to its pre set home")
+        print()
+        print("Press home to return turtle to its pre set home")
+        print("Press # to orient the turtle while at home")
+        print("Press + to get the turtle's coordinates")
+        print()
+        print("Remote control:")
+        print("Press / to tobble the remote control")
+        print("Press up arrow to move the turtle forwards")
+        print("Press down arrow to move the turtle backwards")
+        print("Press left arrow to turn the turtle left")
+        print("Press right arrow to turn the turtle right")
+        print("Press page up to move the turtle up")
+        print("Press page down to move the turtle down")
         print()
         working = true
     end
@@ -113,7 +125,7 @@ while working do
     end
 
     -- Bring turtle to its current set home
-    if event == "char" and arg1 == "2" then
+    if event == "key" and arg1 == 268 then
         print("Attempting to return turtle.")
         print("Attempt: 1")
         rednet.send(turtleID1, "return", "instruction")

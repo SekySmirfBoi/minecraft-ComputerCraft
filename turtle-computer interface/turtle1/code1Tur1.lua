@@ -1,4 +1,4 @@
-function returnHome(homeX, homeY, homeZ)
+function returnHome()
 
     local x, y, z = gps.locate()
 
@@ -15,7 +15,7 @@ function returnHome(homeX, homeY, homeZ)
         end
     end
 
-    correctYIfAtHome(homeX, homeY, homeZ)
+    correctYIfAtHome()
 
     local oldDifX = 0
     local newDifX = 0
@@ -82,7 +82,7 @@ function returnHome(homeX, homeY, homeZ)
         end
     end
 
-    correctYIfAtHome(homeX, homeY, homeZ)
+    correctYIfAtHome()
 
     local oldDifX = 0
     local newDifX = 0
@@ -162,7 +162,7 @@ function returnHome(homeX, homeY, homeZ)
 
     ------------------------------------------------------------
 
-    correctYIfAtHome(homeX, homeY, homeZ)
+    correctYIfAtHome()
 
     local oldDifZ = 0
     local newDifZ = 0
@@ -314,19 +314,26 @@ function returnHome(homeX, homeY, homeZ)
 
     -----------------------------------------------------------------------------------------------
 
-    correctYIfAtHome(homeX, homeY, homeZ)
+    correctYIfAtHome()
 end
 
 function correctTurtleFacing() 
     local success, data = turtle.inspect()
 
-    while data.name ~= "minecraft:chest" do
-        turnLeft()
-        success, data = turtle.inspect() 
-    end
+    local x, y, z = gps.locate()
+
+    if x == homeX and y == homeY and z == homeZ then
+
+        while data.name ~= "minecraft:chest" do
+            turnLeft()
+            success, data = turtle.inspect() 
+        end
+    else
+        print("Turtle not at home"); rednet.send(masterComputerID, "Turtle not at home", "compDisplay")
+    end        
 end
 
-function correctYIfAtHome(homeX, homeY, homeZ)
+function correctYIfAtHome()
 
     local x, y, z = gps.locate()
 
@@ -358,8 +365,65 @@ function correctYIfAtHome(homeX, homeY, homeZ)
             end
         end
 
+        print(); rednet.send(masterComputerID, "", "compDisplay")
+        print("Returned home"); rednet.send(masterComputerID, "Returned home", "compDisplay")
+
         correctTurtleFacing()
         return
+    end
+end
+
+
+function dropInventory(dir)
+
+    local prevSlot = turtle.getSelectedSlot()
+
+    if dir == "front" then
+
+        turtle.select(1)
+        
+        for i = 1, 16, 1 do
+            turtle.select(i)
+            turtle.drop()
+        end
+
+        turtle.select(prevSlot)
+
+    elseif dir == "up" then
+        
+        turtle.select(1)
+        
+        for i = 1, 16, 1 do
+            turtle.select(i)
+            turtle.dropUp()
+        end
+
+        turtle.select(prevSlot)
+
+    elseif dir == "down" then
+        
+        turtle.select(1)
+        
+        for i = 1, 16, 1 do
+            turtle.select(i)
+            turtle.()
+        end
+
+        turtle.select(prevSlot)
+
+    end
+end
+
+
+function emptyInventoryAtHome()
+    
+    local x, y, z = gps.locate()
+
+    if x == homeX and y == homeY and x == homeX then
+        correctTurtleFacing()
+        dropInventory("front")
+    else
+        print("Turtle not at home")
     end
 end
 
@@ -552,19 +616,19 @@ thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
 masterComputerID = 12   -- masterComputerID -- The computer in control of everything
 comp2ID = 19    -- secondComputerID -- Just a second unused computer
 
-local homeX = 572
-local homeY = 64
-local homeZ = 257
+global homeX = 572
+global homeY = 64
+global homeZ = 257
 
 print()
 print("Turtle ready to receive instructions")
 print("Listeneing for messages")
 print()
 
-local active = "off"
-local echoed = false
+global active = "off"
+global echoed = false
 
-local loopRunning = true
+global loopRunning = true
 
 while loopRunning do
 
@@ -600,7 +664,7 @@ while loopRunning do
             if message == "return" and protocol == "instruction" then
                 rednet.send(masterComputerID, "returningHome", "notSleep")
                 print("Returning home")
-                returnHome(homeX, homeY, homeZ)
+                returnHome()
             end
 
             --updates the turtles home
