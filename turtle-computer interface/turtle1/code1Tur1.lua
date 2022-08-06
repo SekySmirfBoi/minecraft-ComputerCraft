@@ -298,7 +298,6 @@ function dropInventory(dir)
     end
 end
 
-
 function emptyInventoryAtHome()
     
     local x, y, z = gps.locate()
@@ -309,6 +308,23 @@ function emptyInventoryAtHome()
         dropInventory("front");
     else
         print("Turtle not at home"); rednet.send(masterComputerID, "Turtle not at home", "compyDisplay")
+    end
+end
+
+function getItemSlot(itemName)
+
+    if itemName == nil then
+        return nil;
+    end
+
+    local prevSlot = turtle.getSelectedSlot()
+
+    for i = 1, 16, 1 do
+        turtle.select(i)
+        
+        if turtle.getItemDetail().name == itemName then
+            return turtle.getSelectedSlot()
+        end
     end
 end
 

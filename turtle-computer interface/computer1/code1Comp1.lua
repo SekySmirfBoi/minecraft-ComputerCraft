@@ -55,6 +55,7 @@ while not eResponded do
         print("Press f22 to break up block")
         print("Press f23 to break front block")
         print("Press f24 to break down block")
+        print()
         working = true
     end
 end
