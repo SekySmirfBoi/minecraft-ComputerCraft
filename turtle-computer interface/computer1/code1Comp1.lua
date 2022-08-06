@@ -52,6 +52,9 @@ while not eResponded do
         print("Press page up to move the turtle up")
         print("Press page down to move the turtle down")
         print()
+        print("Press f22 to break up block")
+        print("Press f23 to break front block")
+        print("Press f24 to break down block")
         working = true
     end
 end
@@ -196,19 +199,19 @@ while working do
     leftAlt = 342
     ]]--
 
-    if event == "key" and arg1 == 340 then
+    if event == "key" and arg1 == 311 then
         print()
         print("Attempting to destroy up block")
         rednet.send(turtleID1, "destroyUp", "instruction")
     end
 
-    if event == "key" and arg1 == 258 then
+    if event == "key" and arg1 == 312 then
         print()
         print("Attempting to destroy front block")
         rednet.send(turtleID1, "destroyFront", "instruction")
     end
 
-    if event == "key" and arg1 == 342 then
+    if event == "key" and arg1 == 313 then
         print()
         print("Attempting to destroy down block")
         rednet.send(turtleID1, "destroyDown", "instruction")
