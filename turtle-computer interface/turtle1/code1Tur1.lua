@@ -329,7 +329,7 @@ function getItemSlot(itemName)
 end
 
 function getCurrentSlotData()
-    if turtle.getItemDeta() == nil then
+    if turtle.getItemDetail() == nil then
         return nil
     end
 
@@ -670,7 +670,7 @@ while loopRunning do
 
 
 
-            -- destroy up block
+            -- destroy block
             if message == "destroyUp" and protocol == "instruction" then
                 digBlock("up")
             end
@@ -682,6 +682,22 @@ while loopRunning do
             if message == "destroyDown" and protocol == "instruction" then
                 digBlock("down")
             end
+
+
+            -- place block
+            if message == "placeUp" and protocol == "instruction" then
+                placeBlock("up")
+            end
+
+            if message == "placeFront" and protocol == "instruction" then
+                placeBlock("front")
+            end
+
+            if message == "placeDown" and protocol == "instruction" then
+                placeBlock("down")
+            end
+
+
 
             --moves turtle up
             if message == "up" then

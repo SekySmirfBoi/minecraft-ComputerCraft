@@ -198,24 +198,87 @@ while working do
     leftShift = 340
     tab = 258
     leftAlt = 342
+
+    f20 = 309
+    f21 = 310
+    f22 = 311
+    f23 = 312
+    f24 = 313
     ]]--
 
     if event == "key" and arg1 == 311 then
         print()
-        print("Attempting to destroy up block")
-        rednet.send(turtleID1, "destroyUp", "instruction")
+        print("Press f20 to place block")
+        print("Press f21 to break block")
+        print()
+
+        local specEvent, specA1
+        while specEvent ~= "key" do
+            specEvent, specA1 = os.pullEvent("key")
+            if specA1 == 309 or specA1 == 310 then
+                break
+            else
+                specEvent = nil
+            end
+        end
+
+        if specA1 == 309 then
+            print("Attempting to place up block")
+            rednet.send(turtleID1, "placeUp", "instruction")
+        elseif specA1 == 310 then
+            print("Attempting to destroy up block")
+            rednet.send(turtleID1, "destroyUp", "instruction")
+        end
     end
 
     if event == "key" and arg1 == 312 then
         print()
-        print("Attempting to destroy front block")
-        rednet.send(turtleID1, "destroyFront", "instruction")
+        print("Press f20 to place block")
+        print("Press f21 to break block")
+        print()
+
+        local specEvent, specA1
+        while specEvent ~= "key" do
+            specEvent, specA1 = os.pullEvent("key")
+            if specA1 == 309 or specA1 == 310 then
+                break
+            else
+                specEvent = nil
+            end
+        end
+
+        if specA1 == 309 then
+            print("Attempting to place front block")
+            rednet.send(turtleID1, "placeFront", "instruction")
+        elseif specA1 == 310 then
+            print("Attempting to destroy front block")
+            rednet.send(turtleID1, "destroyFront", "instruction")
+        end
     end
 
     if event == "key" and arg1 == 313 then
         print()
-        print("Attempting to destroy down block")
-        rednet.send(turtleID1, "destroyDown", "instruction")
+        print("Press f20 to place block")
+        print("Press f21 to break block")
+        print()
+
+        local specEvent, specA1
+        while specEvent ~= "key" do
+            specEvent, specA1 = os.pullEvent("key")
+            if specA1 == 309 or specA1 == 310 then
+                break
+            else
+                specEvent = nil
+            end
+        end
+
+        if specA1 == 309 then
+            print("Attempting to place down block")
+            rednet.send(turtleID1, "placeDown", "instruction")
+        elseif specA1 == 310 then
+            print("Attempting to destroy down block")
+            rednet.send(turtleID1, "destroyDown", "instruction")
+        end
     end
 
     -- Turtle move up
