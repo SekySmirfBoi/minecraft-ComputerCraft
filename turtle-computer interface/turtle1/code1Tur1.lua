@@ -328,6 +328,14 @@ function getItemSlot(itemName)
     end
 end
 
+function getCurrentSlotData()
+    if turtle.getItemDeta() == nil then
+        return nil
+    end
+
+    return turtle.getItemDetail()
+end
+
 
 function digBlock(dir) 
     local success, err
@@ -367,11 +375,56 @@ function digBlock(dir)
     end
 
     if success then
-        print()
+        print(); rednet.send(masterComputerID, "", "compDisplay")
         print("Mined block: "..data.name); rednet.send(masterComputerID, "Mined block: "..data.name, "compDisplay")
     else
-        print()
+        print(); rednet.send(masterComputerID, "", "compDisplay")
         print("Failed to mine block"); rednet.send(masterComputerID, "Failed to mine block", "compDisplay")
+        print("Reason: "..err); rednet.send(masterComputerID, "Reason: "..err, "compDisplay")
+    end
+end
+
+function placeBlock(dir)
+    local success
+    local err
+    local data
+
+    if getCurrentSlotData() == nil then
+        success = false
+        err = "No block in current slot"
+
+    elseif dir == "front" or dir == nil then
+        if turtle.detect() then
+            err = "Block in way"
+        else
+            data = getCurrentSlotData()
+            success = turtle.place()
+        end
+    elseif dir == "up" then
+        if turtle.detectUp() then
+            err = "Block in way"
+        else
+            data = getCurrentSlotData()
+            success = turtle.placeUp()
+        end
+    elseif dir == "down" then
+        if turtle.detectDown() then
+            err = "Block in way"
+        else
+            data = getCurrentSlotData()
+            success = turtle.placeDown()
+        end
+
+    else
+        return
+    end
+
+    if success then
+        print(); rednet.send(masterComputerID, "", "compDisplay")
+        print("Placed block: "..data.name); rednet.send(masterComputerID, "Placed block: "..data.name, "compDisplay")
+    else
+        print(); rednet.send(masterComputerID, "", "compDisplay")
+        print("Failed to place block"); rednet.send(masterComputerID, "Failed to place block", "compDisplay")
         print("Reason: "..err); rednet.send(masterComputerID, "Reason: "..err, "compDisplay")
     end
 end
