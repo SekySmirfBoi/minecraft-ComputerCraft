@@ -565,9 +565,9 @@ function turnRight()
     end
 end
 
-function work()
+function work(currY)
 
-    if y == 5 then
+    if currY == 5 then
         if turtle.detect() then
             digBlock("front")
         end
@@ -862,7 +862,8 @@ if validY then
 
         --turtle goes and works
         elseif echoed and active == "on" then
-            work()
+            local x, y, z = gps.locate()
+            work(y)
         end
     end
 end
