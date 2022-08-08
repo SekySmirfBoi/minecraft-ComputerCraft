@@ -569,8 +569,43 @@ function work()
 
     local x, y, z = gps.locate()
     if y == 5 then
+        if turtle.detect() then
+            digBlock("front")
+        end
+
+        if HighMine == "on" then
+            digBlock("up")
+        end
+        
+        if turtle.detectUp() then
+            local succ, data = turtle.inspectUp()
+
+            if data.name == "minecraft:gold_ore" or 
+            data.name == "minecraft:iron_ore" or 
+            data.name == "minecraft:coal_ore" or 
+            data.name == "minecraft:lapis_ore" or 
+            data.name == "minecraft:diamond_ore" or 
+            data.name == "minecraft:redstone_ore" or 
+            data.name == "minecraft:emerald_ore" then
+                digBlock("up")
+            end
+        end
+
+        if turtle.detectDown() then
+            local succ, data = turtle.inspectDown()
+
+            if data.name == "minecraft:gold_ore" or 
+            data.name == "minecraft:iron_ore" or 
+            data.name == "minecraft:coal_ore" or 
+            data.name == "minecraft:lapis_ore" or 
+            data.name == "minecraft:diamond_ore" or 
+            data.name == "minecraft:redstone_ore" or 
+            data.name == "minecraft:emerald_ore" then
+                digBlock("down")
+            end
+        end
+
         moveForwards()
-        digBlock("front")
     else
         print()
         print("Moving down to y 5")
@@ -606,6 +641,8 @@ masterComputerID = 53   -- masterComputerID -- The computer in control of everyt
 comp2ID = 19    -- secondComputerID -- Just a second unused computer
 
 validY = false
+
+HighMine = "off"
 
 homeX = 572
 homeY = 64
@@ -657,6 +694,14 @@ if validY then
                 if message == "on" and protocol == "instruction" then
                 active = "on"
                 print("Turtle on")
+                end
+
+                if message == "toggle2High" and protocol == "instruction" then
+                    if HighMine == "off" then
+                        HighMine = "on"
+                    elseif HighMine == "on" then
+                        HighMine = "off"
+                    end
                 end
 
                 -- sends the turtle back home

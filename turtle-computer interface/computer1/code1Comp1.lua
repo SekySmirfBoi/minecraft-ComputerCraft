@@ -38,6 +38,7 @@ while not eResponded do
         print()
         print("Press 0 to stop the turtle from working")
         print("Press 1 to start the turtle working")
+        print("Press 2 to toggle the turtle to dig a 2 high tunnel")
         print()
         print("Press home to return turtle to its pre set home")
         print("Press # to orient the turtle while at home")
@@ -64,6 +65,7 @@ while not eResponded do
     end
 end
 
+local HighThing = "on"
 local active = "off"
 local remoteControl = "off"
 
@@ -120,20 +122,33 @@ while working do
 
     -- Stop the turtle from moving and mining
     if event == "char" and arg1 == "0" then
-        print("Computer output: Turtle off.")
+        print("Turtle off.")
         active = "off"
         rednet.send(turtleID1, "off", "instruction")
     end
 
     -- Start the turtle moving and mining
     if event == "char" and arg1 == "1" then
-        print("Computer output: Turtle on.")
+        print("Turtle on.")
         active = "on"
         rednet.send(turtleID1, "on", "instruction")
     end
 
+    if event == "char" and arg1 == "2" then
+        if HighThing == "off" then
+            HighThing = "on"
+            print("The turtle now digs 2 high tunnels")
+            rednet.send(turtleID1, "toggle2High", "instruction")
+        elseif HighThing == "on" then
+            HighThing = "off"
+            print("The turtle won't digs high tunnels")
+            rednet.send(turtleID1, "toggle2High", "instruction")
+        end
+    end
+
     -- Bring turtle to its current set home
     if event == "key" and arg1 == 268 then
+        print()
         print("Attempting to return turtle.")
         print("Attempt: 1")
         rednet.send(turtleID1, "return", "instruction")
