@@ -52,9 +52,13 @@ while not eResponded do
         print("Press page up to move the turtle up")
         print("Press page down to move the turtle down")
         print()
-        print("Press f22 to break up block")
-        print("Press f23 to break front block")
-        print("Press f24 to break down block")
+        print("Press f1 to break up block")
+        print("Press f2 to break front block")
+        print("Press f3 to break down block")
+        print()
+        print("Press f4 to place up block")
+        print("Press f5 to place front block")
+        print("Press f6 to place down block")
         print()
         working = true
     end
