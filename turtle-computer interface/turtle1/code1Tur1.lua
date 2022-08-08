@@ -567,7 +567,9 @@ end
 
 function work(currY)
 
+    print()
     print(currY)
+    print("update true")
 
     if currY == 5 then
         if turtle.detect() then
