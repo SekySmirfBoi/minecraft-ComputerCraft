@@ -590,73 +590,83 @@ thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
 masterComputerID = 53   -- masterComputerID -- The computer in control of everything
 comp2ID = 19    -- secondComputerID -- Just a second unused computer
 
+validY = false
+
 homeX = 572
 homeY = 64
 homeZ = 257
 
+if homeY < 5 then
+    validY = false
+    print("homeY cannot be less then 5")
+else
+    validY = true
+end
+
 nextMove = ""
 miningVein = false
 
-print()
-print("Turtle ready to receive instructions")
-print("Listeneing for messages")
-print()
+if validY then
+    print()
+    print("Turtle ready to receive instructions")
+    print("Listeneing for messages")
+    print()
 
-active = "off"
-echoed = false
+    active = "off"
+    echoed = false
 
-loopRunning = true
+    loopRunning = true
 
-while loopRunning do
+    while loopRunning do
 
-    local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
+        local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
 
-    if osEvent == "rednet_message" then
-        local sender = osArg1
-        local message = osArg2
-        local protocol = osArg3
+        if osEvent == "rednet_message" then
+            local sender = osArg1
+            local message = osArg2
+            local protocol = osArg3
 
-        if sender == masterComputerID then
+            if sender == masterComputerID then
 
-            -- Responds back to thr master computer saying that it is online
-            if message == "echo" and protocol == "instruction" then
+                -- Responds back to thr master computer saying that it is online
+                if message == "echo" and protocol == "instruction" then
                 rednet.send(masterComputerID, "received")
                 print("Echoing")
                 echoed = true
-            end
+                end
 
-            -- disables the turtle after the master computer tells it to
-            if message == "off" and protocol == "instruction" then
+                -- disables the turtle after the master computer tells it to
+                if message == "off" and protocol == "instruction" then
                 active = "off"
                 print("Turtle off")
-            end
+                end
 
-            -- enables the turtle after the master computer tells it to
-            if message == "on" and protocol == "instruction" then
+                -- enables the turtle after the master computer tells it to
+                if message == "on" and protocol == "instruction" then
                 active = "on"
                 print("Turtle on")
-            end
+                end
 
-            -- sends the turtle back home
-            if message == "return" and protocol == "instruction" then
+                -- sends the turtle back home
+                if message == "return" and protocol == "instruction" then
                 rednet.send(masterComputerID, "returningHome", "notSleep")
                 print("Returning home")
                 returnHome()
-            end
+                end
 
-            --updates the turtles home
-            if message == "newHome" and protocol == "instruction" then
+                --updates the turtles home
+                if message == "newHome" and protocol == "instruction" then
                 print("Setting new home coords as:")
                 updateHomeCoords()
-            end
-            
-            -- empties inventory into the home chest
-            if message == "inventoryEmtpyHome" and protocol == "instruction" then
-                emptyInventoryAtHome()
-            end
+                end
 
-            -- termination after getting the instruction from the master computer
-            if message == "termination" and protocol == "instruction" then
+                -- empties inventory into the home chest
+                if message == "inventoryEmtpyHome" and protocol == "instruction" then
+                emptyInventoryAtHome()
+                end
+
+                -- termination after getting the instruction from the master computer
+                if message == "termination" and protocol == "instruction" then
                 term.setTextColor(colors.red)
                 print("Why kill me?")
                 print()
@@ -666,85 +676,85 @@ while loopRunning do
                 print("Why would you ever do that, you're the one who killed me")
                 term.setTextColor(colors.white)
                 loopRunning = false
-            end
+                end
 
 
 
-            -- destroy block
-            if message == "destroyUp" and protocol == "instruction" then
+                -- destroy block
+                if message == "destroyUp" and protocol == "instruction" then
                 digBlock("up")
-            end
+                end
 
-            if message == "destroyFront" and protocol == "instruction" then
+                if message == "destroyFront" and protocol == "instruction" then
                 digBlock("front")
-            end
+                end
 
-            if message == "destroyDown" and protocol == "instruction" then
+                if message == "destroyDown" and protocol == "instruction" then
                 digBlock("down")
-            end
+                end
 
 
-            -- place block
-            if message == "placeUp" and protocol == "instruction" then
+                -- place block
+                if message == "placeUp" and protocol == "instruction" then
                 placeBlock("up")
-            end
+                end
 
-            if message == "placeFront" and protocol == "instruction" then
+                if message == "placeFront" and protocol == "instruction" then
                 placeBlock("front")
-            end
+                end
 
-            if message == "placeDown" and protocol == "instruction" then
+                if message == "placeDown" and protocol == "instruction" then
                 placeBlock("down")
-            end
+                end
 
 
 
-            --moves turtle up
-            if message == "up" then
+                --moves turtle up
+                if message == "up" then
                 moveUp()
-            end
-            
-            --moves turtle down
-            if message == "down" then
+                end
+
+                --moves turtle down
+                if message == "down" then
                 moveDown()
-            end
+                end
 
-            --moves turtle forward
-            if message == "forward" then
+                --moves turtle forward
+                if message == "forward" then
                 moveForwards()
-            end
+                end
 
-            --moves turtle backwards
-            if message == "back" then
+                --moves turtle backwards
+                if message == "back" then
                 moveBackwards()
-            end
+                end
 
-            --turns turtle left
-            if message == "left" then
+                --turns turtle left
+                if message == "left" then
                 turnLeft()
-            end
+                end
 
-            --turns turtle 
-            if message == "right" then
+                --turns turtle 
+                if message == "right" then
                 turnRight()
-            end
+                end
 
-            -- sends the master computer its coords
-            if message == "coords" then
+                -- sends the master computer its coords
+                if message == "coords" then
                 local x, y, z = gps.locate()
                 print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
                 print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
                 print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
-            end
+                end
 
-            -- orients the turtle
-            if message == "orient" then
+                -- orients the turtle
+                if message == "orient" then
                 correctTurtleFacing()
+                end
             end
-        end
 
-    -- custom terminate
-    elseif osEvent == "terminate" then
+        -- custom terminate
+        elseif osEvent == "terminate" then
         
         rednet.send(masterComputerID, "termination", "userCommand")
         term.setTextColor(colors.red)
@@ -758,8 +768,9 @@ while loopRunning do
         loopRunning = false
 
 
-    --turtle goes and works
-    elseif echoed and active == "on" then
-        nextMove = work(nextMove)
+        --turtle goes and works
+        elseif echoed and active == "on" then
+            nextMove = work(nextMove)
+        end
     end
 end
