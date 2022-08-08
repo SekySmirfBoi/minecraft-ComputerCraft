@@ -567,7 +567,6 @@ end
 
 function work()
 
-    local x, y, z = gps.locate()
     if y == 5 then
         if turtle.detect() then
             digBlock("front")
@@ -642,6 +641,7 @@ function work()
 
         moveForwards()
     else
+        local x, y, z = gps.locate()
         print()
         print("Moving down to y 5")
         print("You can't control it while it is doing this")
