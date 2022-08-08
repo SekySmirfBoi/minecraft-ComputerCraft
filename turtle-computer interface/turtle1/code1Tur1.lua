@@ -566,10 +566,9 @@ function turnRight()
 end
 
 function work()
-    local x, y, z = gps.locate()
+    moveForwards()
 
-    if y == 5 then
-    end
+    digBlock("front")
 end
 
 rednet.open("left")
@@ -602,9 +601,6 @@ if homeY < 5 then
 else
     validY = true
 end
-
-nextMove = ""
-miningVein = false
 
 if validY then
     print()
@@ -770,7 +766,7 @@ if validY then
 
         --turtle goes and works
         elseif echoed and active == "on" then
-            nextMove = work(nextMove)
+            work()
         end
     end
 end

@@ -44,7 +44,7 @@ while not eResponded do
         print("Press + to get the turtle's coordinates")
         print()
         print("Remote control:")
-        print("Press / to tobble the remote control")
+        print("Press / to toggle the remote control")
         print("Press up arrow to move the turtle forwards")
         print("Press down arrow to move the turtle backwards")
         print("Press left arrow to turn the turtle left")
