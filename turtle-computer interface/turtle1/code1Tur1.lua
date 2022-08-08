@@ -567,6 +567,8 @@ end
 
 function work(currY)
 
+    print(currY)
+
     if currY == 5 then
         if turtle.detect() then
             digBlock("front")
