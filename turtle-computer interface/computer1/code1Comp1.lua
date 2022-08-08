@@ -183,6 +183,7 @@ while working do
     -- Empty inventory do
     if event == "char" and arg1 == "e" then
         print()
+        print("Emtpying inventory")
         rednet.send(turtleID1, "inventoryEmtpyHome", "instruction")
     end
 
@@ -199,6 +200,25 @@ while working do
     tab = 258
     leftAlt = 342
 
+    f1 = 290
+    f2 = 291
+    f3 = 292
+    f4 = 293
+    f5 = 294
+    f6 = 295
+    f7 = 296
+    f8 = 297
+    f9 = 298
+    f10 = 299
+    f11 = 300
+    f12 = 301
+    f13 = 302
+    f14 = 303
+    f15 = 304
+    f16 = 305
+    f17 = 306
+    f18 = 307
+    f19 = 308
     f20 = 309
     f21 = 310
     f22 = 311
@@ -206,79 +226,46 @@ while working do
     f24 = 313
     ]]--
 
-    if event == "key" and arg1 == 311 then
+    -- destroy up
+    if event == "key" and arg1 == 290 then
         print()
-        print("Press f20 to place block")
-        print("Press f21 to break block")
-        print()
-
-        local specEvent, specA1
-        while specEvent ~= "key" do
-            specEvent, specA1 = os.pullEvent("key")
-            if specA1 == 309 or specA1 == 310 then
-                break
-            else
-                specEvent = nil
-            end
-        end
-
-        if specA1 == 309 then
-            print("Attempting to place up block")
-            rednet.send(turtleID1, "placeUp", "instruction")
-        elseif specA1 == 310 then
-            print("Attempting to destroy up block")
-            rednet.send(turtleID1, "destroyUp", "instruction")
-        end
+        print("Attempting to destroy up block")
+        rednet.send(turtleID1, "destroyUp", "instruction")
     end
 
-    if event == "key" and arg1 == 312 then
+    -- destroy front
+    if event == "key" and arg1 == 291 then
         print()
-        print("Press f20 to place block")
-        print("Press f21 to break block")
-        print()
-
-        local specEvent, specA1
-        while specEvent ~= "key" do
-            specEvent, specA1 = os.pullEvent("key")
-            if specA1 == 309 or specA1 == 310 then
-                break
-            else
-                specEvent = nil
-            end
-        end
-
-        if specA1 == 309 then
-            print("Attempting to place front block")
-            rednet.send(turtleID1, "placeFront", "instruction")
-        elseif specA1 == 310 then
-            print("Attempting to destroy front block")
-            rednet.send(turtleID1, "destroyFront", "instruction")
-        end
+        print("Attempting to destroy front block")
+        rednet.send(turtleID1, "destroyFront", "instruction")
     end
 
-    if event == "key" and arg1 == 313 then
+    -- destroy down
+    if event == "key" and arg1 == 292 then
         print()
-        print("Press f20 to place block")
-        print("Press f21 to break block")
+        print("Attempting to destroy down block")
+        rednet.send(turtleID1, "destroyDown", "instruction")
+    end
+
+    -- place up
+    if event == "key" and arg1 == 293 then
         print()
+        print("Attempting to place up block")
+        rednet.send(turtleID1, "placeUp", "instruction")
+    end
 
-        local specEvent, specA1
-        while specEvent ~= "key" do
-            specEvent, specA1 = os.pullEvent("key")
-            if specA1 == 309 or specA1 == 310 then
-                break
-            else
-                specEvent = nil
-            end
-        end
+    -- place front
+    if event == "key" and arg1 == 294 then
+        print()
+        print("Attempting to place front block")
+        rednet.send(turtleID1, "placeFront", "instruction")
+    end
 
-        if specA1 == 309 then
-            print("Attempting to place down block")
-            rednet.send(turtleID1, "placeDown", "instruction")
-        elseif specA1 == 310 then
-            print("Attempting to destroy down block")
-            rednet.send(turtleID1, "destroyDown", "instruction")
-        end
+    -- place down
+    if event == "key" and arg1 == 295 then
+        print()
+        print("Attempting to place down block")
+        rednet.send(turtleID1, "placeDown", "instruction")
     end
 
     -- Turtle move up
