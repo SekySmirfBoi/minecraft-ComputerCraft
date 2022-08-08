@@ -362,4 +362,6 @@ while working do
         working = false
 
     end
+
+    rednet.send(turtleID1, "workYouBastard", "instruction")
 end

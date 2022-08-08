@@ -567,10 +567,6 @@ end
 
 function work(currY)
 
-    print()
-    print(currY)
-    print("update true")
-
     if currY == 5 then
         if turtle.detect() then
             digBlock("front")
@@ -727,6 +723,9 @@ if validY then
                 if message == "off" and protocol == "instruction" then
                 active = "off"
                 print("Turtle off")
+                end
+
+                if message == "workYouBastard" and protocol == "instruction" then
                 end
 
                 -- enables the turtle after the master computer tells it to
