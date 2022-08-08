@@ -566,6 +566,8 @@ function turnRight()
 end
 
 function work()
+
+    local x, y, z = gps.locate()
     if y == 5 then
         moveForwards()
         digBlock("front")
