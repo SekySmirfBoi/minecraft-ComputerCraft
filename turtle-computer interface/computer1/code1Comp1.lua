@@ -148,6 +148,13 @@ while working do
 
     -- Bring turtle to its current set home
     if event == "key" and arg1 == 268 then
+        
+        if active == "on" then
+            print("Turtle off.")
+            active = "off"
+            rednet.send(turtleID1, "off", "instruction")
+        end
+
         print()
         print("Attempting to return turtle.")
         print("Attempt: 1")
@@ -155,11 +162,6 @@ while working do
 
         local responded = false
         local attempt = 1
-
-        if active == "on" then
-            print("You must deactive the turtle first")
-            responded = true
-        end
 
         while not responded do
             

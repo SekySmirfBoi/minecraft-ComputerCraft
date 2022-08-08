@@ -336,6 +336,29 @@ function getCurrentSlotData()
     return turtle.getItemDetail()
 end
 
+function getLeastValue()
+    local valuable = {"minecraft:diamond", 
+    "minecraft:iron_ore", 
+    "minecraft:coal", 
+    "minecraft:gold_ore", 
+    "minecraft:emerald", 
+    "minecraft:lapis_lazuli", 
+    "minecraft:redstone"}
+
+    local notValSlot = {}
+
+    for i = 1, 16, 1 do
+        turtle.select(i)
+        
+        for key, item in ipairs(valuable) do
+    
+            if item ~= getCurrentSlotData().name then
+                
+            end
+        end
+    end
+end
+
 
 function digBlock(dir) 
     local success, err
