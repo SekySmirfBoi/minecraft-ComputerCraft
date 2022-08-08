@@ -566,9 +566,23 @@ function turnRight()
 end
 
 function work()
-    moveForwards()
-
-    digBlock("front")
+    if y == 5 then
+        moveForwards()
+        digBlock("front")
+    else
+        print()
+        print("Moving down to y 5")
+        print("You can't control it while it is doing this")
+        while y > 5 do
+            if turtle.detectDown() then
+                digBlock("down")
+            end
+            moveDown()
+            x, y, z = gps.locate()
+        end
+        print()
+        print("Finished moving down")
+    end
 end
 
 rednet.open("left")
