@@ -642,7 +642,7 @@ end
 function work(currY)
 
     print("did the thing")
-    local mesId, mesMes = rednet.receive("instruction", 0.5)
+    local mesId, mesMes = rednet.receive("instruction", 0.25)
 
     if mesId ~= nil then
         if mesId == masterComputerID and mesMes == "off" then

@@ -132,7 +132,7 @@ while working do
         while disableResponded == false do
             print("Attempt: "..disableAttempt)
             rednet.send(turtleID1, "off", "instruction")   
-            local respSender, respMessage, respProtocol = rednet.receive(nil, 0.25)
+            local respSender, respMessage, respProtocol = rednet.receive(nil, 0.2)
 
             if respMessage == "recieved" and respProtocol == "recieved" then
                 disableResponded = true
@@ -143,6 +143,8 @@ while working do
 
         print()
         print("Turtle responded in "..disableAttempt.." attempts")
+        print("Just so you know you have to return it home yourself")
+        print("To do this just press the home button on your keyboard")
     end
 
     -- Start the turtle moving and mining
