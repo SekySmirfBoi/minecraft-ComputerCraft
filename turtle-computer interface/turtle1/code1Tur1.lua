@@ -347,57 +347,35 @@ end
 
 function getLeastValue()
     local valuable = {"minecraft:diamond", 
+    "minecraft:diamond_ore",
     "minecraft:iron_ore",
+    "minecraft:iron_ingot",
     "minecraft:coal", 
+    "minecraft:coal_ore",
     "minecraft:gold_ore", 
+    "minecraft:gold_ingot",
     "minecraft:emerald", 
+    "minecraft:emerald_old",
     "minecraft:lapis_lazuli", 
-    "minecraft:redstone"}
+    "minecraft:lapis_ore",
+    "minecraft:redstone",
+    "minecraft:redstone_ore"}
 
-    local notValSlot = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
     local walSLot = {}
-    local returnThisVar = 0
+    local notVal = {}
 
     for i = 1, 16, 1 do
         turtle.select(i)
-        
+
         for key, item in ipairs(valuable) do
-    
-            if getCurrentSlotData() == nil then
-                break
-            elseif item == getCurrentSlotData().name then
+            if item == getCurrentSlotData().name then
                 table.insert( walSLot, i )
+                break
             end
         end
     end
 
-    local itemsInwalSLot = 0
-
-    for key, item in ipairs(walSLot) do
-        itemsInwalSLot = itemsInwalSLot + 1
-    end
-
-    if itemsInwalSLot ~= 16 then
-        return "inventory not full"
-    end
-
-    local tableNum = 1
-
-    for key, item in ipairs(walSLot) do
-        for key2, item2 in ipairs(notValSlot) do
-            if item == item2 then
-                table.remove(notValSlot, tableNum)
-                tableNum = tableNum + 1
-            end
-        end
-    end
-
-    for key, item in ipairs(notValSlot) do
-        returnThisVar = item
-        break
-    end
-
-    return returnThisVar
+    
 end
 
 --[[
