@@ -2,7 +2,7 @@ homeX = 572
 homeY = 64
 homeZ = 257
 
---klzdjhlkJ
+--i walk to burger king
 
 
 function returnHome()
@@ -1000,9 +1000,9 @@ if validY then
             notContinue = work(y)
 
             if notContinue then
-                active == "off"
+                active = "off"
             elseif not notContinue or notContinue == nil then
-                active == "on"
+                active = "on"
             else
                 print("Unknown erro")
             end
