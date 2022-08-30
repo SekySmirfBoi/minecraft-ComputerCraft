@@ -52,6 +52,7 @@ while not eResponded do
         print("Press right arrow to turn the turtle right")
         print("Press page up to move the turtle up")
         print("Press page down to move the turtle down")
+        print("Press e to empty turtle's inventory at home")
         print()
         print("Press f1 to break up block")
         print("Press f2 to break front block")

@@ -369,6 +369,14 @@ function getLeastValue()
         end
     end
 
+    local itemsInwalSLot = 0
+
+    for key, item in ipairs(walSLot) do
+        itemsInwalSLot = itemsInwalSLot + 1
+    end
+
+    return itemsInwalSLot
+
     local tableNum = 1
 
     for key, item in ipairs(walSLot) do
@@ -388,6 +396,7 @@ function getLeastValue()
     return returnThisVar
 end
 
+--[[
 function checkInventoryIfFull() 
     for i = 1, 16, 1 do
         turtle.select(i)
@@ -399,6 +408,7 @@ function checkInventoryIfFull()
 
     return true
 end
+]]--
 
 
 
@@ -721,7 +731,7 @@ function work(currY)
         print("Finished moving down")
     end
 
-    if checkInventoryIfFull() then
+    if getLeastValue() ~= false then
 
         local slotNum = getLeastValue()
         local cureentTableNum = 1
