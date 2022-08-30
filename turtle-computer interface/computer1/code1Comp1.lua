@@ -1,7 +1,7 @@
 rednet.open("back")
 
 
---then i walk back home from burger king
+--sztjhi tolWUIAfolIZUgh
 
 
 local turtleID1 = 52

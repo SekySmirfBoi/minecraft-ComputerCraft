@@ -2,7 +2,7 @@ homeX = 572
 homeY = 64
 homeZ = 257
 
---then i walk back home from burger king
+--sztjhi tolWUIAfolIZUgh
 
 
 function returnHome()
@@ -332,9 +332,12 @@ function getItemSlot(itemName)
         turtle.select(i)
         
         if turtle.getItemDetail().name == itemName then
+            turtle.select(prevSlot)
             return turtle.getSelectedSlot()
         end
     end
+
+    return nil;
 end
 
 function getCurrentSlotData()
@@ -783,7 +786,23 @@ function work(currY)
     local disFromHome = disHomeX + disHomeY + disHomeZ
 
     if turtle.getFuelLevel() <= disFromHome + 100 then
-        returnHome()
+        
+        local tempMemory = getItemSlot("minecraft:coal_block")
+        local prevSlot = turtle.getSelectedSlot()
+
+        if tempMemory == nil then
+            tempMemory = getItemSlot("minecraft:coal")
+            if tempMemory == nil then
+                print("Turtle out of fuel")
+                print("Returning home")
+                returnHome()
+                return true
+            end
+        end
+
+        turtle.select(tempMemory)
+        turtle.refuel(64)
+        
     end
 end
 
