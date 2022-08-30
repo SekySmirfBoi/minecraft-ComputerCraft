@@ -1,8 +1,4 @@
 
 4) finish the work function
 
-
-----------------------------------------------------------
-do getLeastValue() function finish
-----------------------------------------------------------
 absolute final) make monitors be compatible with the turtle and computer

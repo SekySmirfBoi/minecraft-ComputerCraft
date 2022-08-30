@@ -124,7 +124,24 @@ while working do
     if event == "char" and arg1 == "0" then
         print("Turtle off.")
         active = "off"
-        rednet.send(turtleID1, "off", "instruction")
+        print()
+        local disableAttempt = 1
+        local disableResponded = false
+
+        while disableResponded == false do
+            print("Attempt: "..disableAttempt)
+            rednet.send(turtleID1, "off", "instruction")   
+            local respSender, respMessage, respProtocol = rednet.receive(nil, 1)
+
+            if respMessage == "recieved" and respProtocol == "recieved" then
+                disableResponded = true
+            else
+                disableAttempt = disableAttempt + 1
+            end
+        end
+
+        print()
+        print("Turtle responded in "..disableAttempt.." attempts")
     end
 
     -- Start the turtle moving and mining

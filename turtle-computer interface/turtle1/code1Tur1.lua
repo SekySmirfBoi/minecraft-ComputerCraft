@@ -1,3 +1,10 @@
+homeX = 572
+homeY = 64
+homeZ = 257
+
+
+
+
 function returnHome()
 
     local x, y, z = gps.locate()
@@ -201,6 +208,7 @@ function returnHome()
 end
 
 
+
 function correctTurtleFacing() 
     local success, data = turtle.inspect()
 
@@ -256,6 +264,7 @@ function correctYIfAtHome()
         return
     end
 end
+
 
 
 function dropInventory(dir)
@@ -338,26 +347,59 @@ end
 
 function getLeastValue()
     local valuable = {"minecraft:diamond", 
-    "minecraft:iron_ore", 
+    "minecraft:iron_ore",
     "minecraft:coal", 
     "minecraft:gold_ore", 
     "minecraft:emerald", 
     "minecraft:lapis_lazuli", 
     "minecraft:redstone"}
 
-    local notValSlot = {}
+    local notValSlot = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
+    local walSLot = {}
+    local returnThisVar = 0
 
     for i = 1, 16, 1 do
         turtle.select(i)
         
         for key, item in ipairs(valuable) do
     
-            if item ~= getCurrentSlotData().name then
-                
+            if item == getCurrentSlotData().name then
+                table.insert( walSLot, i )
             end
         end
     end
+
+    local tableNum = 1
+
+    for key, item in ipairs(walSLot) do
+        for key2, item2 in ipairs(notValSlot) do
+            if item == item2 then
+                table.remove(notValSlot, tableNum)
+                tableNum = tableNum + 1
+            end
+        end
+    end
+
+    for key, item in ipairs(notValSlot) do
+        returnThisVar = item
+        break
+    end
+
+    return returnThisVar
 end
+
+function checkInventoryIfFull() 
+    for i = 1, 16, 1 do
+        turtle.select(i)
+
+        if getCurrentSlotData() == nil then
+            return false
+        end
+    end
+
+    return true
+end
+
 
 
 function digBlock(dir) 
@@ -678,6 +720,41 @@ function work(currY)
         print()
         print("Finished moving down")
     end
+
+    if checkInventoryIfFull() then
+
+        local slotNum = getLeastValue()
+        local cureentTableNum = 1
+
+        if slotNum == nil then
+            returnHome()
+        else
+            turtle.select(slotNum)
+            turtle.drop()
+        end
+    end
+
+    local x, y, z = gps.locate()
+
+    local disHomeX = homeX - x
+    local disHomeY = homeY - y
+    local disHomeZ = homeZ - z
+
+    if disHomeX < 0 then
+        disHomeX = disHomeX * -1
+    end
+    if disHomeY < 0 then
+        disHomeY = disHomeY * -1
+    end
+    if disHomeZ < 0 then
+        disHomeZ = disHomeZ * -1
+    end
+
+    local disFromHome = disHomeX + disHomeY + disHomeZ
+
+    if turtle.getFuelLevel() <= disFromHome + 100 then
+        returnHome()
+    end
 end
 
 rednet.open("left")
@@ -701,10 +778,6 @@ comp2ID = 19    -- secondComputerID -- Just a second unused computer
 validY = false
 
 HighMine = "on"
-
-homeX = 572
-homeY = 64
-homeZ = 257
 
 if homeY < 5 then
     validY = false
@@ -737,15 +810,16 @@ if validY then
 
                 -- Responds back to thr master computer saying that it is online
                 if message == "echo" and protocol == "instruction" then
-                rednet.send(masterComputerID, "received")
-                print("Echoing")
-                echoed = true
+                    rednet.send(masterComputerID, "received")
+                    print("Echoing")
+                    echoed = true
                 end
 
                 -- disables the turtle after the master computer tells it to
                 if message == "off" and protocol == "instruction" then
-                active = "off"
-                print("Turtle off")
+                    active = "off"
+                    print("Turtle off")
+                    rednet.send(masterComputerID, "recieved", "recieved")
                 end
 
                 if message == "workYouBastard" and protocol == "instruction" then
@@ -753,8 +827,8 @@ if validY then
 
                 -- enables the turtle after the master computer tells it to
                 if message == "on" and protocol == "instruction" then
-                active = "on"
-                print("Turtle on")
+                    active = "on"
+                    print("Turtle on")
                 end
 
                 if message == "toggle2High" and protocol == "instruction" then
@@ -767,123 +841,123 @@ if validY then
 
                 -- sends the turtle back home
                 if message == "return" and protocol == "instruction" then
-                rednet.send(masterComputerID, "returningHome", "notSleep")
-                print("Returning home")
-                returnHome()
+                    rednet.send(masterComputerID, "returningHome", "notSleep")
+                    print("Returning home")
+                    returnHome()
                 end
 
                 --updates the turtles home
                 if message == "newHome" and protocol == "instruction" then
-                print("Setting new home coords as:")
-                updateHomeCoords()
+                    print("Setting new home coords as:")
+                    updateHomeCoords()
                 end
 
                 -- empties inventory into the home chest
                 if message == "inventoryEmtpyHome" and protocol == "instruction" then
-                emptyInventoryAtHome()
+                    emptyInventoryAtHome()
                 end
 
                 -- termination after getting the instruction from the master computer
                 if message == "termination" and protocol == "instruction" then
-                term.setTextColor(colors.red)
-                print("Why kill me?")
-                print()
-                term.setTextColor(colors.lightBlue)
-                print("It's because I'm a turtle isn't it :(")
-                print("Tell my family that I love them")
-                print("Why would you ever do that, you're the one who killed me")
-                term.setTextColor(colors.white)
-                loopRunning = false
+                    term.setTextColor(colors.red)
+                    print("Why kill me?")
+                    print()
+                    term.setTextColor(colors.lightBlue)
+                    print("It's because I'm a turtle isn't it :(")
+                    print("Tell my family that I love them")
+                    print("Why would you ever do that, you're the one who killed me")
+                    term.setTextColor(colors.white)
+                    loopRunning = false
                 end
 
 
 
                 -- destroy block
                 if message == "destroyUp" and protocol == "instruction" then
-                digBlock("up")
+                    digBlock("up")
                 end
 
                 if message == "destroyFront" and protocol == "instruction" then
-                digBlock("front")
+                    digBlock("front")
                 end
 
                 if message == "destroyDown" and protocol == "instruction" then
-                digBlock("down")
+                    digBlock("down")
                 end
 
 
                 -- place block
                 if message == "placeUp" and protocol == "instruction" then
-                placeBlock("up")
+                    placeBlock("up")
                 end
 
                 if message == "placeFront" and protocol == "instruction" then
-                placeBlock("front")
+                    placeBlock("front")
                 end
 
                 if message == "placeDown" and protocol == "instruction" then
-                placeBlock("down")
+                    placeBlock("down")
                 end
 
 
 
                 --moves turtle up
                 if message == "up" then
-                moveUp()
+                    moveUp()
                 end
 
                 --moves turtle down
                 if message == "down" then
-                moveDown()
+                    moveDown()
                 end
 
                 --moves turtle forward
                 if message == "forward" then
-                moveForwards()
+                    moveForwards()
                 end
 
                 --moves turtle backwards
                 if message == "back" then
-                moveBackwards()
+                    moveBackwards()
                 end
 
                 --turns turtle left
                 if message == "left" then
-                turnLeft()
+                    turnLeft()
                 end
 
                 --turns turtle 
                 if message == "right" then
-                turnRight()
+                    turnRight()
                 end
 
                 -- sends the master computer its coords
                 if message == "coords" then
-                local x, y, z = gps.locate()
-                print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
-                print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
-                print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
+                    local x, y, z = gps.locate()
+                    print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
+                    print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
+                    print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
                 end
 
                 -- orients the turtle
                 if message == "orient" then
-                correctTurtleFacing()
+                    correctTurtleFacing()
                 end
             end
 
         -- custom terminate
         elseif osEvent == "terminate" then
         
-        rednet.send(masterComputerID, "termination", "userCommand")
-        term.setTextColor(colors.red)
-        print("Why kill me?")
-        print()
-        term.setTextColor(colors.lightBlue)
-        print("It's because I'm a turtle isn't it :(")
-        print("Tell my family that I love them")
-        print("Why would you ever do that, you're the one who killed me")
-        term.setTextColor(colors.white)
-        loopRunning = false
+            rednet.send(masterComputerID, "termination", "userCommand")
+            term.setTextColor(colors.red)
+            print("Why kill me?")
+            print()
+            term.setTextColor(colors.lightBlue)
+            print("It's because I'm a turtle isn't it :(")
+            print("Tell my family that I love them")
+            print("Why would you ever do that, you're the one who killed me")
+            term.setTextColor(colors.white)
+            loopRunning = false
 
 
         --turtle goes and works
