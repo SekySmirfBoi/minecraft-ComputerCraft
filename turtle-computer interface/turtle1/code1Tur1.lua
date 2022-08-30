@@ -363,7 +363,8 @@ function getLeastValue()
         
         for key, item in ipairs(valuable) do
     
-            if item == getCurrentSlotData().name then
+            if getCurrentSlotData() == nil then
+            else if item == getCurrentSlotData().name then
                 table.insert( walSLot, i )
             end
         end
