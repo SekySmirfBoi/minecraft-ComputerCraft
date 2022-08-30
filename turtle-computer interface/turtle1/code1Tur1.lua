@@ -346,6 +346,7 @@ function getCurrentSlotData()
 end
 
 function getLeastValue()
+    --[[
     local valuable = {"minecraft:diamond", 
     "minecraft:diamond_ore",
     "minecraft:iron_ore",
@@ -360,19 +361,31 @@ function getLeastValue()
     "minecraft:lapis_ore",
     "minecraft:redstone",
     "minecraft:redstone_ore"}
+    ]]--
 
-    local walSLot = {}
-    local notVal = {}
+    local notValuable = {
+        "minecraft:dirt",
+        "minecraft:stone",
+        "minecraft:granite",
+        "minecraft:diorite",
+        "minecraft:andesite",
+        "minecraft:cobblestone",
+        "minecraft:gravel"
+    }
+
+    local prevSlot = turtle.getSelectedSlot()
 
     for i = 1, 16, 1 do
         turtle.select(i)
 
-        for key, item in ipairs(valuable) do
+        for key, item in ipairs(notValuable) do
             if item == getCurrentSlotData().name then
-                table.insert( walSLot, i )
-                break
+                turtle.select(prevSlot)
+                return i
             end
         end
+
+        return false
     end
 
     -----------  /------\
@@ -390,7 +403,7 @@ function getLeastValue()
     -----------  \------/
 end
 
---[[
+
 function checkInventoryIfFull() 
     for i = 1, 16, 1 do
         turtle.select(i)
@@ -402,7 +415,7 @@ function checkInventoryIfFull()
 
     return true
 end
-]]--
+
 
 
 
@@ -725,16 +738,20 @@ function work(currY)
         print("Finished moving down")
     end
 
-    if getLeastValue() ~= false and getLeastValue() ~= "inventory not full" then
-
-        local slotNum = getLeastValue()
-        local cureentTableNum = 1
-
-        if slotNum == nil then
+    if checkInventoryIfFull() then
+        local tempMemory = getLeastValue()
+        if tempMemory == false then
             returnHome()
-        else
-            turtle.select(slotNum)
+            emptyInventoryAtHome()
+        elseif tempMemory >= 1 and tempMemory <= 16 then
+            turtle.select(tempMemory)
             turtle.drop()
+        else
+            print()
+            print("Error"); rednet.send(masterComputerID, "Error", "compDisplay")
+            print("tempMemory: "..tempMemory); rednet.send(masterComputerID, "tempMemory: "..tempMemory, "compDisplay")
+            print(); rednet.send(masterComputerID, "", "compDisplay")
+            print("You fix the problem, I'm too lazy"); rednet.send(masterComputerID, "You fix the problem, I'm too lazy", "compDisplay")
         end
     end
 
