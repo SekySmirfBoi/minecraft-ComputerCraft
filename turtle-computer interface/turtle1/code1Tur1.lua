@@ -2,7 +2,7 @@ homeX = 572
 homeY = 64
 homeZ = 257
 
---snepsdfg
+--snepsdfgdkfjghdkgjhzdlrjkgh
 
 
 function returnHome()
@@ -734,6 +734,8 @@ function work(currY)
         end
 
         turnLeft()
+
+        moveDown()
 
         ------------------------------------------------
 
