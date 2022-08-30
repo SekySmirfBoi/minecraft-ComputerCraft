@@ -2,7 +2,7 @@ homeX = 572
 homeY = 64
 homeZ = 257
 
---snep
+--snepsdfg
 
 
 function returnHome()
@@ -732,6 +732,8 @@ function work(currY)
                 digBlock("front")
             end
         end
+
+        turnLeft()
 
         ------------------------------------------------
 
