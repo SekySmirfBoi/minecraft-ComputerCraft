@@ -1,7 +1,7 @@
 rednet.open("back")
 
 
---sztjhi tolWUIAfolIZUgh
+--snep
 
 
 local turtleID1 = 52

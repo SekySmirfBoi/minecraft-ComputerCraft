@@ -2,7 +2,7 @@ homeX = 572
 homeY = 64
 homeZ = 257
 
---sztjhi tolWUIAfolIZUgh
+--snep
 
 
 function returnHome()
@@ -681,6 +681,59 @@ function work(currY)
                 digBlock("up")
             end
         end
+
+        ------------------------------------------------
+
+        moveUp()
+
+        if turtle.detectUp() then
+            local succ, data = turtle.inspectUp()
+
+            if data.name == "minecraft:gold_ore" or 
+            data.name == "minecraft:iron_ore" or 
+            data.name == "minecraft:coal_ore" or 
+            data.name == "minecraft:lapis_ore" or 
+            data.name == "minecraft:diamond_ore" or 
+            data.name == "minecraft:redstone_ore" or 
+            data.name == "minecraft:emerald_ore" then
+                digBlock("up")
+            end
+        end
+
+        turnLeft()
+        
+        if turtle.detect() then
+            local succ, data = turtle.inspect()
+
+            if data.name == "minecraft:gold_ore" or 
+            data.name == "minecraft:iron_ore" or 
+            data.name == "minecraft:coal_ore" or 
+            data.name == "minecraft:lapis_ore" or 
+            data.name == "minecraft:diamond_ore" or 
+            data.name == "minecraft:redstone_ore" or 
+            data.name == "minecraft:emerald_ore" then
+                digBlock("front")
+            end
+        end
+
+        turnRight()
+        turnRight()
+
+        if turtle.detect() then
+            local succ, data = turtle.inspect()
+
+            if data.name == "minecraft:gold_ore" or 
+            data.name == "minecraft:iron_ore" or 
+            data.name == "minecraft:coal_ore" or 
+            data.name == "minecraft:lapis_ore" or 
+            data.name == "minecraft:diamond_ore" or 
+            data.name == "minecraft:redstone_ore" or 
+            data.name == "minecraft:emerald_ore" then
+                digBlock("front")
+            end
+        end
+
+        ------------------------------------------------
 
         if turtle.detectDown() then
             local succ, data = turtle.inspectDown()
