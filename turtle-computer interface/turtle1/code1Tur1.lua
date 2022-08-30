@@ -2,7 +2,7 @@ homeX = 572
 homeY = 64
 homeZ = 257
 
-
+--klzdjhlkJ
 
 
 function returnHome()
@@ -984,6 +984,7 @@ if validY then
         --turtle goes and works
         elseif echoed and active == "on" then
             local x, y, z = gps.locate()
+            print("penis")
             work(y)
         end
     end
