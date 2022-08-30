@@ -132,7 +132,7 @@ while working do
         while disableResponded == false do
             print("Attempt: "..disableAttempt)
             rednet.send(turtleID1, "off", "instruction")   
-            local respSender, respMessage, respProtocol = rednet.receive(nil, 1)
+            local respSender, respMessage, respProtocol = rednet.receive(nil, 0.25)
 
             if respMessage == "recieved" and respProtocol == "recieved" then
                 disableResponded = true

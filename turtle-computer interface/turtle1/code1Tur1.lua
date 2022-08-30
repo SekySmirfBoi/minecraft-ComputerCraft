@@ -271,7 +271,7 @@ function dropInventory(dir)
 
     local prevSlot = turtle.getSelectedSlot()
 
-    if dir == "front" then
+    if dir == "front" or dir == nil then
 
         turtle.select(1)
         
@@ -387,31 +387,23 @@ function getLeastValue()
 
         return false
     end
-
-    -----------  /------\
-    -----------  |      |
-    -----------  |      |
-    -----------  \------/
-    -----------           ==============================|=====\
-    -----------                                         |      \
-    -----------                                         |       |
-    -----------                                         |      /
-    -----------           ==============================|=====/
-    -----------  /------\
-    -----------  |      |
-    -----------  |      |
-    -----------  \------/
 end
 
 
 function checkInventoryIfFull() 
+
+    local prevSlot = turtle.getSelectedSlot()
+
     for i = 1, 16, 1 do
         turtle.select(i)
 
         if getCurrentSlotData() == nil then
+            turtle.select(prevSlot)
             return false
         end
     end
+
+    turtle.select(prevSlot)
 
     return true
 end
@@ -649,6 +641,21 @@ end
 
 function work(currY)
 
+    print("did the thing")
+    local mesId, mesMes = rednet.receive("instruction", 0.5)
+
+    if mesId ~= nil then
+        if mesId == masterComputerID and mesMes == "off" then
+            rednet.send(mesId, "recieved", "recieved")
+            return true
+        end
+        if mesId == masterComputerID and mesMes == "return" then
+            rednet.send(mesId, "returningHome", "notSleep")
+            returnHome()
+            return true
+        end
+    end
+
     if currY == 5 then
         if turtle.detect() then
             digBlock("front")
@@ -739,7 +746,9 @@ function work(currY)
     end
 
     if checkInventoryIfFull() then
+
         local tempMemory = getLeastValue()
+
         if tempMemory == false then
             returnHome()
             emptyInventoryAtHome()
@@ -814,6 +823,7 @@ if validY then
     print()
 
     active = "off"
+    notContinue = true
     echoed = false
 
     loopRunning = true
@@ -983,9 +993,19 @@ if validY then
 
         --turtle goes and works
         elseif echoed and active == "on" then
+            
             local x, y, z = gps.locate()
-            print("penis")
-            work(y)
+            
+            
+            notContinue = work(y)
+
+            if notContinue then
+                active == "off"
+            elseif not notContinue or notContinue == nil then
+                active == "on"
+            else
+                print("Unknown erro")
+            end
         end
     end
 end
