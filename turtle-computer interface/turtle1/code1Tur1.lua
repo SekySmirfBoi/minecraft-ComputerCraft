@@ -375,7 +375,9 @@ function getLeastValue()
         itemsInwalSLot = itemsInwalSLot + 1
     end
 
-    return itemsInwalSLot
+    if itemsInwalSLot ~= 16 then
+        return itemsInwalSLot
+    end
 
     local tableNum = 1
 
