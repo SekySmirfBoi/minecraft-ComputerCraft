@@ -1,4 +1,1 @@
-
-4) finish the work function
-
 absolute final) make monitors be compatible with the turtle and computer
