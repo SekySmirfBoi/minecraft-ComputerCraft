@@ -2,7 +2,7 @@ homeX = 572
 homeY = 64
 homeZ = 257
 
---i walk to burger king
+--then i walk back home from burger king
 
 
 function returnHome()
