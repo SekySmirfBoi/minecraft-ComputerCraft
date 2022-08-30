@@ -378,7 +378,7 @@ function getLeastValue()
     end
 
     if itemsInwalSLot ~= 16 then
-        return itemsInwalSLot
+        return "inventory not full"
     end
 
     local tableNum = 1
@@ -735,7 +735,7 @@ function work(currY)
         print("Finished moving down")
     end
 
-    if getLeastValue() ~= false then
+    if getLeastValue() ~= false and getLeastValue() ~= "inventory not full" then
 
         local slotNum = getLeastValue()
         local cureentTableNum = 1
