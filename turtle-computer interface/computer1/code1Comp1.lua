@@ -60,10 +60,10 @@ prinTCum()
 prinTCum("--------------------------------------------------------------------")
 
 
-prinTCum()
-prinTCum("Computer has started.")
-prinTCum()
-prinTCum("Echoing turtle")
+print()
+print("Computer has started.")
+print()
+print("Echoing turtle")
 
 while not eResponded do
     rednet.send(turtleID1, "echo", "instruction")
