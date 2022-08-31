@@ -356,6 +356,7 @@ while working do
     if event == "key" and arg1 == 301 then
         if remoteControl == "on" then
             rednet.send(turtleID1, "y5")
+            print("Turtle going down to y5")
         else 
             print("remoteControl off")
         end
