@@ -1,1 +1,0 @@
-absolute final) make monitors be compatible with the turtle and computer

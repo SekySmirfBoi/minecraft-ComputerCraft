@@ -1,13 +1,46 @@
-homeX = 572
-homeY = 64
-homeZ = 257
+
+---------------Change these variables---------------
+
+--[[
+The turtle will return to this position when its 
+inventory is full, when it's low on fuel, or when 
+the player requests it via the master computer
+]]--
+
+homeX = 572     -- X coordinate of the turtle's home
+homeY = 64      -- Y coordinate of the turtle's home
+homeZ = 257     -- Z coordinate of the turtle's home
+
+masterComputerID = 53   -- masterComputerID -- The computer in control of everything
+turtleMonitorID = 61    -- secondComputerID -- Just a second unused computer
+---------------------------------------------------------------
+
+
+
+------------You do not need to change this variable------------
+---------------------------------------------------------------
+thisTurtleID = os.getComputerID()   -- The ID of this turtle -- 
+---------------------------------------------------------------
 
 --snepsdfgdkfjghdkgjhzdlrjkgh
+
+
+function prinTCum(message) 
+
+    print(message)
+
+    rednet.send(turtleMonitorID, message, "display")
+end
+
+
 
 
 function returnHome()
 
     local x, y, z = gps.locate()
+    rednet.send(masterComputerID, "X: "..x, "actuallyPrintThisPls")
+    rednet.send(masterComputerID, "Y: "..y, "actuallyPrintThisPls")
+    rednet.send(masterComputerID, "Z: "..z, "actuallyPrintThisPls")
 
     while y > 5 do
         if turtle.detectDown() then
@@ -16,8 +49,8 @@ function returnHome()
         moveDown()
         x, y, z = gps.locate()
         if turtle.getFuelLevel == 0 then
-            print(); rednet.send(masterComputerID, "", "compDisplay")
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
             return
         end
     end
@@ -97,8 +130,8 @@ function returnHome()
         moveForwards()
         x, y, z = gps.locate()
         if turtle.getFuelLevel == 0 then
-            print(); rednet.send(masterComputerID, "", "compDisplay")
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
             return
         end
     end
@@ -114,8 +147,8 @@ function returnHome()
         moveForwards()
         x, y, z = gps.locate()
         if turtle.getFuelLevel == 0 then
-            print(); rednet.send(masterComputerID, "", "compDisplay")
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
             return
         end
     end
@@ -196,8 +229,8 @@ function returnHome()
         moveForwards()
         x, y, z = gps.locate()
         if turtle.getFuelLevel == 0 then
-            print(); rednet.send(masterComputerID, "", "compDisplay")
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
             return
         end
     end
@@ -221,7 +254,7 @@ function correctTurtleFacing()
             success, data = turtle.inspect() 
         end
     else
-        print("Turtle not at home"); rednet.send(masterComputerID, "Turtle not at home", "compDisplay")
+        prinTCum("Turtle not at home"); rednet.send(masterComputerID, "Turtle not at home", "compDisplay")
     end        
 end
 
@@ -238,8 +271,8 @@ function correctYIfAtHome()
             moveUp()
             x, y, z = gps.locate()
             if turtle.getFuelLevel == 0 then
-                print(); rednet.send(masterComputerID, "", "compDisplay")
-                print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+                prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+                prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
                 return
             end
         end
@@ -251,14 +284,14 @@ function correctYIfAtHome()
             moveDown()
             x, y, z = gps.locate()
             if turtle.getFuelLevel == 0 then
-                print(); rednet.send(masterComputerID, "", "compDisplay")
-                print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+                prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+                prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
                 return
             end
         end
 
-        print(); rednet.send(masterComputerID, "", "compDisplay")
-        print("Returned home"); rednet.send(masterComputerID, "Returned home", "compDisplay")
+        prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+        prinTCum("Returned home"); rednet.send(masterComputerID, "Returned home", "compDisplay")
 
         correctTurtleFacing()
         return
@@ -316,7 +349,7 @@ function emptyInventoryAtHome()
         rednet.send(masterComputerID, "Emptying inventory", "compyDisplay")
         dropInventory("front");
     else
-        print("Turtle not at home"); rednet.send(masterComputerID, "Turtle not at home", "compyDisplay")
+        prinTCum("Turtle not at home"); rednet.send(masterComputerID, "Turtle not at home", "compyDisplay")
     end
 end
 
@@ -423,7 +456,7 @@ function digBlock(dir)
     if dir == "front" or dir == nil then
         succ, data = turtle.inspect()
         if x == homeX and y == homeY and z == homeZ then
-            print("Will not break blocks while at home")
+            prinTCum("Will not break blocks while at home")
             success = false
             err = "Turtle at home"
         else
@@ -432,7 +465,7 @@ function digBlock(dir)
     elseif dir == "down" then
         succ, data = turtle.inspectDown()
         if x == homeX and y == homeY and z == homeZ then
-            print("Will not break blocks while at home")
+            prinTCum("Will not break blocks while at home")
             success = false
             err = "Turtle at home"
         else
@@ -441,7 +474,7 @@ function digBlock(dir)
     elseif dir == "up" then
         succ, data = turtle.inspectUp()
         if x == homeX and y == homeY and z == homeZ then
-            print("Will not break blocks while at home")
+            prinTCum("Will not break blocks while at home")
             success = false
             err = "Turtle at home"
         else
@@ -452,12 +485,12 @@ function digBlock(dir)
     end
 
     if success then
-        print(); rednet.send(masterComputerID, "", "compDisplay")
-        print("Mined block: "..data.name); rednet.send(masterComputerID, "Mined block: "..data.name, "compDisplay")
+        prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+        prinTCum("Mined block: "..data.name); rednet.send(masterComputerID, "Mined block: "..data.name, "compDisplay")
     else
-        print(); rednet.send(masterComputerID, "", "compDisplay")
-        print("Failed to mine block"); rednet.send(masterComputerID, "Failed to mine block", "compDisplay")
-        print("Reason: "..err); rednet.send(masterComputerID, "Reason: "..err, "compDisplay")
+        prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+        prinTCum("Failed to mine block"); rednet.send(masterComputerID, "Failed to mine block", "compDisplay")
+        prinTCum("Reason: "..err); rednet.send(masterComputerID, "Reason: "..err, "compDisplay")
     end
 end
 
@@ -497,33 +530,33 @@ function placeBlock(dir)
     end
 
     if success then
-        print(); rednet.send(masterComputerID, "", "compDisplay")
-        print("Placed block: "..data.name); rednet.send(masterComputerID, "Placed block: "..data.name, "compDisplay")
+        prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+        prinTCum("Placed block: "..data.name); rednet.send(masterComputerID, "Placed block: "..data.name, "compDisplay")
     else
-        print(); rednet.send(masterComputerID, "", "compDisplay")
-        print("Failed to place block"); rednet.send(masterComputerID, "Failed to place block", "compDisplay")
-        print("Reason: "..err); rednet.send(masterComputerID, "Reason: "..err, "compDisplay")
+        prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+        prinTCum("Failed to place block"); rednet.send(masterComputerID, "Failed to place block", "compDisplay")
+        prinTCum("Reason: "..err); rednet.send(masterComputerID, "Reason: "..err, "compDisplay")
     end
 end
 
 
 function moveUp()
     local success, err = turtle.up()
-    print(); rednet.send(masterComputerID, "", "compDisplay")
-    print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then        
-        print("Successfully moved up"); rednet.send(masterComputerID, "Successfully moved up", "compDisplay")
+        prinTCum("Successfully moved up"); rednet.send(masterComputerID, "Successfully moved up", "compDisplay")
     else
-        print()
-        print("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
+        prinTCum()
+        prinTCum("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
 
         if err == "Out of fuel" then
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
         elseif err == "Movement obstructed" then
-            print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
+            prinTCum("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
+            prinTCum("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
@@ -533,118 +566,118 @@ function moveDown()
     local x, y, z = gps.locate()
 
     if y == 5 then
-        print("Will not go below y-level 5."); rednet.send(masterComputerID, "Will not go below y-level 5.", "compDisplay")
-        print("This is to prevent the turtle getting stuck under bedrock"); rednet.send(masterComputerID, "This is to prevent the turtle getting stuck under bedrock", "compDisplay")
+        prinTCum("Will not go below y-level 5."); rednet.send(masterComputerID, "Will not go below y-level 5.", "compDisplay")
+        prinTCum("This is to prevent the turtle getting stuck under bedrock"); rednet.send(masterComputerID, "This is to prevent the turtle getting stuck under bedrock", "compDisplay")
         return
     end
 
     local success, err = turtle.down()
-    print(); rednet.send(masterComputerID, "", "compDisplay")
-    print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        print("Successfully moved down"); rednet.send(masterComputerID, "Successfully moved down", "compDisplay")
+        prinTCum("Successfully moved down"); rednet.send(masterComputerID, "Successfully moved down", "compDisplay")
     else
-        print()
-        print("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
+        prinTCum()
+        prinTCum("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
 
         if err == "Out of fuel" then
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
         elseif err == "Movement obstructed" then
-            print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
+            prinTCum("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
+            prinTCum("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
 function moveForwards()
     local success, err = turtle.forward()
-    print(); rednet.send(masterComputerID, "", "compDisplay")
-    print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        print("Successfully moved forward"); rednet.send(masterComputerID, "Successfully moved forward", "compDisplay")
+        prinTCum("Successfully moved forward"); rednet.send(masterComputerID, "Successfully moved forward", "compDisplay")
     else
-        print()
-        print("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
+        prinTCum()
+        prinTCum("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
 
         if err == "Out of fuel" then
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
         elseif err == "Movement obstructed" then
-            print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
+            prinTCum("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
+            prinTCum("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
 function moveBackwards()
     local success, err = turtle.back()
-    print(); rednet.send(masterComputerID, "", "compDisplay")
-    print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        print("Successfully moved back"); rednet.send(masterComputerID, "Successfully moved back", "compDisplay")
+        prinTCum("Successfully moved back"); rednet.send(masterComputerID, "Successfully moved back", "compDisplay")
     else
-        print()
-        print("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
+        prinTCum()
+        prinTCum("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
 
         if err == "Out of fuel" then
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
         elseif err == "Movement obstructed" then
-            print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
+            prinTCum("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
+            prinTCum("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
 function turnLeft()
     local success, err = turtle.turnLeft()
-    print(); rednet.send(masterComputerID, "", "compDisplay")
-    print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        print("Successfully turned left"); rednet.send(masterComputerID, "Successfully turned left", "compDisplay")
+        prinTCum("Successfully turned left"); rednet.send(masterComputerID, "Successfully turned left", "compDisplay")
     else
-        print()
-        print("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
+        prinTCum()
+        prinTCum("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
 
         if err == "Out of fuel" then
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
         elseif err == "Movement obstructed" then
-            print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
+            prinTCum("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
+            prinTCum("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
 function turnRight()
     local success, err = turtle.turnRight()
-    print(); rednet.send(masterComputerID, "", "compDisplay")
-    print("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
-        print("Successfully turned right"); rednet.send(masterComputerID, "Successfully turned right", "compDisplay")
+        prinTCum("Successfully turned right"); rednet.send(masterComputerID, "Successfully turned right", "compDisplay")
     else
-        print()
-        print("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
+        prinTCum()
+        prinTCum("There was an error"); rednet.send(masterComputerID, "There was an error", "compDisplay")
 
         if err == "Out of fuel" then
-            print("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
+            prinTCum("Out of fuel"); rednet.send(masterComputerID, "Out of fuel", "compDisplay")
         elseif err == "Movement obstructed" then
-            print("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
+            prinTCum("Movement obstructed"); rednet.send(masterComputerID, "Movement obstructed", "compDisplay")
         else
-            print("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
+            prinTCum("Unknown error: "..err); rednet.send(masterComputerID, "Unknown error: "..err, "compDisplay")
         end
     end
 end
 
 function work(currY)
 
-    print("did the thing")
+    prinTCum("did the thing")
     local mesId, mesMes = rednet.receive("instruction", 0.25)
 
     if mesId ~= nil then
@@ -791,9 +824,9 @@ function work(currY)
         moveForwards()
     else
         local x, y, z = gps.locate()
-        print()
-        print("Moving down to y 5")
-        print("You can't control it while it is doing this")
+        prinTCum()
+        prinTCum("Moving down to y 5")
+        prinTCum("You can't control it while it is doing this")
         while y > 5 do
             if turtle.detectDown() then
                 digBlock("down")
@@ -801,8 +834,8 @@ function work(currY)
             moveDown()
             x, y, z = gps.locate()
         end
-        print()
-        print("Finished moving down")
+        prinTCum()
+        prinTCum("Finished moving down")
     end
 
     if checkInventoryIfFull() then
@@ -816,11 +849,11 @@ function work(currY)
             turtle.select(tempMemory)
             turtle.drop()
         else
-            print()
-            print("Error"); rednet.send(masterComputerID, "Error", "compDisplay")
-            print("tempMemory: "..tempMemory); rednet.send(masterComputerID, "tempMemory: "..tempMemory, "compDisplay")
-            print(); rednet.send(masterComputerID, "", "compDisplay")
-            print("You fix the problem, I'm too lazy"); rednet.send(masterComputerID, "You fix the problem, I'm too lazy", "compDisplay")
+            prinTCum()
+            prinTCum("Error"); rednet.send(masterComputerID, "Error", "compDisplay")
+            prinTCum("tempMemory: "..tempMemory); rednet.send(masterComputerID, "tempMemory: "..tempMemory, "compDisplay")
+            prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
+            prinTCum("You fix the problem, I'm too lazy"); rednet.send(masterComputerID, "You fix the problem, I'm too lazy", "compDisplay")
         end
     end
 
@@ -850,8 +883,8 @@ function work(currY)
         if tempMemory == nil then
             tempMemory = getItemSlot("minecraft:coal")
             if tempMemory == nil then
-                print("Turtle out of fuel")
-                print("Returning home")
+                prinTCum("Turtle out of fuel")
+                prinTCum("Returning home")
                 returnHome()
                 return true
             end
@@ -865,21 +898,27 @@ end
 
 rednet.open("left")
 
-print()
-print("---------------------------------------")
-print()
-print("   _____    _____   ____  ")
-print(" / ____|  / ____| |  _ \\ ")
-print("| (___   | (___   | |_) |")
-print(" \\___ \\   \\___ \\  |  _ < ")
-print(" ____) |  ____) | | |_) |")
-print("|_____/  |_____/  |____/ ")
-print()
-print("---------------------------------------")
-
-thisTurtleID = os.getComputerID()   -- thisTurtleID -- The ID of this turtle
-masterComputerID = 53   -- masterComputerID -- The computer in control of everything
-comp2ID = 19    -- secondComputerID -- Just a second unused computer
+prinTCum()
+prinTCum("---------------------------------------")
+prinTCum()
+prinTCum("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
+prinTCum(" SS:::::::::::::::S      SS:::::::::::::::S     B::::::::::::::::B  ")
+prinTCum("S:::::SSSSSS::::::S     S:::::SSSSSS::::::S     B::::::BBBBBB:::::B ")
+prinTCum("S:::::S     SSSSSSS     S:::::S     SSSSSSS     BB:::::B     B:::::B")
+prinTCum("S:::::S                 S:::::S                   B::::B     B:::::B")
+prinTCum("S:::::S                 S:::::S                   B::::B     B:::::B")
+prinTCum(" S::::SSSS               S::::SSSS                B::::BBBBBB:::::B ")
+prinTCum("  SS::::::SSSSS           SS::::::SSSSS           B:::::::::::::BB  ")
+prinTCum("    SSS::::::::SS           SSS::::::::SS         B::::BBBBBB:::::B ")
+prinTCum("       SSSSSS::::S             SSSSSS::::S        B::::B     B:::::B")
+prinTCum("            S:::::S                 S:::::S       B::::B     B:::::B")
+prinTCum("            S:::::S                 S:::::S       B::::B     B:::::B")
+prinTCum("SSSSSSS     S:::::S     SSSSSSS     S:::::S     BB:::::BBBBBB::::::B")
+prinTCum("S::::::SSSSSS:::::S     S::::::SSSSSS:::::S     B:::::::::::::::::B ")
+prinTCum("S:::::::::::::::SS      S:::::::::::::::SS      B::::::::::::::::B  ")
+prinTCum(" SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS        BBBBBBBBBBBBBBBBB   ")
+prinTCum()
+prinTCum("---------------------------------------")
 
 validY = false
 
@@ -887,16 +926,16 @@ HighMine = "on"
 
 if homeY < 5 then
     validY = false
-    print("homeY cannot be less then 5")
+    prinTCum("homeY cannot be less then 5")
 else
     validY = true
 end
 
 if validY then
-    print()
-    print("Turtle ready to receive instructions")
-    print("Listeneing for messages")
-    print()
+    prinTCum()
+    prinTCum("Turtle ready to receive instructions")
+    prinTCum("Listeneing for messages")
+    prinTCum()
 
     active = "off"
     notContinue = true
@@ -918,15 +957,20 @@ if validY then
                 -- Responds back to thr master computer saying that it is online
                 if message == "echo" and protocol == "instruction" then
                     rednet.send(masterComputerID, "received")
-                    print("Echoing")
+                    prinTCum("Echoing")
                     echoed = true
                 end
 
                 -- disables the turtle after the master computer tells it to
                 if message == "off" and protocol == "instruction" then
                     active = "off"
-                    print("Turtle off")
+                    prinTCum("Turtle off")
                     rednet.send(masterComputerID, "recieved", "recieved")
+
+                    local x, y, x = gps.locate()
+                    rednet.send(masterComputerID, "X: "..x, "actuallyPrintThisPls")
+                    rednet.send(masterComputerID, "Y: "..y, "actuallyPrintThisPls")
+                    rednet.send(masterComputerID, "Z: "..z, "actuallyPrintThisPls")
                 end
 
                 if message == "workYouBastard" and protocol == "instruction" then
@@ -935,7 +979,12 @@ if validY then
                 -- enables the turtle after the master computer tells it to
                 if message == "on" and protocol == "instruction" then
                     active = "on"
-                    print("Turtle on")
+                    prinTCum("Turtle on")
+
+                    local x, y, x = gps.locate()
+                    rednet.send(masterComputerID, "X: "..x, "actuallyPrintThisPls")
+                    rednet.send(masterComputerID, "Y: "..y, "actuallyPrintThisPls")
+                    rednet.send(masterComputerID, "Z: "..z, "actuallyPrintThisPls")
                 end
 
                 if message == "toggle2High" and protocol == "instruction" then
@@ -949,13 +998,14 @@ if validY then
                 -- sends the turtle back home
                 if message == "return" and protocol == "instruction" then
                     rednet.send(masterComputerID, "returningHome", "notSleep")
-                    print("Returning home")
+
+                    prinTCum("Returning home")
                     returnHome()
                 end
 
                 --updates the turtles home
                 if message == "newHome" and protocol == "instruction" then
-                    print("Setting new home coords as:")
+                    prinTCum("Setting new home coords as:")
                     updateHomeCoords()
                 end
 
@@ -967,12 +1017,12 @@ if validY then
                 -- termination after getting the instruction from the master computer
                 if message == "termination" and protocol == "instruction" then
                     term.setTextColor(colors.red)
-                    print("Why kill me?")
-                    print()
+                    prinTCum("Why kill me?")
+                    prinTCum()
                     term.setTextColor(colors.lightBlue)
-                    print("It's because I'm a turtle isn't it :(")
-                    print("Tell my family that I love them")
-                    print("Why would you ever do that, you're the one who killed me")
+                    prinTCum("It's because I'm a turtle isn't it :(")
+                    prinTCum("Tell my family that I love them")
+                    prinTCum("Why would you ever do that, you're the one who killed me")
                     term.setTextColor(colors.white)
                     loopRunning = false
                 end
@@ -1041,9 +1091,9 @@ if validY then
                 -- sends the master computer its coords
                 if message == "coords" then
                     local x, y, z = gps.locate()
-                    print("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
-                    print("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
-                    print("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
+                    prinTCum("X: "..x); rednet.send(masterComputerID, x, "getCoordsX")
+                    prinTCum("Y: "..y); rednet.send(masterComputerID, y, "getCoordsY")
+                    prinTCum("Z: "..z); rednet.send(masterComputerID, z, "getCoordsZ")
                 end
 
                 -- orients the turtle
@@ -1057,12 +1107,12 @@ if validY then
         
             rednet.send(masterComputerID, "termination", "userCommand")
             term.setTextColor(colors.red)
-            print("Why kill me?")
-            print()
+            prinTCum("Why kill me?")
+            prinTCum()
             term.setTextColor(colors.lightBlue)
-            print("It's because I'm a turtle isn't it :(")
-            print("Tell my family that I love them")
-            print("Why would you ever do that, you're the one who killed me")
+            prinTCum("It's because I'm a turtle isn't it :(")
+            prinTCum("Tell my family that I love them")
+            prinTCum("Why would you ever do that, you're the one who killed me")
             term.setTextColor(colors.white)
             loopRunning = false
 
@@ -1080,7 +1130,7 @@ if validY then
             elseif not notContinue or notContinue == nil then
                 active = "on"
             else
-                print("Unknown erro")
+                prinTCum("Unknown erro")
             end
         end
     end

@@ -1,32 +1,75 @@
+
+---------------Change these variables---------------
+turtleMonitorID = 61
+turtleID1 = 52
+
+monitorDirection = "side or monitor name" -- Change this variable so it works with the monitor
+
+--------------------------------------------------------------
+thisCompID = os.getComputerID() -- Do not change this variable
+--------------------------------------------------------------
+
+function prinTCum(message)
+    
+    
+    --[[ ↓↓↓ Untag the line below to have the message output in the computer terminal as well ↓↓↓ ]]--
+
+    -- print(message) 
+
+    mon.write(message)
+
+    local monX, monY = mon.getCursorPos()
+    monY = monY + 1
+    mon.setCursorPos(1,monY)
+end
+
+function falsePrint(message)
+    emptyVar = 1
+end
+
+
+
 rednet.open("back")
 
+mon = peripheral.wrap(monitorDirection)
+mon.clear()
+mon.setCursorPos(1,1)
 
---snep
+emptyVar = 1
+
+working = false
+
+eResponded = false
+eSender, eMessage, eProtocol
 
 
-local turtleID1 = 52
+prinTCum()
+prinTCum("--------------------------------------------------------------------")
+prinTCum("")
+prinTCum("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
+prinTCum(" SS:::::::::::::::S      SS:::::::::::::::S     B::::::::::::::::B  ")
+prinTCum("S:::::SSSSSS::::::S     S:::::SSSSSS::::::S     B::::::BBBBBB:::::B ")
+prinTCum("S:::::S     SSSSSSS     S:::::S     SSSSSSS     BB:::::B     B:::::B")
+prinTCum("S:::::S                 S:::::S                   B::::B     B:::::B")
+prinTCum("S:::::S                 S:::::S                   B::::B     B:::::B")
+prinTCum(" S::::SSSS               S::::SSSS                B::::BBBBBB:::::B ")
+prinTCum("  SS::::::SSSSS           SS::::::SSSSS           B:::::::::::::BB  ")
+prinTCum("    SSS::::::::SS           SSS::::::::SS         B::::BBBBBB:::::B ")
+prinTCum("       SSSSSS::::S             SSSSSS::::S        B::::B     B:::::B")
+prinTCum("            S:::::S                 S:::::S       B::::B     B:::::B")
+prinTCum("            S:::::S                 S:::::S       B::::B     B:::::B")
+prinTCum("SSSSSSS     S:::::S     SSSSSSS     S:::::S     BB:::::BBBBBB::::::B")
+prinTCum("S::::::SSSSSS:::::S     S::::::SSSSSS:::::S     B:::::::::::::::::B ")
+prinTCum("S:::::::::::::::SS      S:::::::::::::::SS      B::::::::::::::::B  ")
+prinTCum(" SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS        BBBBBBBBBBBBBBBBB   ")
+prinTCum("")
+prinTCum("--------------------------------------------------------------------")
 
-local working = false
 
-local eResponded = false
-local eSender, eMessage, eProtocol
-
-
-print()
-print("----------------------------------------------")
-print()
-print("   _____    _____   ____  ")
-print(" / ____|  / ____| |  _ \\ ")
-print("| (___   | (___   | |_) |")
-print(" \\___ \\   \\___ \\  |  _ < ")
-print(" ____) |  ____) | | |_) |")
-print("|_____/  |_____/  |____/ ")
-print()
-print("----------------------------------------------")
-print()
-print("Computer has started.")
-print()
-print("Echoing turtle")
+prinTCum()
+prinTCum("Computer has started.")
+prinTCum()
+prinTCum("Echoing turtle")
 
 while not eResponded do
     rednet.send(turtleID1, "echo", "instruction")
@@ -35,37 +78,37 @@ while not eResponded do
 
     if eSender == turtleID1 and eMessage == "received" then
         eResponded = true
-        print()
-        print("----------------------------------------------")
-        print()
-        print("Turtle has started")
-        print()
-        print("Press 0 to stop the turtle from working")
-        print("Press 1 to start the turtle working")
-        print("Press 2 to toggle the turtle to dig a 2 high tunnel")
-        print()
-        print("Press home to return turtle to its pre set home")
-        print("Press # to orient the turtle while at home")
-        print("Press + to get the turtle's coordinates")
-        print()
-        print("Remote control:")
-        print("Press / to toggle the remote control")
-        print("Press up arrow to move the turtle forwards")
-        print("Press down arrow to move the turtle backwards")
-        print("Press left arrow to turn the turtle left")
-        print("Press right arrow to turn the turtle right")
-        print("Press page up to move the turtle up")
-        print("Press page down to move the turtle down")
-        print("Press e to empty turtle's inventory at home")
-        print()
-        print("Press f1 to break up block")
-        print("Press f2 to break front block")
-        print("Press f3 to break down block")
-        print()
-        print("Press f4 to place up block")
-        print("Press f5 to place front block")
-        print("Press f6 to place down block")
-        print()
+        prinTCum()
+        prinTCum("----------------------------------------------")
+        prinTCum()
+        prinTCum("Turtle has started")
+        prinTCum()
+        prinTCum("Press 0 to stop the turtle from working")
+        prinTCum("Press 1 to start the turtle working")
+        prinTCum("Press 2 to toggle the turtle to dig a 2 high tunnel")
+        prinTCum()
+        prinTCum("Press home to return turtle to its pre set home")
+        prinTCum("Press # to orient the turtle while at home")
+        prinTCum("Press + to get the turtle's coordinates")
+        prinTCum()
+        prinTCum("Remote control:")
+        prinTCum("Press / to toggle the remote control")
+        prinTCum("Press up arrow to move the turtle forwards")
+        prinTCum("Press down arrow to move the turtle backwards")
+        prinTCum("Press left arrow to turn the turtle left")
+        prinTCum("Press right arrow to turn the turtle right")
+        prinTCum("Press page up to move the turtle up")
+        prinTCum("Press page down to move the turtle down")
+        prinTCum("Press e to empty turtle's inventory at home")
+        prinTCum()
+        prinTCum("Press f1 to break up block")
+        prinTCum("Press f2 to break front block")
+        prinTCum("Press f3 to break down block")
+        prinTCum()
+        prinTCum("Press f4 to place up block")
+        prinTCum("Press f5 to place front block")
+        prinTCum("Press f6 to place down block")
+        prinTCum()
         working = true
     end
 end
@@ -86,6 +129,10 @@ while working do
         if sender == turtleID1 then
             -- prints whatever the turtle said to the screen
             if protocol == "compDisplay" then
+                falsePrint(message)
+            end
+
+            if protocol == "actuallyPrintThisPls" then
                 print(message)
             end
 
