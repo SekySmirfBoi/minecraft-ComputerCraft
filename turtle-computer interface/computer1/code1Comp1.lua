@@ -72,8 +72,6 @@ while not eResponded do
 
     if eSender == turtleID1 and eMessage == "received" then
         eResponded = true
-        prinTCum()
-        prinTCum("----------------------------------------------")
         print("Turtle has started")
         prinTCum()
         prinTCum("Press 0 to stop the turtle from working")
