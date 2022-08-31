@@ -717,6 +717,18 @@ function work(currY)
             data.name == "minecraft:emerald_ore" then
                 digBlock("up")
             end
+
+            if data.name == "minecraft:lava" then
+                if data.state.level == 0 then
+                    
+                    local tempMemory = getItemSlot("minecraft:bucket")
+
+                    if tempMemory ~= nil then 
+                        turtle.select(tempMemory)
+                        turtle.placeUp()
+                    end
+                end
+            end
         end
 
         ------------------------------------------------
@@ -725,50 +737,86 @@ function work(currY)
             moveUp()
 
             if turtle.detectUp() then
-            local succ, data = turtle.inspectUp()
+                local succ, data = turtle.inspectUp()
 
-            if data.name == "minecraft:gold_ore" or 
-            data.name == "minecraft:iron_ore" or 
-            data.name == "minecraft:coal_ore" or 
-            data.name == "minecraft:lapis_ore" or 
-            data.name == "minecraft:diamond_ore" or 
-            data.name == "minecraft:redstone_ore" or 
-            data.name == "minecraft:emerald_ore" then
-                digBlock("up")
-            end
+                if data.name == "minecraft:gold_ore" or 
+                data.name == "minecraft:iron_ore" or 
+                data.name == "minecraft:coal_ore" or 
+                data.name == "minecraft:lapis_ore" or 
+                data.name == "minecraft:diamond_ore" or 
+                data.name == "minecraft:redstone_ore" or 
+                data.name == "minecraft:emerald_ore" then
+                    digBlock("up")
+                end
+
+                if data.name == "minecraft:lava" then
+                    if data.state.level == 0 then
+                        
+                        local tempMemory = getItemSlot("minecraft:bucket")
+    
+                        if tempMemory ~= nil then 
+                            turtle.select(tempMemory)
+                            turtle.placeUp()
+                        end
+                    end
+                end
             end
 
             turnLeft()
-            
-            if turtle.detect() then
-            local succ, data = turtle.inspect()
 
-            if data.name == "minecraft:gold_ore" or 
-            data.name == "minecraft:iron_ore" or 
-            data.name == "minecraft:coal_ore" or 
-            data.name == "minecraft:lapis_ore" or 
-            data.name == "minecraft:diamond_ore" or 
-            data.name == "minecraft:redstone_ore" or 
-            data.name == "minecraft:emerald_ore" then
-                digBlock("front")
-            end
+            if turtle.detect() then
+                local succ, data = turtle.inspect()
+
+                if data.name == "minecraft:gold_ore" or 
+                data.name == "minecraft:iron_ore" or 
+                data.name == "minecraft:coal_ore" or 
+                data.name == "minecraft:lapis_ore" or 
+                data.name == "minecraft:diamond_ore" or 
+                data.name == "minecraft:redstone_ore" or 
+                data.name == "minecraft:emerald_ore" then
+                    digBlock("front")
+                end
+
+                if data.name == "minecraft:lava" then
+                    if data.state.level == 0 then
+                        
+                        local tempMemory = getItemSlot("minecraft:bucket")
+    
+                        if tempMemory ~= nil then 
+                            turtle.select(tempMemory)
+                            turtle.place()
+                        end
+                    end
+                end
             end
 
             turnRight()
             turnRight()
 
             if turtle.detect() then
-            local succ, data = turtle.inspect()
+                local succ, data = turtle.inspect()
 
-            if data.name == "minecraft:gold_ore" or 
-            data.name == "minecraft:iron_ore" or 
-            data.name == "minecraft:coal_ore" or 
-            data.name == "minecraft:lapis_ore" or 
-            data.name == "minecraft:diamond_ore" or 
-            data.name == "minecraft:redstone_ore" or 
-            data.name == "minecraft:emerald_ore" then
-                digBlock("front")
-            end
+                if data.name == "minecraft:gold_ore" or 
+                data.name == "minecraft:iron_ore" or 
+                data.name == "minecraft:coal_ore" or 
+                data.name == "minecraft:lapis_ore" or 
+                data.name == "minecraft:diamond_ore" or 
+                data.name == "minecraft:redstone_ore" or 
+                data.name == "minecraft:emerald_ore" then
+                    digBlock("front")
+                end
+
+                if data.name == "minecraft:lava" then
+                    if data.state.level == 0 then
+                        
+                        local tempMemory = getItemSlot("minecraft:bucket")
+    
+                        if tempMemory ~= nil then 
+                            turtle.select(tempMemory)
+                            turtle.place()
+                        end
+                    end
+                end
             end
 
             turnLeft()
@@ -790,6 +838,18 @@ function work(currY)
             data.name == "minecraft:emerald_ore" then
                 digBlock("down")
             end
+
+            if data.name == "minecraft:lava" then
+                if data.state.level == 0 then
+                    
+                    local tempMemory = getItemSlot("minecraft:bucket")
+
+                    if tempMemory ~= nil then 
+                        turtle.select(tempMemory)
+                        turtle.placeDown()
+                    end
+                end
+            end
         end
 
         turnLeft()
@@ -805,6 +865,18 @@ function work(currY)
             data.name == "minecraft:redstone_ore" or 
             data.name == "minecraft:emerald_ore" then
                 digBlock("front")
+            end
+
+            if data.name == "minecraft:lava" then
+                if data.state.level == 0 then
+                    
+                    local tempMemory = getItemSlot("minecraft:bucket")
+
+                    if tempMemory ~= nil then 
+                        turtle.select(tempMemory)
+                        turtle.place()
+                    end
+                end
             end
         end
 
@@ -822,6 +894,18 @@ function work(currY)
             data.name == "minecraft:redstone_ore" or 
             data.name == "minecraft:emerald_ore" then
                 digBlock("front")
+            end
+
+            if data.name == "minecraft:lava" then
+                if data.state.level == 0 then
+                    
+                    local tempMemory = getItemSlot("minecraft:bucket")
+
+                    if tempMemory ~= nil then 
+                        turtle.select(tempMemory)
+                        turtle.place()
+                    end
+                end
             end
         end
 
@@ -883,16 +967,19 @@ function work(currY)
 
     if turtle.getFuelLevel() <= disFromHome + 100 then
         
-        local tempMemory = getItemSlot("minecraft:coal_block")
+        local tempMemory = getItemSlot("minecraft:lava_bucket")
         local prevSlot = turtle.getSelectedSlot()
 
         if tempMemory == nil then
-            tempMemory = getItemSlot("minecraft:coal")
+            tempMemory = getItemSlot("minecraft:coal_block")
             if tempMemory == nil then
-                prinTCum("Turtle out of fuel")
-                prinTCum("Returning home")
-                returnHome()
-                return true
+                tempMemory = getItemSlot("minecraft:coal")
+                if tempMemory == nil then
+                    prinTCum("Turtle out of fuel")
+                    prinTCum("Returning home")
+                    returnHome()
+                    return true
+                end
             end
         end
 
@@ -905,7 +992,7 @@ end
 rednet.open("left")
 
 prinTCum()
-prinTCum("---------------------------------------")
+prinTCum("--------------------------------------------------------------------")
 prinTCum()
 prinTCum("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
 prinTCum(" SS:::::::::::::::S      SS:::::::::::::::S     B::::::::::::::::B  ")
@@ -924,7 +1011,7 @@ prinTCum("S::::::SSSSSS:::::S     S::::::SSSSSS:::::S     B:::::::::::::::::B ")
 prinTCum("S:::::::::::::::SS      S:::::::::::::::SS      B::::::::::::::::B  ")
 prinTCum(" SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS        BBBBBBBBBBBBBBBBB   ")
 prinTCum()
-prinTCum("---------------------------------------")
+prinTCum("--------------------------------------------------------------------")
 
 validY = false
 
