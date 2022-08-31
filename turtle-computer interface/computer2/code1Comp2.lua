@@ -27,6 +27,10 @@ while active do
         mon.write(mes)
 
         local monX, monY = mon.getCursorPos()
+        if monY == 40 then
+            monY = 0
+            mon.clear()
+        end
         monY = monY + 1
         mon.setCursorPos(1,monY)
     end

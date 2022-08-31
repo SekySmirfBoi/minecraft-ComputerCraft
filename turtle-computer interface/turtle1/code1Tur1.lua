@@ -27,7 +27,11 @@ thisTurtleID = os.getComputerID()   -- The ID of this turtle --
 
 function prinTCum(message) 
 
-    print(message)
+    if message == nil then
+        print()
+    else
+        print(message)
+    end
 
     rednet.send(turtleMonitorID, message, "display")
 end
