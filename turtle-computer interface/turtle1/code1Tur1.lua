@@ -547,7 +547,7 @@ end
 function moveUp()
     local success, err = turtle.up()
     prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
-    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum("Fuel left: "..turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then        
         prinTCum("Successfully moved up"); rednet.send(masterComputerID, "Successfully moved up", "compDisplay")
@@ -577,7 +577,7 @@ function moveDown()
 
     local success, err = turtle.down()
     prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
-    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum("Fuel left: "..turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
         prinTCum("Successfully moved down"); rednet.send(masterComputerID, "Successfully moved down", "compDisplay")
@@ -598,7 +598,7 @@ end
 function moveForwards()
     local success, err = turtle.forward()
     prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
-    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum("Fuel left: "..turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
         prinTCum("Successfully moved forward"); rednet.send(masterComputerID, "Successfully moved forward", "compDisplay")
@@ -619,7 +619,7 @@ end
 function moveBackwards()
     local success, err = turtle.back()
     prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
-    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum("Fuel left: "..turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
         prinTCum("Successfully moved back"); rednet.send(masterComputerID, "Successfully moved back", "compDisplay")
@@ -640,7 +640,7 @@ end
 function turnLeft()
     local success, err = turtle.turnLeft()
     prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
-    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum("Fuel left: ".turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
         prinTCum("Successfully turned left"); rednet.send(masterComputerID, "Successfully turned left", "compDisplay")
@@ -661,7 +661,7 @@ end
 function turnRight()
     local success, err = turtle.turnRight()
     prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
-    prinTCum("Fuel left: ", turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum("Fuel left: "..turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
         prinTCum("Successfully turned right"); rednet.send(masterComputerID, "Successfully turned right", "compDisplay")
