@@ -5,13 +5,13 @@ turtleID = 52           -- The id of the turtle that will send messages to this 
 
 
 
-monitorDirection = "side or monitor name" -- Change this variable so it works with the monitor
+monitorDirection = "back" -- Change this variable so it works with the monitor
 
 --------------------------------------------------------------
 thisCompID = os.getComputerID() -- Do not change this variable
 --------------------------------------------------------------
 
-rednet.open("back")
+rednet.open("top")
 
 mon = peripheral.wrap(monitorDirection)
 mon.clear()
