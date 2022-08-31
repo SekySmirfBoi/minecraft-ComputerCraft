@@ -640,7 +640,7 @@ end
 function turnLeft()
     local success, err = turtle.turnLeft()
     prinTCum(); rednet.send(masterComputerID, "", "compDisplay")
-    prinTCum("Fuel left: ".turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
+    prinTCum("Fuel left: "..turtle.getFuelLevel()); rednet.send(masterComputerID, "Fuel left "..turtle.getFuelLevel(), "compDisplay")
 
     if success then
         prinTCum("Successfully turned left"); rednet.send(masterComputerID, "Successfully turned left", "compDisplay")
