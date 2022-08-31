@@ -3,7 +3,7 @@
 turtleMonitorID = 61
 turtleID1 = 52
 
-monitorDirection = "side or monitor name" -- Change this variable so it works with the monitor
+monitorDirection = "right" -- Change this variable so it works with the monitor
 
 --------------------------------------------------------------
 thisCompID = os.getComputerID() -- Do not change this variable
