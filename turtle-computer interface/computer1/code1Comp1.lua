@@ -13,14 +13,14 @@ function prinTCum(message)
     
     local addAmount = 1
 
-    if message ~= nil then
+    if message == nil then
+        addAmount = 2
+    else
         --[[ ↓↓↓ Untag the line below to have the message output in the computer terminal as well ↓↓↓ ]]--
 
         -- print(message) 
 
         mon.write(message)
-    else
-        addAmount = 2
     end
 
     local monX, monY = mon.getCursorPos()
@@ -48,7 +48,7 @@ eResponded = false
 eSender, eMessage, eProtocol
 
 
-prinTCum()
+prinTCum(nil)
 prinTCum("--------------------------------------------------------------------")
 prinTCum()
 prinTCum("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
