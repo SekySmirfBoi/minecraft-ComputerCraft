@@ -23,6 +23,12 @@ while active do
 
     local id, mes, pro = rednet.receive("display", 0.25)
 
+    if id == turtleID and mes == "clear" and mes == pro then
+        mon.clear()
+        mon.setCursorPos(1,1)
+    end
+
+
     if id == turtleID and pro == "display" then
         mon.write(mes)
 

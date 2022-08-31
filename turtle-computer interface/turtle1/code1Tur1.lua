@@ -961,6 +961,7 @@ if validY then
                 -- Responds back to thr master computer saying that it is online
                 if message == "echo" and protocol == "instruction" then
                     rednet.send(masterComputerID, "received")
+                    rednet.send(turtleMonitorID, "clear", "clear")
                     prinTCum("Echoing")
                     echoed = true
                 end
