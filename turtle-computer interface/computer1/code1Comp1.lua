@@ -43,7 +43,7 @@ eResponded = false
 eSender, eMessage, eProtocol
 
 
-prinTCum()
+prinTCum("")
 prinTCum("--------------------------------------------------------------------")
 prinTCum("")
 prinTCum("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
@@ -66,9 +66,9 @@ prinTCum("")
 prinTCum("--------------------------------------------------------------------")
 
 
-prinTCum()
+prinTCum("")
 prinTCum("Computer has started.")
-prinTCum()
+prinTCum("")
 prinTCum("Echoing turtle")
 
 while not eResponded do
@@ -78,19 +78,18 @@ while not eResponded do
 
     if eSender == turtleID1 and eMessage == "received" then
         eResponded = true
-        prinTCum()
+        prinTCum("")
         prinTCum("----------------------------------------------")
-        prinTCum()
-        prinTCum("Turtle has started")
-        prinTCum()
+        print("Turtle has started")
+        prinTCum("")
         prinTCum("Press 0 to stop the turtle from working")
         prinTCum("Press 1 to start the turtle working")
         prinTCum("Press 2 to toggle the turtle to dig a 2 high tunnel")
-        prinTCum()
+        prinTCum("")
         prinTCum("Press home to return turtle to its pre set home")
         prinTCum("Press # to orient the turtle while at home")
         prinTCum("Press + to get the turtle's coordinates")
-        prinTCum()
+        prinTCum("")
         prinTCum("Remote control:")
         prinTCum("Press / to toggle the remote control")
         prinTCum("Press up arrow to move the turtle forwards")
@@ -100,15 +99,15 @@ while not eResponded do
         prinTCum("Press page up to move the turtle up")
         prinTCum("Press page down to move the turtle down")
         prinTCum("Press e to empty turtle's inventory at home")
-        prinTCum()
+        prinTCum("")
         prinTCum("Press f1 to break up block")
         prinTCum("Press f2 to break front block")
         prinTCum("Press f3 to break down block")
-        prinTCum()
+        prinTCum("")
         prinTCum("Press f4 to place up block")
         prinTCum("Press f5 to place front block")
         prinTCum("Press f6 to place down block")
-        prinTCum()
+        prinTCum("")
         working = true
     end
 end
