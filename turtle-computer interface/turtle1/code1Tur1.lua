@@ -1021,6 +1021,7 @@ if validY then
                 -- termination after getting the instruction from the master computer
                 if message == "termination" and protocol == "instruction" then
                     term.setTextColor(colors.red)
+                    prinTCum()
                     prinTCum("Why kill me?")
                     prinTCum()
                     term.setTextColor(colors.lightBlue)
@@ -1111,6 +1112,7 @@ if validY then
         
             rednet.send(masterComputerID, "termination", "userCommand")
             term.setTextColor(colors.red)
+            prinTCum()
             prinTCum("Why kill me?")
             prinTCum()
             term.setTextColor(colors.lightBlue)
