@@ -314,7 +314,10 @@ function dropInventory(dir)
         
         for i = 1, 16, 1 do
             turtle.select(i)
-            turtle.drop()
+
+            if getCurrentSlotData().name ~= "minecraft:lava_bucket" then
+                turtle.drop()
+            end
         end
 
         turtle.select(prevSlot)
@@ -325,7 +328,10 @@ function dropInventory(dir)
         
         for i = 1, 16, 1 do
             turtle.select(i)
-            turtle.dropUp()
+
+            if getCurrentSlotData().name ~= "minecraft:lava_bucket" then
+                turtle.drop()
+            end
         end
 
         turtle.select(prevSlot)
@@ -336,7 +342,10 @@ function dropInventory(dir)
         
         for i = 1, 16, 1 do
             turtle.select(i)
-            turtle.dropDown()
+
+            if getCurrentSlotData().name ~= "minecraft:lava_bucket" then
+                turtle.drop()
+            end
         end
 
         turtle.select(prevSlot)
