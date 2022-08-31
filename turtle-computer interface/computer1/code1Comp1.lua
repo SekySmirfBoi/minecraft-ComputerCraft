@@ -11,20 +11,15 @@ thisCompID = os.getComputerID() -- Do not change this variable
 
 function prinTCum(message)
     
-    local addAmount = 1
+    
+    --[[ ↓↓↓ Untag the line below to have the message output in the computer terminal as well ↓↓↓ ]]--
 
-    if message == nil then
-        addAmount = 2
-    else
-        --[[ ↓↓↓ Untag the line below to have the message output in the computer terminal as well ↓↓↓ ]]--
+    -- print(message) 
 
-        -- print(message) 
-
-        mon.write(message)
-    end
+    mon.write(message)
 
     local monX, monY = mon.getCursorPos()
-    monY = monY + addAmount
+    monY = monY + 1
     mon.setCursorPos(1,monY)
 end
 
@@ -45,10 +40,10 @@ emptyVar = 1
 working = false
 
 eResponded = false
-eSender, eMessage, eProtocol
+eSender, eMessage, eProtocol = nil, nil, nil
 
 
-prinTCum(nil)
+prinTCum()
 prinTCum("--------------------------------------------------------------------")
 prinTCum()
 prinTCum("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
