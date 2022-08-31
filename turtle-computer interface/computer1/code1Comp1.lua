@@ -11,15 +11,20 @@ thisCompID = os.getComputerID() -- Do not change this variable
 
 function prinTCum(message)
     
-    
-    --[[ ↓↓↓ Untag the line below to have the message output in the computer terminal as well ↓↓↓ ]]--
+    local addAmount = 1
 
-    -- print(message) 
+    if message ~= nil then
+        --[[ ↓↓↓ Untag the line below to have the message output in the computer terminal as well ↓↓↓ ]]--
 
-    mon.write(message)
+        -- print(message) 
+
+        mon.write(message)
+    else
+        addAmount = 2
+    end
 
     local monX, monY = mon.getCursorPos()
-    monY = monY + 1
+    monY = monY + addAmount
     mon.setCursorPos(1,monY)
 end
 
@@ -43,9 +48,9 @@ eResponded = false
 eSender, eMessage, eProtocol
 
 
-prinTCum("")
+prinTCum()
 prinTCum("--------------------------------------------------------------------")
-prinTCum("")
+prinTCum()
 prinTCum("   SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS      BBBBBBBBBBBBBBBBB   ")
 prinTCum(" SS:::::::::::::::S      SS:::::::::::::::S     B::::::::::::::::B  ")
 prinTCum("S:::::SSSSSS::::::S     S:::::SSSSSS::::::S     B::::::BBBBBB:::::B ")
@@ -62,13 +67,13 @@ prinTCum("SSSSSSS     S:::::S     SSSSSSS     S:::::S     BB:::::BBBBBB::::::B")
 prinTCum("S::::::SSSSSS:::::S     S::::::SSSSSS:::::S     B:::::::::::::::::B ")
 prinTCum("S:::::::::::::::SS      S:::::::::::::::SS      B::::::::::::::::B  ")
 prinTCum(" SSSSSSSSSSSSSSS         SSSSSSSSSSSSSSS        BBBBBBBBBBBBBBBBB   ")
-prinTCum("")
+prinTCum()
 prinTCum("--------------------------------------------------------------------")
 
 
-prinTCum("")
+prinTCum()
 prinTCum("Computer has started.")
-prinTCum("")
+prinTCum()
 prinTCum("Echoing turtle")
 
 while not eResponded do
@@ -78,18 +83,18 @@ while not eResponded do
 
     if eSender == turtleID1 and eMessage == "received" then
         eResponded = true
-        prinTCum("")
+        prinTCum()
         prinTCum("----------------------------------------------")
         print("Turtle has started")
-        prinTCum("")
+        prinTCum()
         prinTCum("Press 0 to stop the turtle from working")
         prinTCum("Press 1 to start the turtle working")
         prinTCum("Press 2 to toggle the turtle to dig a 2 high tunnel")
-        prinTCum("")
+        prinTCum()
         prinTCum("Press home to return turtle to its pre set home")
         prinTCum("Press # to orient the turtle while at home")
         prinTCum("Press + to get the turtle's coordinates")
-        prinTCum("")
+        prinTCum()
         prinTCum("Remote control:")
         prinTCum("Press / to toggle the remote control")
         prinTCum("Press up arrow to move the turtle forwards")
@@ -99,15 +104,15 @@ while not eResponded do
         prinTCum("Press page up to move the turtle up")
         prinTCum("Press page down to move the turtle down")
         prinTCum("Press e to empty turtle's inventory at home")
-        prinTCum("")
+        prinTCum()
         prinTCum("Press f1 to break up block")
         prinTCum("Press f2 to break front block")
         prinTCum("Press f3 to break down block")
-        prinTCum("")
+        prinTCum()
         prinTCum("Press f4 to place up block")
         prinTCum("Press f5 to place front block")
         prinTCum("Press f6 to place down block")
-        prinTCum("")
+        prinTCum()
         working = true
     end
 end
