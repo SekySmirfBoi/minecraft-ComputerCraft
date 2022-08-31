@@ -1093,6 +1093,16 @@ if validY then
                     turnRight()
                 end
 
+                --brings the turtle to y5
+                if message == "y5" then
+                    local x, y, z = gps.locate()
+
+                    while y ~= 5 do
+                        moveDown()
+                        x, y, z = gps.locate()
+                    end
+                end
+
                 -- sends the master computer its coords
                 if message == "coords" then
                     local x, y, z = gps.locate()

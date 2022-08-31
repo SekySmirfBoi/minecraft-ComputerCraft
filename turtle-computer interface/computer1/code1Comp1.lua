@@ -350,6 +350,15 @@ while working do
         rednet.send(turtleID1, "placeDown", "instruction")
     end
 
+    -- Turtle to y 5
+    if event == "key" and arg1 == 301 then
+        if remoteControl == "on" then
+            rednet.send(turtleID1, "y5")
+        else 
+            print("remoteControl off")
+        end
+    end
+
     -- Turtle move up
     if event == "key" and arg1 == 266 then
         if remoteControl == "on" then
