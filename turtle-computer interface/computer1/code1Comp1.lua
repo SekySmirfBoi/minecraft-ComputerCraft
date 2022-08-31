@@ -99,6 +99,8 @@ while not eResponded do
         prinTCum("Press f5 to place front block")
         prinTCum("Press f6 to place down block")
         prinTCum()
+        prinTCum("Press f12 to bring tutle to y5")
+        prinTCum()
         working = true
     end
 end
