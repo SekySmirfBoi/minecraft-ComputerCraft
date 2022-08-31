@@ -720,10 +720,11 @@ function work(currY)
         end
 
         ------------------------------------------------
+        
+        if HighMine == "on" then
+            moveUp()
 
-        moveUp()
-
-        if turtle.detectUp() then
+            if turtle.detectUp() then
             local succ, data = turtle.inspectUp()
 
             if data.name == "minecraft:gold_ore" or 
@@ -735,11 +736,11 @@ function work(currY)
             data.name == "minecraft:emerald_ore" then
                 digBlock("up")
             end
-        end
+            end
 
-        turnLeft()
-        
-        if turtle.detect() then
+            turnLeft()
+            
+            if turtle.detect() then
             local succ, data = turtle.inspect()
 
             if data.name == "minecraft:gold_ore" or 
@@ -751,12 +752,12 @@ function work(currY)
             data.name == "minecraft:emerald_ore" then
                 digBlock("front")
             end
-        end
+            end
 
-        turnRight()
-        turnRight()
+            turnRight()
+            turnRight()
 
-        if turtle.detect() then
+            if turtle.detect() then
             local succ, data = turtle.inspect()
 
             if data.name == "minecraft:gold_ore" or 
@@ -768,11 +769,12 @@ function work(currY)
             data.name == "minecraft:emerald_ore" then
                 digBlock("front")
             end
+            end
+
+            turnLeft()
+
+            moveDown()
         end
-
-        turnLeft()
-
-        moveDown()
 
         ------------------------------------------------
 
