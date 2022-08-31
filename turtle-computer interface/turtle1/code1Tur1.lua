@@ -971,7 +971,7 @@ if validY then
                     prinTCum("Turtle off")
                     rednet.send(masterComputerID, "recieved", "recieved")
 
-                    local x, y, x = gps.locate()
+                    local x, y, z = gps.locate()
                     rednet.send(masterComputerID, "X: "..x, "actuallyPrintThisPls")
                     rednet.send(masterComputerID, "Y: "..y, "actuallyPrintThisPls")
                     rednet.send(masterComputerID, "Z: "..z, "actuallyPrintThisPls")
@@ -985,7 +985,7 @@ if validY then
                     active = "on"
                     prinTCum("Turtle on")
 
-                    local x, y, x = gps.locate()
+                    local x, y, z = gps.locate()
                     rednet.send(masterComputerID, "X: "..x, "actuallyPrintThisPls")
                     rednet.send(masterComputerID, "Y: "..y, "actuallyPrintThisPls")
                     rednet.send(masterComputerID, "Z: "..z, "actuallyPrintThisPls")

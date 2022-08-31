@@ -49,7 +49,6 @@ eSender, eMessage, eProtocol = nil, nil, nil
 
 prinTCum()
 prinTCum("--------------------------------------------------------------------")
-prinTCum()
 prinTCum("   _____    _____   ____  ")
 prinTCum(" / ____|  / ____| |  _ \\ ")
 prinTCum("| (___   | (___   | |_) |")
