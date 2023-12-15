@@ -1,3 +1,5 @@
+--1
+
 running = true
 
 function turnLeft()
