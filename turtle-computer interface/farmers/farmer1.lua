@@ -3,3 +3,4 @@ if turtle.detect() then
 end
 
 turtle.forward()
+turtle.back(2)
