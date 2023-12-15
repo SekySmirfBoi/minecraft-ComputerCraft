@@ -32,5 +32,10 @@ while running do
                     turtle.drop()
                 else
                     turtle.dropUp()
-        
+                end
+            end
+        end
+    end
+
     running = false
+end            
