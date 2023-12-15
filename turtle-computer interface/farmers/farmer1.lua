@@ -28,6 +28,8 @@ while running do
                     succ, lsd, eror = turtle.inspect()
                     if lsg.name == "computercraft:turtle" or lsg.name == "computercraft:turtle_advanced" then
                         looking = false
+                    end
+                end
 
             for i = 1, 16, 1 do
                 turtle.select(i)
