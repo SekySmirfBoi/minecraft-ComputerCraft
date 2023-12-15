@@ -41,6 +41,5 @@ while running do
             end
         end
     end
-
     running = false
 end            
