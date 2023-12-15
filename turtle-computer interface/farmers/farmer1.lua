@@ -1,5 +1,5 @@
 if turtle.detect() then
-    turlte.dig()
+    turtle.dig()
 end
 
 turtle.forward()
