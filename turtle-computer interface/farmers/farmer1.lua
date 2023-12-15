@@ -24,14 +24,14 @@ while running do
             looking = true
             while looking do
                 turnRight()
-                if turtle.detect() do
+                if turtle.detect() then
                     succ, lsd, eror = turtle.inspect()
                     if lsg.name == "computercraft:turtle" or lsg.name == "computercraft:turtle_advanced" then
                         looking = false
 
             for i = 1, 16, 1 do
                 turtle.select(i)
-                if getItemData().name == "minecraft:wheat" do
+                if getItemData().name == "minecraft:wheat" then
                     turtle.drop()
                 else
                     turtle.dropUp()
