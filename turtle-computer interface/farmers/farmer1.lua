@@ -1,4 +1,6 @@
---2
+--3
+
+rednet.open("left")
 
 running = true
 
@@ -28,7 +30,7 @@ while running do
                 turnRight()
                 if turtle.detect() then
                     succ, lsd, eror = turtle.inspect()
-                    if lsg.name == "computercraft:turtle" or lsg.name == "computercraft:turtle_advanced" then
+                    if lsd.name == "computercraft:turtle" or lsd.name == "computercraft:turtle_advanced" then
                         looking = false
                     end
                 end
