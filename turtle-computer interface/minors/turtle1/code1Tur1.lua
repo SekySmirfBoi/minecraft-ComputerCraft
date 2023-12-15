@@ -367,7 +367,6 @@ function emptyInventoryAtHome()
 end
 
 function getItemSlot(itemName)
-
     if itemName == nil then
         return nil;
     end
