@@ -1,4 +1,4 @@
---1
+--2
 
 running = true
 
@@ -43,6 +43,6 @@ while running do
                 end
             end
         end
+        running = false
     end
-    running = false
 end            
