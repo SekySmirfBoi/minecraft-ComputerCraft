@@ -2,12 +2,15 @@ running = true
 
 function turnLeft()
     turtle.turnLeft()
+end
 
 function turnRight()
     turtle.turnRight()
+end
 
 function getItemData()
     return turtle.getItemDetail()
+end
 
 while running do
     local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
