@@ -1,4 +1,4 @@
---1
+--2
 
 local slaveOwner = 5
 
@@ -56,6 +56,8 @@ while running do
     local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
 
     if osEvent == "rednet_message" then
+        
+        print("got message")
 
         local sender = osArg1
         local message = osArg2
@@ -91,10 +93,10 @@ while running do
     
     elseif osEvent == "terminate" then
         running = false
-    
     else
         if turtle.detectDown() then
             local succ, blockData, err = turtle.inspectDown()
+            print("inspected")
             if blockData.name == "minecraft:wheat" then
                 if blockData.age == 7 then
                     famr()
