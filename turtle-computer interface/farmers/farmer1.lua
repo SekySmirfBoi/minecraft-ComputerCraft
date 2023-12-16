@@ -1,4 +1,4 @@
---2
+--3
 
 local slaveOwner = 5
 
@@ -98,9 +98,11 @@ while running do
             local succ, blockData, err = turtle.inspectDown()
             print("inspected")
             if blockData.name == "minecraft:wheat" then
-                if blockData.age == 7 then
+                if blockData.state.age == 7 then
                     famr()
                 end
+            else
+                print(blockData.name)
             end
         end
     end
