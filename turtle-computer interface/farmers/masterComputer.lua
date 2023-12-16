@@ -15,7 +15,7 @@ while not recieved do
         local sender = osArg1
         local message = osArg2
 
-        if sender == farmerID and message = "recieved" then
+        if sender == farmerID and message == "recieved" then
             received = true
         end
     end
