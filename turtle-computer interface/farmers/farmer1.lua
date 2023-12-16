@@ -49,10 +49,18 @@ function famr()
             end
             forward()
         end
+        if turtle.detectDown() then
+            succ, blockData, eror = turtle.inspectDown()
+            if blockData.name == "minecraft:wheat" then
+                if blockData.state.age == 7 then
+                    turtle.digDown()
+                end
+            end
+        end
         turnLeft()
         forward()
         turnLeft()
-        for i = 5, 8, 1 do
+        for i = 1, 8, 1 do
             if turtle.detectDown() then
                 succ, blockData, eror = turtle.inspectDown()
                 if blockData.name == "minecraft:wheat" then
@@ -62,6 +70,14 @@ function famr()
                 end
             end
             forward()
+        end
+        if turtle.detectDown() then
+            succ, blockData, eror = turtle.inspectDown()
+            if blockData.name == "minecraft:wheat" then
+                if blockData.state.age == 7 then
+                    turtle.digDown()
+                end
+            end
         end
         turnRight()
         forward()
