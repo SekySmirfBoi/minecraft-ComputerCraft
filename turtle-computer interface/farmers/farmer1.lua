@@ -1,4 +1,4 @@
---b
+--245
 
 rednet.open("left")
 
@@ -51,5 +51,7 @@ while running do
     
     elseif osEvent == "terminate" then
         running = false
+    else
+        print(osEvent)
     end
 end            
