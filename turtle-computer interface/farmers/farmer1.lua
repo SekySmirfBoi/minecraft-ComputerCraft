@@ -1,4 +1,4 @@
---a
+--b
 
 rednet.open("left")
 
@@ -20,6 +20,7 @@ while running do
     local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
 
     if osEvent == "rednet_message" then
+
         local sender = osArg1
         local message = osArg2
         local protocol = osArg3
@@ -46,6 +47,9 @@ while running do
                 end
             end
         end
+        running = false
+    
+    elseif osEvent == "terminate" then
         running = false
     end
 end            
