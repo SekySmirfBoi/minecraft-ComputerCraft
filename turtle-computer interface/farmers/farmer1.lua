@@ -1,4 +1,4 @@
---3
+--a
 
 rednet.open("left")
 
@@ -38,7 +38,8 @@ while running do
 
             for i = 1, 16, 1 do
                 turtle.select(i)
-                if getItemData().name == "minecraft:wheat" then
+                if getItemData() == nil then
+                elseif getItemData().name == "minecraft:wheat" then
                     turtle.drop()
                 else
                     turtle.dropUp()
