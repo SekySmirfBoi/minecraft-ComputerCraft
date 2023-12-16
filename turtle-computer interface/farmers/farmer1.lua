@@ -1,11 +1,9 @@
---tyty
+--1
 
 local slaveOwner = 5
 
 
 rednet.open("left")
-
-running = true
 
 function turnLeft()
     turtle.turnLeft()
@@ -51,6 +49,8 @@ function famr()
         forward()
     end
 end
+
+running = true
 
 while running do
     local osEvent, osArg1, osArg2, osArg3, osArg4, osArg5 = os.pullEventRaw()
