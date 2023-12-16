@@ -88,7 +88,7 @@ while running do
     
     else
         if turtle.detectDown() then
-            local blockData = turtle.inspectDown()
+            local succ, blockData, err = turtle.inspectDown()
             if blockData.name == "minecraft:wheat" then
                 if blockData.age == 7 then
                     famr()
