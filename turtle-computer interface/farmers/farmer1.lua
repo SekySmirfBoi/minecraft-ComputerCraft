@@ -15,11 +15,16 @@ function turnRight()
     turtle.turnRight()
 end
 
+function forward()
+    turtle.forward()
+end
+
 function getItemData()
     return turtle.getItemDetail()
 end
 
 function famr()
+    print("farming")
     looking = true
     while looking do
         turnRight()
@@ -43,6 +48,7 @@ function famr()
                 end
             end
         end
+        forward()
     end
 end
 
