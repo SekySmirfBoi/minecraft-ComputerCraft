@@ -37,8 +37,8 @@ function famr()
     for i = 1, 9, 1 do
         if turtle.detectDown() then
             succ, blockData, eror = turtle.inspectDown()
-            if blockData.name = "minecraft:wheat" then
-                if blockData.state.age = 7 then
+            if blockData.name == "minecraft:wheat" then
+                if blockData.state.age == 7 then
                     turtle.digDown()
                 end
             end
