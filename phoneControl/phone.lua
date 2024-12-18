@@ -1,6 +1,7 @@
-print(peripheral.getType("botttom"))
-print(peripheral.getType("top"))
-print(peripheral.getType("left"))
-print(peripheral.getType("right"))
-print(peripheral.getType("front"))
-print(peripheral.getType("back"))
+while true do
+    shell.run("clear")
+    local x,y,z = gps.locate()
+    print(x)
+    print(y)
+    print(z)
+end 
