@@ -35,7 +35,7 @@ function main()
             local key = arg1
             if key == 257 then
                 slavesWorking = true
-                for i, id in turtles do
+                for i, id in ipairs(turtles) do
                     rednet.send(id, "beginMine")
                 end
             end
