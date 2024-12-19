@@ -1,4 +1,4 @@
-local stripsToMine = 16
+local stripsToMine = 8
 local blocksPerStrip = 64
 local direction = "right" -- This means go left
 
