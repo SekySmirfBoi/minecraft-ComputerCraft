@@ -1,4 +1,4 @@
-local turtles = {45, 36, 47, 46}
+local turtles = {45, 36, 47, 46, 51, 50, 49, 48}
 --local turtles = {7,8,9,10,11,12,13,14}
 
 function main()
