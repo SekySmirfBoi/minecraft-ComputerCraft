@@ -56,7 +56,7 @@ function main()
                 end
             elseif key == 322 then -- num pad 2
                 for i, id in ipairs(turtles) do
-                    rednet.send(id, "break", "front")
+                    rednet.send(id, "break", "down")
                 end
             elseif key == 262 then -- right
                 for i, id in ipairs(turtles) do
