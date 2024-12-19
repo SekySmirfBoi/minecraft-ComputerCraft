@@ -1,6 +1,6 @@
 local stripsToMine = 16
 local blocksPerStrip = 64
-local direction = "left" -- This means go left
+local direction = "right" -- This means go left
 
 local masterPhoneID = 37
 
@@ -48,7 +48,7 @@ function main()
                         turtle.forward()
                         turtle.digUp()
                         turtle.digDown()
-                        blocksPerStrip = blocksPerStrip - 1
+                        blocksLeft = blocksLeft - 1
                     end
 
                     if direction == "left" then
