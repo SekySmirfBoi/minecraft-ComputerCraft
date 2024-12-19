@@ -1,6 +1,6 @@
 local stripsToMine = 8
 local blocksPerStrip = 64
-local direction = "right" -- This means go left
+local direction = "" -- This means go in the direction
 
 local masterPhoneID = 6
 
@@ -34,7 +34,9 @@ function main()
         local event, sender, message, protocol = os.pullEvent("rednet_message")
 
         if sender == masterPhoneID then
-            if message == "beginMine" then
+            if protocol == "beginMine" then
+                direction = message
+
                 local fuelRequired = blocksPerStrip * stripsToMine + stripsToMine * 2
                 print("Estimated fuel required:", fuelRequired)
                 print("Coal required:", fuelRequired / 80)
@@ -99,6 +101,8 @@ function main()
 
                     stripsLeft = stripsLeft - 1
                 end
+            else
+                shell.run(message)
             end
         end
     end

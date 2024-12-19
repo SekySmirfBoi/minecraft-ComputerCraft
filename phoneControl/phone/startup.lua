@@ -1,4 +1,5 @@
-local turtles = {45, 36, 47, 46}
+--local turtles = {45, 36, 47, 46}
+local turtles = {7,8,9,10,11,12,13,14}
 
 function main()
     rednet.open("back")
@@ -33,10 +34,41 @@ function main()
             end
         elseif event == "key" then
             local key = arg1
-            if key == 257 then
-                slavesWorking = true
+            if key == 257 then -- enter
+                print("Direction: ")
+                local diretion = read()
+                if diretion == "left" or diretion == "right" then
+                    slavesWorking = true
+                    for i, id in ipairs(turtles) do
+                        rednet.send(id, diretion, "beginMine")
+                    end
+                else
+                    print("Bad direction")
+                end
+
+            elseif key == 262 then -- right
                 for i, id in ipairs(turtles) do
-                    rednet.send(id, "beginMine")
+                    rednet.send(id, "turn right")
+                end
+            elseif key == 263 then -- left
+                for i, id in ipairs(turtles) do
+                    rednet.send(id, "turn left")
+                end
+            elseif key == 264 then -- arrow down
+                for i, id in ipairs(turtles) do
+                    rednet.send(id, "turn right")
+                end
+            elseif key == 265 then -- arrow up
+                for i, id in ipairs(turtles) do
+                    rednet.send(id, "go back 1")
+                end
+            elseif key == 266 then -- pgUp
+                for i, id in ipairs(turtles) do
+                    rednet.send(id, "go up 1")
+                end
+            elseif key == 267 then -- pgDown
+                for i, id in ipairs(turtles) do
+                    rednet.send(id, "go down 1")
                 end
             end
         end 
