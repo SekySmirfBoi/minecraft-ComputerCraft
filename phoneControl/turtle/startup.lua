@@ -69,10 +69,13 @@ function main()
                         end
                         turtle.forward()
                         turtle.turnRight()
+                        turtle.dig()
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
                         turtle.forward()
+                        turtle.digUp()
+                        turtle.digDown()
                         turtle.turnRight()
                         direction = "left"
                     end
