@@ -40,7 +40,7 @@ function main()
                 local stripsLeft = stripsToMine
                 while stripsLeft > 0 do
                     local blocksLeft = blocksPerStrip
-                    while blocksPerStrip > 0 do
+                    while blocksLeft > 0 do
                         turtle.dig()
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
