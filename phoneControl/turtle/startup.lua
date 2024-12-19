@@ -2,7 +2,7 @@ local stripsToMine = 8
 local blocksPerStrip = 64
 local direction = "right" -- This means go left
 
-local masterPhoneID = 37
+local masterPhoneID = 6
 
 
 function NoFuel()
