@@ -42,7 +42,7 @@ function main()
                     local blocksLeft = blocksPerStrip
                     while blocksPerStrip > 0 do
                         turtle.dig()
-                        if turtle.getFuelLevel() = 0 then
+                        if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
                         turtle.forward()
@@ -52,24 +52,24 @@ function main()
                     end
 
                     if direction == "left" then
-                        if turtle.getFuelLevel() = 0 then
+                        if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
                         turtle.forward()
                         turtle.turnLeft()
-                        if turtle.getFuelLevel() = 0 then
+                        if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
                         turtle.forward()
                         turtle.turnLeft() 
                         direction = "tiht"
                     else
-                        if turtle.getFuelLevel() = 0 then
+                        if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
                         turtle.forward()
                         turtle.turnRight()
-                        if turtle.getFuelLevel() = 0 then
+                        if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
                         turtle.forward()
