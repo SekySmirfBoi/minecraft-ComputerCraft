@@ -26,7 +26,7 @@ end
 
 function main()
     rednet.open("left")
-    
+
     local running = true
 
     while running do
@@ -34,6 +34,7 @@ function main()
 
         if sender == masterPhoneID then
             if message == "beginMine" then
+                print("Estimated fuel required:", blocksPerStrip * stripsToMine + stripsToMine * 2)
                 local stripsLeft = stripsToMine
                 while stripsLeft > 0 do
                     local blocksLeft = blocksPerStrip
