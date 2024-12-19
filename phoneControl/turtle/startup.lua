@@ -34,7 +34,9 @@ function main()
 
         if sender == masterPhoneID then
             if message == "beginMine" then
-                print("Estimated fuel required:", blocksPerStrip * stripsToMine + stripsToMine * 2)
+                local fuelRequired = blocksPerStrip * stripsToMine + stripsToMine * 2
+                print("Estimated fuel required:", fuelRequired)
+                print("Coal required:", fuelRequired / 80)
                 local stripsLeft = stripsToMine
                 while stripsLeft > 0 do
                     local blocksLeft = blocksPerStrip
