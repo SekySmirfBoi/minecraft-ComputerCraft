@@ -102,7 +102,17 @@ function main()
                     stripsLeft = stripsLeft - 1
                 end
             else
-                shell.run(message)
+                if message == "break" then
+                    if protocol == "up" then
+                        turtle.digUp()
+                    elseif protocol == "down" then
+                        turtle.digDown()
+                    elseif protocol == "front" then
+                        turtle.dig()
+                    end
+                else
+                    shell.run(message)
+                end
             end
         end
     end
