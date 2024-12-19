@@ -1,4 +1,4 @@
-local stripsToMine = 16
+local stripsToMine = 8
 local blocksPerStrip = 64
 local direction = "" -- This means go in the direction
 
