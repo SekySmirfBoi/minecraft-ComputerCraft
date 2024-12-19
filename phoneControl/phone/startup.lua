@@ -31,7 +31,7 @@ function main()
                     rednet.send(sender, "continue")
                 end 
             end
-        else if event == "key" then
+        elseif event == "key" then
             local key = arg1
             if key == 257 then
                 slavesWorking = true
