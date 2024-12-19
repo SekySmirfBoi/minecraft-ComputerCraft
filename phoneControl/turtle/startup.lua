@@ -44,7 +44,7 @@ function main()
                 print("Coal required:", fuelRequired / 80)
                 local stripsLeft = stripsToMine
                 while stripsLeft > 0 do
-                    local blocksLeft = blocksPerStrip
+                    local blocksLeft = blocksPerStrip - 1
                     while blocksLeft > 0 do
                         turtle.dig()
                         if turtle.getFuelLevel() == 0 then
