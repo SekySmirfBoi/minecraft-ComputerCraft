@@ -35,6 +35,7 @@ function main()
         local event, sender, message, protocol = os.pullEvent("rednet_message")
 
         if sender == masterPhoneID then
+            print("Master has requested me")
             if protocol == "beginMine" then
                 direction = message
 
@@ -115,6 +116,8 @@ function main()
                     shell.run(message)
                 end
             end
+        else
+            print("That aint my master")
         end
     end
 end
