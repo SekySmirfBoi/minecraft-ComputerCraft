@@ -1,5 +1,5 @@
 local stripsToMine = 16
-local blocksPerStrip = 64
+local blocksPerStrip = 58
 local direction = "right" -- This means go left
 
 local masterPhoneID = 37
