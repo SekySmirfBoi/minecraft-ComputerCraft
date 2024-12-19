@@ -1,5 +1,5 @@
 local stripsToMine = 16
-local blocksPerStrip = 58
+local blocksPerStrip = 64
 local direction = "right" -- This means go left
 
 local masterPhoneID = 37
@@ -55,27 +55,43 @@ function main()
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
+                        turtle.dig()
                         turtle.forward()
+                        turtle.digUp()
+                        turtle.digDown()
+
                         turtle.turnLeft()
+
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
+
+                        turtle.dig()
                         turtle.forward()
+                        turtle.digUp()
+                        turtle.digDown()
+
                         turtle.turnLeft() 
                         direction = "tiht"
                     else
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
-                        turtle.forward()
-                        turtle.turnRight()
                         turtle.dig()
-                        if turtle.getFuelLevel() == 0 then
-                            NoFuel()
-                        end
                         turtle.forward()
                         turtle.digUp()
                         turtle.digDown()
+
+                        turtle.turnRight()
+
+                        if turtle.getFuelLevel() == 0 then
+                            NoFuel()
+                        end
+                        turtle.dig()
+                        turtle.forward()
+                        turtle.digUp()
+                        turtle.digDown()
+
                         turtle.turnRight()
                         direction = "left"
                     end
