@@ -31,6 +31,7 @@ function main()
     local running = true
 
     while running do
+        print("waiting for request")
         local event, sender, message, protocol = os.pullEvent("rednet_message")
 
         if sender == masterPhoneID then
