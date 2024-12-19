@@ -17,7 +17,7 @@ function NoFuel()
 
     turtle.refuel()
 
-    if turtle.getFuelLevel() = 0 then
+    if turtle.getFuelLevel() == 0 then
         NoFuel()
     end
 
