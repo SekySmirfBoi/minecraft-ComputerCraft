@@ -25,6 +25,7 @@ function NoFuel()
 end
 
 function main()
+    print(os.getComputerID())
     rednet.open("left")
 
     local running = true
