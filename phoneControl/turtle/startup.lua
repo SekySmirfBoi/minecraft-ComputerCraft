@@ -6,27 +6,32 @@ local masterPhoneID = 37
 
 
 function NoFuel()
-    rednet.send(masterPhoneID, "noFuel")
-    local yeahItsGood = false
-
-    while not yeahItsGood do
-        local event, sender, message, protocol = os.pullEvent("rednet_message")
+    local received = false
+    while not received do
+        rednet.send(masterPhoneID, "noFuel")
+        sender, message = rednet.receive(nil,1)
         if sender == masterPhoneID and message == "continue" then
-            yeahItsGood = true
+            received = true
         end
     end
 
     turtle.refuel()
 
+    if turtle.getFuelLevel() = 0 then
+        NoFuel()
+    end
+
     return
 end
 
 function main()
-    local running = true
+    rednet.open("left")
     
+    local running = true
+
     while running do
         local event, sender, message, protocol = os.pullEvent("rednet_message")
-    
+
         if sender == masterPhoneID then
             if message == "beginMine" then
                 local stripsLeft = stripsToMine
@@ -42,7 +47,7 @@ function main()
                         turtle.digDown()
                         blocksPerStrip = blocksPerStrip - 1
                     end
-                
+
                     if direction == "left" then
                         if turtle.getFuelLevel() = 0 then
                             NoFuel()
@@ -68,7 +73,7 @@ function main()
                         turtle.turnRight()
                         direction = "left"
                     end
-                
+
                     stripsLeft = stripsLeft - 1
                 end
             end
