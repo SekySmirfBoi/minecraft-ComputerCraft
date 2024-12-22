@@ -50,6 +50,8 @@ function main()
                     print("Failed to add:", sender)
                 end
                 rednet.send(sender, "confirmed", "addTurtle")
+            else
+                print("big dick")
             end 
 
         elseif event == "key" then
