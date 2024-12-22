@@ -29,11 +29,10 @@ function main()
     print(os.getComputerID())
     print("Fuel left:", turtle.getFuelLevel())
 
-    rednet.send(masterPhoneID, os.getComputerID, "addTurtle")
-
     local startupCompleted = false
     while not startupCompleted do
-        local sender, msg, protocol = rednet.receive()
+        rednet.send(masterPhoneID, os.getComputerID, "addTurtle")
+        local sender, msg, protocol = rednet.receive(nil, 1)
         if sender == masterPhoneID and msg == "confirmed" and protocol == "addTurtle" then
             startupCompleted = true
             print("I have been recognised")
