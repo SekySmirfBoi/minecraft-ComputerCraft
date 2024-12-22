@@ -51,11 +51,14 @@ function foundATMore()
     local ableToContinue = false
 
     while not ableToContinue do
-        local succ, data = turtle.inspect()
-        if not data.name == "allthemodium:allthemodium_slate_ore" then
+        local succ1, data1 = turtle.inspect()
+        local succ2, data2 = turtle.inspectUp()
+        local succ3, data3 = turtle.inspectDown()
+
+        if data1.name == "allthemodium:allthemodium_slate_ore" or data2.name == "allthemodium:allthemodium_slate_ore" or data3.name == "allthemodium:allthemodium_slate_ore" then
+            ableToContinue = false
+        else
             ableToContinue = true
-        else 
-            print(data.name)
         end
         sleep(0.5)
     end
@@ -66,7 +69,7 @@ function foundATMore()
 end
 
 function main()
-    print("updated")
+    print("not updated")
     rednet.open("left")
     print(os.getComputerID())
     print("Fuel left:", turtle.getFuelLevel())
