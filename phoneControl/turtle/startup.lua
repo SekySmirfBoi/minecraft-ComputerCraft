@@ -25,16 +25,11 @@ function NoFuel()
 end
 
 function checkForATMore(dir)
-    local succ, data
+    local succ1, data1 = turtle.inspect()
+    local succ2, data2 = turtle.inspectUp()
+    local succ3, data3 = turtle.inspectDown()
 
-    if dir == "forward" then
-        succ, data = turtle.inspect()
-        foundATMore()
-    elseif dir == "up" then
-        succ, data = turtle.inspectUp()
-        foundATMore()
-    elseif dir == "down" then
-        succ, data = turtle.inspectDown()
+    if data1.name == "allthemodium:allthemodium_slate_ore" or data2.name == "allthemodium:allthemodium_slate_ore" or data3.name == "allthemodium:allthemodium_slate_ore" then
         foundATMore()
     end
 
