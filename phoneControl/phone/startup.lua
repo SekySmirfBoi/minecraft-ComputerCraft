@@ -1,5 +1,14 @@
-local turtles = {45, 36, 47, 46, 51, 50, 49, 48}
+local turtles = {}
 --local turtles = {7,8,9,10,11,12,13,14}
+
+function tableContains(table, value)
+    for i, id in ipairs(table) do
+        if (id == value) then
+            return true
+        end
+    end
+    return false
+end
 
 function main()
     rednet.open("back")
@@ -32,6 +41,15 @@ function main()
                     rednet.send(sender, "continue")
                 end 
             end
+
+            if protocol == "addTurtle" then
+                if tableContains(table, sender) then
+                    rednet.send(sender, "confirmed", "addTurtle")
+                else
+                    table.insert(turtles, sender)
+                end
+            end 
+
         elseif event == "key" then
             local key = arg1
             if key == 257 then -- enter

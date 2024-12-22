@@ -2,8 +2,8 @@ local stripsToMine = 8
 local blocksPerStrip = 64
 local direction = "" -- This means go in the direction
 
-local masterPhoneID = 37
-
+local masterPhoneID = 6
+local speakerCpID = 17
 
 function NoFuel()
     local received = false
@@ -25,8 +25,19 @@ function NoFuel()
 end
 
 function main()
-    print(os.getComputerID())
     rednet.open("left")
+    print(os.getComputerID())
+    print("Fuel left:", turtle.getFuelLevel())
+
+    rednet.send(masterPhoneID, os.getComputerID, "addTurtle")
+
+    local startupCompleted = false
+    while not startupCompleted do
+        local sender, msg, protocol = rednet.receive()
+        if sender == masterPhoneID and msg == "confirmed" and protocol == "addTurtle" then
+            startupCompleted = true
+        end
+    end
 
     local running = true
 
