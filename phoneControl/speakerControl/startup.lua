@@ -7,11 +7,12 @@ function main()
             
             local playerAck = false
             while not playerAck do
-                speaker.playNote("bit", 100, 1)
+                shell.run("speaker play https://cdn.discordapp.com/attachments/1119559261261938709/1320521425072951387/BGM_Guardian_main.dfpwm?ex=6769e6e9&is=67689569&hm=fbd878093baebcdfef10fd3231a50e1125a2f20da4354ccf631bceacf064063b&")
                 local event, key = os.pullEvent("key")
                 if key == 257 then
                     playerAck = true
                 end
+                speaker.stop()
             end
         end
     end
