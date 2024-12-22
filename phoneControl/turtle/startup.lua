@@ -5,9 +5,6 @@ local direction = "" -- This means go in the direction
 local masterPhoneID = 6
 local speakerCpID = 36
 
-local stripsLeft = stripsToMine
-local blocksLeft = blocksPerStrip - 1
-
 function NoFuel()
     local received = false
     while not received do
@@ -32,13 +29,16 @@ function checkForATMore(dir)
 
     if dir == "forward" then
         succ, data = turtle.inspect()
+        foundATMore()
     elseif dir == "up" then
         succ, data = turtle.inspectUp()
+        foundATMore()
     elseif dir == "down" then
         succ, data = turtle.inspectDown()
+        foundATMore()
     end
 
-    return data.name == "allthemodium:allthemodium_slate_ore"
+    return
 end
 
 function foundATMore()
@@ -54,7 +54,8 @@ function foundATMore()
     local ableToContinue = false
 
     while not ableToContinue do
-        if not turtle.detect() then
+        local succ, data = turtle.inspect()
+        if not data.name == "allthemodium:allthemodium_slate_ore" then
             ableToContinue = true
         end
     end
@@ -91,7 +92,9 @@ function main()
                 local fuelRequired = blocksPerStrip * stripsToMine + stripsToMine * 2
                 print("Estimated fuel required:", fuelRequired)
                 print("Coal required:", fuelRequired / 80)
+                local stripsLeft = stripsToMine
                 while stripsLeft > 0 do
+                    local blocksLeft = blocksPerStrip - 1
                     while blocksLeft > 0 do
                         turtle.dig()
                         if turtle.getFuelLevel() == 0 then
