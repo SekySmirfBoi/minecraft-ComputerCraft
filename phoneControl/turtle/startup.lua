@@ -3,13 +3,16 @@ local blocksPerStrip = 64
 local direction = "" -- This means go in the direction
 
 local masterPhoneID = 6
-local speakerCpID = 17
+local speakerCpID = 36
+
+local stripsLeft = stripsToMine
+local blocksLeft = blocksPerStrip - 1
 
 function NoFuel()
     local received = false
     while not received do
         rednet.send(masterPhoneID, "noFuel")
-        sender, message = rednet.receive(nil,1)
+        local sender, message, protocol = rednet.receive(nil,1)
         if sender == masterPhoneID and message == "continue" then
             received = true
         end
@@ -19,6 +22,41 @@ function NoFuel()
 
     if turtle.getFuelLevel() == 0 then
         NoFuel()
+    end
+
+    return
+end
+
+function checkForATMore(dir)
+    local succ, data
+
+    if dir == "forward" then
+        succ, data = turtle.inspect()
+    elseif dir == "up" then
+        succ, data = turtle.inspectUp()
+    elseif dir == "down" then
+        succ, data = turtle.inspectDown()
+    end
+
+    return data.name == "allthemodium:allthemodium_slate_ore"
+end
+
+function foundATMore()
+    local ack = false
+    while not ack do
+        rednet.send(speakerCpID, "found", "atmore")
+        local sender, message, protocol = rednet.receive(nil,1)
+        if sender == speakerCpID and message == "ok" and protocol == "atmore" then
+            ack = true
+        end
+    end
+
+    local ableToContinue = false
+
+    while not ableToContinue do
+        if not turtle.detect() do
+            ableToContinue = true
+        end
     end
 
     return
@@ -53,9 +91,7 @@ function main()
                 local fuelRequired = blocksPerStrip * stripsToMine + stripsToMine * 2
                 print("Estimated fuel required:", fuelRequired)
                 print("Coal required:", fuelRequired / 80)
-                local stripsLeft = stripsToMine
                 while stripsLeft > 0 do
-                    local blocksLeft = blocksPerStrip - 1
                     while blocksLeft > 0 do
                         turtle.dig()
                         if turtle.getFuelLevel() == 0 then
