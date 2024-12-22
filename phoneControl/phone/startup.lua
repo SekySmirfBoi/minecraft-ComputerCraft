@@ -18,11 +18,12 @@ function main()
     print("Press enter to being mining")
 
     while true do
-        local event, arg1, arg2 = os.pullEvent()
+        local event, arg1, arg2, arg3 = os.pullEvent()
 
         if event == "rednet_message" then
             local sender = arg1
             local message = arg2
+            local protocol = arg3
 
             if slavesWorking then
                 if message == "noFuel" then
@@ -50,8 +51,6 @@ function main()
                     print("Failed to add:", sender)
                 end
                 rednet.send(sender, "confirmed", "addTurtle")
-            else
-                print("big dick")
             end 
 
         elseif event == "key" then
