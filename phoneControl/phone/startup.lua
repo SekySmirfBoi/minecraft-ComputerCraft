@@ -43,11 +43,11 @@ function main()
             end
 
             if protocol == "addTurtle" then
-                if tableContains(table, sender) then
-                    rednet.send(sender, "confirmed", "addTurtle")
-                else
+                if not tableContains(table, sender) then
                     table.insert(turtles, sender)
+                    print("Added turtle:", sender)
                 end
+                rednet.send(sender, "confirmed", "addTurtle")
             end 
 
         elseif event == "key" then
