@@ -96,8 +96,8 @@ function main()
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end 
-                        checkForATMore()
                         turtle.forward()
+                        checkForATMore()
                         turtle.digUp()
                         turtle.digDown()
                         blocksLeft = blocksLeft - 1
