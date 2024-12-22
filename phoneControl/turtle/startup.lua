@@ -91,10 +91,12 @@ function main()
                 while stripsLeft > 0 do
                     local blocksLeft = blocksPerStrip - 1
                     while blocksLeft > 0 do
+                        checkForATMore()
                         turtle.dig()
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
-                        end
+                        end 
+                        checkForATMore()
                         turtle.forward()
                         turtle.digUp()
                         turtle.digDown()
@@ -151,10 +153,13 @@ function main()
             else
                 if message == "break" then
                     if protocol == "up" then
+                        checkForATMore()
                         turtle.digUp()
                     elseif protocol == "down" then
+                        checkForATMore()
                         turtle.digDown()
                     elseif protocol == "front" then
+                        checkForATMore()
                         turtle.dig()
                     end
                 else
