@@ -54,7 +54,10 @@ function foundATMore()
         local succ, data = turtle.inspect()
         if not data.name == "allthemodium:allthemodium_slate_ore" then
             ableToContinue = true
+        else 
+            print(data.name)
         end
+        sleep(0.5)
     end
 
     print("Continuing operation")
@@ -63,6 +66,7 @@ function foundATMore()
 end
 
 function main()
+    print("updated")
     rednet.open("left")
     print(os.getComputerID())
     print("Fuel left:", turtle.getFuelLevel())
