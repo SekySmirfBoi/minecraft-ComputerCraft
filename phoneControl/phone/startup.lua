@@ -46,6 +46,8 @@ function main()
                 if not tableContains(table, sender) then
                     table.insert(turtles, sender)
                     print("Added turtle:", sender)
+                else
+                    print("Failed to add:", sender)
                 end
                 rednet.send(sender, "confirmed", "addTurtle")
             end 
