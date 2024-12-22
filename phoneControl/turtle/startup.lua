@@ -38,6 +38,7 @@ end
 
 function foundATMore()
     local ack = false
+    print("Found ATM ore")
     while not ack do
         rednet.send(speakerCpID, "found", "atmore")
         local sender, message, protocol = rednet.receive(nil,1)
@@ -45,6 +46,7 @@ function foundATMore()
             ack = true
         end
     end
+    print("Acknowledgement recieved")
 
     local ableToContinue = false
 
@@ -54,6 +56,8 @@ function foundATMore()
             ableToContinue = true
         end
     end
+
+    print("Continuing operation")
 
     return
 end

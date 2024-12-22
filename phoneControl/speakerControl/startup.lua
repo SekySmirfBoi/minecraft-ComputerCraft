@@ -3,6 +3,7 @@ function main()
     while true do
         local sender, message, protocol = rednet.receive()
         if message == "found" and protocol == "atmore" then
+            print(sender, "found atm ore")
             rednet.send(sender, "ok", "atmore")
             
             local playerAck = false
@@ -14,6 +15,7 @@ function main()
                 end
                 speaker.stop()
             end
+            print("Continuing operation")
         end
     end
 end
