@@ -36,6 +36,7 @@ function main()
         local sender, msg, protocol = rednet.receive()
         if sender == masterPhoneID and msg == "confirmed" and protocol == "addTurtle" then
             startupCompleted = true
+            print("I have been recognised")
         end
     end
 
