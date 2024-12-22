@@ -1,7 +1,9 @@
 function main()
+    rednet.open("left")
+
     local speaker = peripheral.wrap("top")
     while true do
-        local sender, message, protocol = rednet.receive()
+        local sender, message, protocol = rednet.receive(nil)
         if message == "found" and protocol == "atmore" then
             print(sender, "found atm ore")
             rednet.send(sender, "ok", "atmore")
