@@ -54,7 +54,7 @@ function foundATMore()
     local ableToContinue = false
 
     while not ableToContinue do
-        if not turtle.detect() do
+        if not turtle.detect() then
             ableToContinue = true
         end
     end
