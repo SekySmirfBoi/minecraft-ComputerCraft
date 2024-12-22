@@ -31,6 +31,7 @@ function main()
 
     local startupCompleted = false
     while not startupCompleted do
+        print("Attempting to add myself")
         rednet.send(masterPhoneID, os.getComputerID, "addTurtle")
         local sender, msg, protocol = rednet.receive(nil, 1)
         if sender == masterPhoneID and msg == "confirmed" and protocol == "addTurtle" then
