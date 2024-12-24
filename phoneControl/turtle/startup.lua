@@ -142,7 +142,7 @@ function main()
                             turtle.turnRight()
                             turtle.turnRight()
 
-                            for i = 1, stripsToMine do
+                            for i = 1, stripsToMine - 1 do
                                 turtle.forward()
                             end 
 
