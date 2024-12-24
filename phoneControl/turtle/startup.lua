@@ -137,9 +137,31 @@ function main()
                             checkForATMore()
                             turtle.digUp()
                             turtle.digDown()
+                            turtle.turnLeft() 
+                        else
+                            turtle.turnRight()
+                            turtle.turnRight()
+
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+
+                            turtle.turnRight()
                         end
 
-                        turtle.turnLeft() 
 
                         direction = "tiht"
                     else
@@ -166,9 +188,30 @@ function main()
                             checkForATMore()
                             turtle.digUp()
                             turtle.digDown()
-                        end
+                            turtle.turnRight()
+                        else
+                            turtle.turnLeft()
+                            turtle.turnLeft()
 
-                        turtle.turnRight()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+                            turtle.forward()
+
+                            turtle.turnLeft()
+                        end
                         direction = "left"
                     end
 
