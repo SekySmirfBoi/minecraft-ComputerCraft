@@ -69,7 +69,6 @@ function foundATMore()
 end
 
 function main()
-    print("not updated")
     rednet.open("left")
     print(os.getComputerID())
     print("Fuel left:", turtle.getFuelLevel())
