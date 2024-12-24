@@ -180,22 +180,9 @@ function main()
                             turtle.turnLeft()
                             turtle.turnLeft()
 
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
+                            for i = 1, stripsToMine - 1 do
+                                turtle.forward()
+                            end 
 
                             turtle.turnLeft()
                         end
