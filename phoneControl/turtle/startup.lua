@@ -2,7 +2,7 @@ local stripsToMine = 4
 local blocksPerStrip = 16
 local direction = "" -- This means go in the direction
 
-local masterPhoneID = 37
+local masterPhoneID = 6
 local speakerCpID = 42
 
 function NoFuel()
@@ -142,22 +142,9 @@ function main()
                             turtle.turnRight()
                             turtle.turnRight()
 
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
-                            turtle.forward()
+                            for i = 1, stripsToMine do
+                                turtle.forward()
+                            end 
 
                             turtle.turnRight()
                         end
