@@ -142,7 +142,9 @@ function main()
                             turtle.turnRight()
                             turtle.turnRight()
 
-                            for i = 1, stripsToMine - 1 do
+                            local tempTarget = stripsToMine - 1
+
+                            for i = 1, tempTarget do
                                 turtle.forward()
                             end 
 
@@ -180,7 +182,9 @@ function main()
                             turtle.turnLeft()
                             turtle.turnLeft()
 
-                            for i = 1, stripsToMine - 1 do
+                            local tempTarget = stripsToMine - 1
+
+                            for i = 1, tempTarget do
                                 turtle.forward()
                             end 
 
