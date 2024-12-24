@@ -118,8 +118,10 @@ function main()
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
+                        checkForATMore()
                         turtle.dig()
                         turtle.forward()
+                        checkForATMore()
                         turtle.digUp()
                         turtle.digDown()
 
@@ -129,19 +131,26 @@ function main()
                             NoFuel()
                         end
 
-                        turtle.dig()
-                        turtle.forward()
-                        turtle.digUp()
-                        turtle.digDown()
+                        if stripsLeft > 1 then
+                            checkForATMore()
+                            turtle.dig()
+                            turtle.forward()
+                            checkForATMore()
+                            turtle.digUp()
+                            turtle.digDown()
+                        end
 
                         turtle.turnLeft() 
+
                         direction = "tiht"
                     else
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
+                        checkForATMore()
                         turtle.dig()
                         turtle.forward()
+                        checkForATMore()
                         turtle.digUp()
                         turtle.digDown()
 
@@ -150,10 +159,15 @@ function main()
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
-                        turtle.dig()
-                        turtle.forward()
-                        turtle.digUp()
-                        turtle.digDown()
+
+                        if stripsLeft > 1 then
+                            checkForATMore()
+                            turtle.dig()
+                            turtle.forward()
+                            checkForATMore()
+                            turtle.digUp()
+                            turtle.digDown()
+                        end
 
                         turtle.turnRight()
                         direction = "left"

@@ -56,8 +56,8 @@ function main()
         elseif event == "key" then
             local key = arg1
             if key == 257 then -- enter
-                print("Direction: ")
-                local diretion = read()
+                --print("Direction: ")
+                local diretion = "right"
                 if diretion == "left" or diretion == "right" then
                     slavesWorking = true
                     for i, id in ipairs(turtles) do
