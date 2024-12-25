@@ -195,6 +195,10 @@ function main()
 
                     stripsLeft = stripsLeft - 1
                 end
+            elseif protocol == "shuting down" then
+                if message == "terminate" then
+                    running = false
+                end
             else
                 if message == "break" then
                     if protocol == "up" then
@@ -217,5 +221,6 @@ function main()
     end
 end
 
-
-main()
+while true do
+    main()
+end

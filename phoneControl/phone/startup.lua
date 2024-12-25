@@ -1,5 +1,5 @@
 local turtles = {}
---local turtles = {7,8,9,10,11,12,13,14}
+local turtleCount = 0
 
 function tableContains(table, value)
     for i, id in ipairs(table) do
@@ -18,9 +18,13 @@ function main()
     print("Press enter to being mining")
 
     while true do
-        local event, arg1, arg2, arg3 = os.pullEvent()
+        local event, arg1, arg2, arg3 = os.pullEventRaw()
 
-        if event == "rednet_message" then
+        if event == "terminate" then
+            for i, id in ipairs(turtles) do
+                rednet.send(id, "terminate", "shuting down")
+            end
+        elseif event == "rednet_message" then
             local sender = arg1
             local message = arg2
             local protocol = arg3
@@ -46,7 +50,8 @@ function main()
             if protocol == "addTurtle" then
                 if not tableContains(table, sender) then
                     table.insert(turtles, sender)
-                    print("Added turtle:", sender)
+                    turtleCount = turtleCount + 1
+                    print("Added turtle: " .. sender .. " (" .. turtleCount .. ")")
                 else
                     print("Failed to add:", sender)
                 end
