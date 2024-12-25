@@ -89,7 +89,7 @@ function main()
         print("waiting for request")
         local event, sender, message, protocol = os.pullEvent("rednet_message")
 
-        if sender == masterPhoneID then
+        if sender == masterPhoneID or sender == speakerCpID then
             print("Master has requested me")
             if protocol == "beginMine" then
                 direction = message
