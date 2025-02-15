@@ -2,8 +2,8 @@ local stripsToMine = 8
 local blocksPerStrip = 64
 local direction = "" -- This means go in the direction
 
-local masterPhoneID = 37
-local speakerCpID = 42
+local masterPhoneID = 18
+local speakerCpID = 19
 
 function NoFuel()
     local received = false
