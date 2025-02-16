@@ -10,7 +10,7 @@ function main()
             
             local playerAck = false
             while not playerAck do
-                shell.run("speaker play https://cdn.discordapp.com/attachments/1119559261261938709/1320521425072951387/BGM_Guardian_main.dfpwm?ex=6769e6e9&is=67689569&hm=fbd878093baebcdfef10fd3231a50e1125a2f20da4354ccf631bceacf064063b&")
+                shell.run("speaker play https://cdn.discordapp.com/attachments/809382496415514654/1340476130603307071/BGM_Guardian_main_5.dfpwm?ex=67b27f2e&is=67b12dae&hm=848eb53349e36c7e8a95a7b12729ea6e33ab970b7a9a456ffe915b7c2d5b3f51&")
                 local event, key = os.pullEvent("key")
                 if key == 257 then
                     playerAck = true
