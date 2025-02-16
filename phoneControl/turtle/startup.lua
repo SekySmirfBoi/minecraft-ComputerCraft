@@ -1,5 +1,7 @@
 local stripsToMine = 8
 local blocksPerStrip = 64
+local layser = 3
+
 local direction = "" -- This means go in the direction
 
 local masterPhoneID = 18
@@ -94,25 +96,29 @@ function main()
             if protocol == "beginMine" then
                 direction = message
 
-                local fuelRequired = blocksPerStrip * stripsToMine + stripsToMine * 2
+                local fuelRequired = layser * (blocksPerStrip * stripsToMine + stripsToMine * 2)
                 print("Estimated fuel required:", fuelRequired)
                 print("Coal required:", fuelRequired / 80)
-                local stripsLeft = stripsToMine
-                while stripsLeft > 0 do
-                    local blocksLeft = blocksPerStrip - 1
-                    while blocksLeft > 0 do
-                        turtle.dig()
-                        if turtle.getFuelLevel() == 0 then
-                            NoFuel()
-                        end 
-                        turtle.forward()
-                        checkForATMore()
-                        turtle.digUp()
-                        turtle.digDown()
-                        blocksLeft = blocksLeft - 1
-                    end
 
-                    if direction == "left" then
+                local layerleft = layser
+
+                while layerleft > 0 do
+                local stripsLeft = stripsToMine
+                    while stripsLeft > 0 do
+                        local blocksLeft = blocksPerStrip - 1
+                        while blocksLeft > 0 do
+                            turtle.dig()
+                            if turtle.getFuelLevel() == 0 then
+                                NoFuel()
+                            end 
+                            turtle.forward()
+                            checkForATMore()
+                            turtle.digUp()
+                            turtle.digDown()
+                            blocksLeft = blocksLeft - 1
+                        end
+
+                        if direction == "left" then
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
@@ -152,7 +158,7 @@ function main()
 
 
                         direction = "tiht"
-                    else
+                        else
                         if turtle.getFuelLevel() == 0 then
                             NoFuel()
                         end
@@ -190,9 +196,20 @@ function main()
                             turtle.turnLeft()
                         end
                         direction = "left"
+                        end
+
+                        stripsLeft = stripsLeft - 1
                     end
 
-                    stripsLeft = stripsLeft - 1
+                    checkForATMore()
+                    turtle.digDown()
+                    turtle.down()
+                    turtle.digDown()
+                    turtle.down()
+                    turtle.digDown()
+                    turtle.down()
+
+                    layerleft = layerleft - 1
                 end
             elseif protocol == "shuting down" then
                 if message == "terminate" then
