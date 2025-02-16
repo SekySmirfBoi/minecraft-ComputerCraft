@@ -211,6 +211,10 @@ function main()
                         turtle.dig()
                     end
                 else
+                    if message == "go down 1" then
+                        checkForATMore()
+                        turtle.digDown()
+                    end
                     shell.run(message)
                 end
             end
