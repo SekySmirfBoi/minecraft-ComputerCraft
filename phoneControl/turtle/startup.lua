@@ -1,6 +1,6 @@
 local stripsToMine = 8
 local blocksPerStrip = 64
-local layser = 3
+local layser = 7
 
 local direction = "" -- This means go in the direction
 
