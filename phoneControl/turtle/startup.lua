@@ -31,6 +31,12 @@ function checkForATMore(dir)
     local succ2, data2 = turtle.inspectUp()
     local succ3, data3 = turtle.inspectDown()
 
+    local target = "mekanism:deepslate_fluorite_ore"
+
+    if data1.name == target or data2.name == target or data3.name == target then
+        foundATMore()
+    end
+
     if data1.name == "allthemodium:allthemodium_slate_ore" or data2.name == "allthemodium:allthemodium_slate_ore" or data3.name == "allthemodium:allthemodium_slate_ore" then
         foundATMore()
     end
